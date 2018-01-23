@@ -4934,6 +4934,7 @@ tbody.collapse.show {
   margin-bottom: 2rem;
   background-color: #e9ecef;
   border-radius: 0.3rem;
+  background-image: image(bilder/jumbotronBG.jpg);
 }
 
 @media (min-width: 576px) {
