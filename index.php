@@ -22,7 +22,7 @@
 
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="sider/index.php">__PLACERHOLDER NAVN__</a>
+      <a class="navbar-brand" href="index.php">__PLACERHOLDER NAVN__</a>
 
       <!-- Mobilvennlig navbar oppsett -->
 
@@ -34,7 +34,7 @@
       <!-- Knapper for nav-->
       <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="sider/index.php">Hjem </a>
+            <a class="nav-link" href="index.php">Hjem </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Link 1</a>
