@@ -9,7 +9,7 @@ body > * {
 }
 
 body > * > .container {
-  max-width: 90%;
+  width: 860px;
   margin: auto;
 }
 
@@ -24,10 +24,6 @@ header > .container {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-
-header > .container > * {
-  flex: 1;
 }
 
 header h1 {

@@ -23,7 +23,7 @@ nav li {
 
 nav li:not(:first-child)::before {
   content: "//";
-  margin-right: 10px;
+  margin-right: 20px;
   color: darkorange;
 }
 
