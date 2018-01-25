@@ -27,11 +27,11 @@ nav li:not(:first-child)::before {
   color: darkorange;
 }
 
-nav a {
+a {
   text-decoration: none;
   color: white;
 }
 
-nav a:hover {
-  text-shadow: 10px;
+a:hover {
+  color: darkorange;
 }
