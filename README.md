@@ -1,3 +1,6 @@
+
+https://docs.google.com/document/d/1AHJw7SWDfhUWeON1HsGUfurbP1zkw4htr9dB7D1mLUA/edit?ts=5a665768
+
 Foreløpig beskrivelse av applikasjon (Milepæl 2) Frist: 23.02 (teller 15%)
 
 Krav: kort introduksjon
