@@ -1,143 +1,73 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8">
-    <title>Nederlaget idrettsforening</title>
+    <title>Nederlaget IK</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bungee+Hairline|Open+Sans+Condensed:300|Open+Sans">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
 
-    <style>
-        .jumbotron {
-            background-image: url("http://s3-eu-west-1.amazonaws.com/evian-resort-website-staging/wp-content/uploads/2016/06/22161940/resort-trophee-des-chefs-evian-resort-golf-club.jpg");
-            color: white;
-        }
-    </style>
+    <header>
+      <div class="container">
+        <p>Logo</p>
+        <h1>Nederlaget<br>Idrettsklubb</h1>
+      </div>
+    </header>
 
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap-grid.css" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap-grid.css.map" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap-grid.min.css" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap-grid.min.css.map" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap-reboot.css" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap-reboot.min.css" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap-grid.min.css.map" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap.css.map" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="bibliotek/Bootstrap/css/bootstrap.min.css.map" />
-
-</head>
-
-<body>
-
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="index.html">Nederlaget Idrettsforening</a>
-
-        <!-- Mobilvennlig navbar oppsett -->
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Knapper for nav-->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">Hjem </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 1</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 3</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link 4</a>
-            </li>
+    <nav>
+      <div class="container">
+        <ul>
+          <li><a href="#">Nyheter</a></li>
+          <li><a href="#">Aktiviteter</a></li>
+          <li><a href="#">Kontakt</a></li>
+          <li><a href="#">Bli medlem</a></li>
+          <li><a href="#">Logg inn</a></li>
         </ul>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logg inn</button>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Registrer deg</button>
+      </div>
     </nav>
 
-    <main role="main">
-        <div class="jumbotron">
-            <div class="container">
-                <br>
-                <br>
-                <br>
-                <h1><bold>Nederlaget Idrettsforening</bold></h1>
-                <br>
-                <p>
-                    <bold>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </bold>
-                </p>
+    <main>
+      <div class="container">
 
-            </div>
+        <article>
+          <a href="#">
+            <img class="article-image" src="img/tennis.jpg">
+            <h2 class="article-header">Tennisbanen er åpnet for sesongen</h2>
+          </a>
+        </article>
 
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2>Arrangemanger</h2>
-                            <p>
-                                Her kan du lese om arrangemanger som har vært eller som kommer til å skje.
-                            </p>
-                            <button type="button" class="btn btn-outline-success"><a href="#">Klikk her</a></button>
-                            <br>
-                            <p>
+        <article>
+          <a href="#">
+            <img class="article-image" src="img/football.jpg">
+            <h2 class="article-header">Nytt nederlag - tapte 4-0 mot Svenseid</h2>
+          </a>
+        </article>
 
-                            </p>
-                        </div>
-                    </div>
-                </div>
+        <article>
+          <a href="#">
+            <img class="article-image" src="img/moose.jpg">
+            <h2 class="article-header">Orienteringsløpet avbrutt av illsint elg</h2>
+          </a>
+        </article>
 
-                <div class="col-sm-4">
-                  <div class="card">
-                    <div class="card-body">
-                        <h2>Baneleie</h2>
-                        <p>
-                            Her kan du lese om banene er opptatte eller om det er mulig å reservere en.
-                        </p>
-                        <button type="button" class="btn btn-outline-success"><a href="#">Klikk her</a></button>
-                        <br>
-                        <p>
+        <article>
+          <a href="#">
+            <img class="article-image" src="img/loss.jpg">
+            <h2 class="article-header">Årsrapporten viser dystre tall</h2>
+          </a>
+        </article>
 
-                        </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <div class="card">
-                    <div class="card-body">
-                        <h2>Sportsutstyr</h2>
-                        <p>
-                            Her kan du se hva som er i nettbutikken vår.
-                        </p>
-                        <button type="button" class="btn btn-outline-success"><a href="#">Klikk her</a></button>
-                        <br>
-                        <p>
-
-                        </p>
-                      </div>
-                    </div>
-                </div>
-
-            </div>
-
+      </div>
     </main>
 
-    <script src="bibliotek/Bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="bibliotek/Bootstrap/js/bootstrap.bundle.js.map"></script>
-    <script src="bibliotek/Bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="bibliotek/Bootstrap/js/bootstrap.bundle.min.js.map"></script>
-    <script src="bibliotek/Bootstrap/js/bootstrap.js"></script>
-    <script src="bibliotek/Bootstrap/js/bootstrap.js.map"></script>
-    <script src="bibliotek/Bootstrap/js/bootstrap.min.js"></script>
-    <script src="bibliotek/Bootstrap/js/bootstrap.min.js.map"></script>
-</body>
+    <footer>
+      <div class="container">
+        <p>Hey</p>
+        <p>Halla</p>
+      </div>
+    </footer>
 
+  </body>
 </html>
