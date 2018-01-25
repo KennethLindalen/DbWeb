@@ -72,7 +72,8 @@ footer {
 
 footer > .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   font-family: 'Open Sans Condensed', sans-serif;
+  line-height: 2em;
 }
