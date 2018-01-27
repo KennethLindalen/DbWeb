@@ -1,9 +1,9 @@
 
-var modal = document.getElementById('loggInnModal');
+modal = document.getElementById('loggInnModal');
 
-var modalBtn = document.getElementById('loggInnModalBtn');
+modalBtn = document.getElementById('loggInnModalBtn');
 
-var closeBtn = document.getElementsByClassName('avsluttBtn')[0];
+closeBtn = document.getElementsByClassName('avsluttBtn')[0];
 
 
 modalBtn.addEventListener('click', openModal);
