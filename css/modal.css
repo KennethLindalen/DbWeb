@@ -55,6 +55,7 @@
 }
 .loggInnKnapp {
     background-color: #a3a3a3;
+    width: 100%;
     color: black;
     border: none; /* Remove borders */
     color: white; /* Add a text color */
