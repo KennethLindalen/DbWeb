@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bungee+Hairline|Open+Sans+Condensed:300|Open+Sans">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/modal.css">
+    <script src="skript\modal.js"></script>
   </head>
   <body>
 
@@ -22,8 +23,8 @@
           <li><a href="p/nyheter.html">Nyheter</a></li>
           <li><a href="p/aktiviteter.html">Aktiviteter</a></li>
           <li><a href="p/resultater.html">Resultater</a></li>
-          <li><a href="#" id="registrerModalBtn">Bli medlem</a></li>
-          <li><a href="#" id="loggInnModalBtn">Logg inn</a></li>
+          <li><a href="#" onClick="openRegistrerModal()">Bli medlem</a></li>
+          <li><a href="#" onClick="openLoginModal()">Logg inn</a></li>
         </ul>
       </div>
     </nav>
@@ -70,10 +71,10 @@
       </div>
     </footer>
 
-      <div id="loggInnModal" class="modal">
+      <div id="loginModal" class="modal">
         <div class="modal-content">
           <div class="modal-header">
-              <span class="avsluttBtn"></span>
+              <span class="closeBtn"></span>
               <h2>Logg inn</h2>
               <h6>Trykk på utsiden av boksen for å lukke</h6>
           </div>
@@ -93,7 +94,7 @@
       <div id="registrerModal" class="modal">
         <div class="modal-content">
           <div class="modal-header">
-              <span class="avsluttBtn"></span>
+              <span class="closeBtn"></span>
               <h2>Registrer deg</h2>
               <h6>Trykk på utsiden av boksen for å lukke</h6>
           </div>
@@ -119,8 +120,7 @@
 </div>
 
 
-    <script src="skript\loggInnModal.js"></script>
-    <script src="skript\registrerModal.js"></script>
+
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8" crossorigin="anonymous"></script>
   </body>
 </html>
