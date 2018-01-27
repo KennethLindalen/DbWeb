@@ -66,3 +66,17 @@
 .loggInnKnapp:hover {
   background: #ddd;
 }
+
+.RegKnapp {
+    background-color: #a3a3a3;
+    width: 100%;
+    color: black;
+    border: none; /* Remove borders */
+    color: white; /* Add a text color */
+    padding: 14px 28px; /* Add some padding */
+    cursor: pointer; /* Add a pointer cursor on mouse-over */
+
+    } /* Gray */
+.RegKnapp:hover {
+  background: #ddd;
+}
