@@ -9,6 +9,7 @@ function openLoginModal(){
 }
 
 function closeModal(e) {
-  if (e.target.className == 'modal')
-    document.getElementById(e.target.id).style.display = 'none'
+  let target = e.target
+  if (target.className == 'modal')
+    target.style.display = 'none'
 }
