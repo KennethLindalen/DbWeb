@@ -6,6 +6,7 @@
 
 body {
   background: #eee;
+  overflow-y: scroll;
 }
 
 body > * {
