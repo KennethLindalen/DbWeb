@@ -116,3 +116,7 @@ a {
 a:hover {
   color: darkorange;
 }
+
+td {
+  text-align: center;
+}
