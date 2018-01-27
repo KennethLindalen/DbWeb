@@ -1,9 +1,7 @@
 
-var modal = document.getElementById('registrerModal');
-
-var modalBtn = document.getElementById('registrerModalBtn');
-
-var closeBtn = document.getElementsByClassName('avsluttBtn')[0];
+let modal = document.getElementById('registrerModal');
+let modalBtn = document.getElementById('registrerModalBtn');
+let  closeBtn = document.getElementsByClassName('avsluttBtn')[0];
 
 
 modalBtn.addEventListener('click', openModal);
