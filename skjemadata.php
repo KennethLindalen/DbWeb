@@ -9,7 +9,7 @@
 
 <?php
 $brukernavn = $_POST['brukernavn'];
-print "<p>Velkommen ${brukernavn}</p>";
+print "<p>Velkommen $brukernavn</p>";
 
 ?>
   </body>
