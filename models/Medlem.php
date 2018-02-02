@@ -16,6 +16,7 @@ class Medlem {
 
 }
 
-  echo password_hash("passord", PASSWORD_BCRYPT);
+  $passordHash = password_hash("passord", PASSWORD_BCRYPT);
+  echo password_verify("passord", $passordHash);
 
 ?>
