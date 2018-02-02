@@ -8,6 +8,6 @@
     return mysqli_connect($hostname, $username, $password, $database);
   }
 
-  var_dump($_ENV);
+  var_dump(getenv());
 
 ?>
