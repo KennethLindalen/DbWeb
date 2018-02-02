@@ -8,6 +8,6 @@
     return mysqli_connect($hostname, $username, $password, $database);
   }
 
-  echo $_ENV["TEST"];
+  echo "hello, " . $_ENV["TEST"];
 
 ?>
