@@ -2,7 +2,7 @@
 
 class Medlem {
 
-  
+
 
   public static function søk() {
 
