@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `Poststed` (
-  `Postnummer` CHAR(4) NOT NULL,
+  `Postnummer` NCHAR(4) NOT NULL,
   `Poststed` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Postnummer`))
 ENGINE = InnoDB;
@@ -9,10 +9,10 @@ CREATE TABLE IF NOT EXISTS `Medlem` (
   `Fornavn` VARCHAR(45) NOT NULL,
   `Etternavn` VARCHAR(45) NOT NULL,
   `Adresse` VARCHAR(45) NOT NULL,
-  `Postnummer` CHAR(4) NOT NULL,
-  `Telefonnummer` CHAR(8) NOT NULL,
+  `Postnummer` NCHAR(4) NOT NULL,
+  `Telefonnummer` NCHAR(8) NOT NULL,
   `E-postadresse` VARCHAR(45) NOT NULL,
-  `Passord` CHAR(60) NOT NULL,
+  `Passord` NCHAR(60) NOT NULL,
   PRIMARY KEY (`Medlemsnummer`),
   UNIQUE INDEX `E-postadresse_UNIQUE` (`E-postadresse` ASC),
   INDEX `fk_Medlem_Poststed_idx` (`Postnummer` ASC),
