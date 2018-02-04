@@ -1,6 +1,6 @@
 <?php
 
-include_once('../models/Poststed.php')
+
 
 class Medlem {
 
