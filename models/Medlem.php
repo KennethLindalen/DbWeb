@@ -27,8 +27,8 @@ class Medlem {
     $sql = "INSERT INTO Medlem VALUES (?, ?, ?, ?, ?, ?);";
 
     $conn = getConnection();
-    /*$stmt = $conn->prepare($sql);
-    $stmt-> bind_param("ssssss",
+    $stmt = $conn->prepare($sql);
+    /*$stmt-> bind_param("ssssss",
       $this->fornavn,
       $this->etternavn,
       $this->adresse,
