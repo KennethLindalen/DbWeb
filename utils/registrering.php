@@ -1,6 +1,6 @@
 <?php
 
-include_once(dirname(__FILE__) . "../models/Medlem.php");
+include_once(dirname(__FILE__) . "/../models/Medlem.php");
 
 function registrerMedlem() {
 
