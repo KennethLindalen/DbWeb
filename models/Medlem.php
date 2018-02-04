@@ -1,7 +1,7 @@
 <?php
 
 include_once (dirname(__DIR__) . "/utils/database.php");
-include_once "Poststed.php";
+include_once (dirname(__FILE__) . "/Poststed.php");
 
 class Medlem {
 
