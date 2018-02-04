@@ -1,6 +1,6 @@
 <?php
 
-  include "../models/Medlem.php";
+  include dirname(__DIR__) . "/models/Medlem.php";
 
   function registrerMedlem() {
 
