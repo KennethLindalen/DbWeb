@@ -22,13 +22,13 @@ class Medlem {
     $this->passord = password_hash($pw, PASSWORD_BCRYPT);
   }
 
-  public static function søk() {
+  /*public static function søk() {
 
   }
 
   public function lagre() {
     var_dump($this);
-  }
+  }*/
 
 }
 
