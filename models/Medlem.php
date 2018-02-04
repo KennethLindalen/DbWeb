@@ -31,11 +31,11 @@ class Medlem {
     $conn = getConnection();
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssssss", $this->fornavn, $this->etternavn, $this->adresse, $this->postnummer, $this->telefonnummer, $this->epost, $this->passord);
-    $stmt->bind_result($res);
     $stmt->execute();
+    $result = $stmt->get_result();
     $stmt->close();
     $conn->close();
-    var_dump($res);
+    var_dump($result);
   }
 
 }
