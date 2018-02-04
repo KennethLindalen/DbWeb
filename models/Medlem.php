@@ -24,7 +24,7 @@ class Medlem {
   }
 
   public function lagre() {
-    $sql = "INSERT INTO Medlem VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO Medlem VALUES (?, ?, ?, ?, ?, ?);";
 
     $conn = getConnection();
     $stmt = $conn->prepare($sql);
