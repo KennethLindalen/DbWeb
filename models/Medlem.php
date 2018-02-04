@@ -28,7 +28,8 @@ class Medlem {
 
     $conn = getConnection();
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $this->fornavn, $this->etternavn, $this->adresse, $this->postnummer, $this->epost, $this->passord);
+    if (!$stmt->bind_param("ssssss", $this->fornavn, $this->etternavn, $this->adresse, $this->postnummer, $this->epost, $this->passord))
+      echo "???";
     $stmt->execute();
     $stmt->close();
     $conn->close();
