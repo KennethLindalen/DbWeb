@@ -11,7 +11,7 @@ class Medlem {
   private $epost;
   private $passord;
 
-  /*public function __construct($mnr, $fnavn, $enavn, $adr, $postnr, $epost, $pw) {
+  public function __construct($mnr, $fnavn, $enavn, $adr, $postnr, $epost, $pw) {
     $this->medlemsnummer = $mnr;
     $this->fornavn = $fnavn;
     $this->etternavn = $enavn;
@@ -19,8 +19,8 @@ class Medlem {
     $this->postnummer = $postnr
     //$this->poststed = $Poststed->fraPostnummer($postnr);
     $this->epost = $epost;
-    $this->passord = password_hash($pw, PASSWORD_BCRYPT);
-  }*/
+    //$this->passord = password_hash($pw, PASSWORD_BCRYPT);
+  }
 
   /*public static function søk() {
 
