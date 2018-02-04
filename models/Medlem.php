@@ -27,6 +27,8 @@ class Medlem {
   public function lagre() {
     $sql = "INSERT INTO Medlem (`Fornavn`, `Etternavn`, `Adresse`, `Postnummer`, `Telefonnummer`, `E-postadresse`, `Passord`) "
          . "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $res = "";
+
     $conn = getConnection();
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssssss", $this->fornavn, $this->etternavn, $this->adresse, $this->postnummer, $this->telefonnummer, $this->epost, $this->passord);
