@@ -5,12 +5,13 @@ include_once "models/Poststed.php";
 
 class Medlem {
 
-  public function __construct($mnr, $fnavn, $enavn, $adr, $postnr, $epost, $pw) {
+  public function __construct($mnr, $fnavn, $enavn, $adr, $postnr, $tlf, $epost, $pw) {
     $this->medlemsnummer = $mnr;
     $this->fornavn = $fnavn;
     $this->etternavn = $enavn;
     $this->adresse = $adr;
     $this->postnummer = $postnr;
+    $this->telefonnummer = $tlf;
     $this->epost = $epost;
     $this->passord = password_hash($pw, PASSWORD_BCRYPT);
   }
@@ -24,14 +25,15 @@ class Medlem {
   }
 
   public function lagre() {
-    $sql = "INSERT INTO Medlem VALUES (?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO Medlem (Fornavn, Etternavn, Adresse, Postnummer, Telefonnummer, E-postadresse, Passord) "
+         . "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     $conn = getConnection();
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssss", $this->fornavn, $this->etternavn, $this->adresse, $this->postnummer, $this->epost, $this->passord);
-    /*$stmt->execute();
+    $stmt->bind_param("sssssss", $this->fornavn, $this->etternavn, $this->adresse, $this->postnummer, $this->telefonnummer, $this->epost, $this->passord);
+    $stmt->execute();
     $stmt->close();
-    $conn->close();*/
+    $conn->close();
     echo "hey";
   }
 
