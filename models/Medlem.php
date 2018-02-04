@@ -32,7 +32,7 @@ class Medlem {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssssss", $this->fornavn, $this->etternavn, $this->adresse, $this->postnummer, $this->telefonnummer, $this->epost, $this->passord);
     $stmt->execute();
-    var_dump(mysqli_errno($conn));
+    var_dump($conn);
     $stmt->close();
     $conn->close();
   }
