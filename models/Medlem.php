@@ -1,5 +1,6 @@
 <?php
 
+include_once "utils/database.php";
 include_once "models/Poststed.php";
 
 class Medlem {
@@ -10,7 +11,6 @@ class Medlem {
     $this->etternavn = $enavn;
     $this->adresse = $adr;
     $this->postnummer = $postnr;
-    $this->poststed = Poststed::fraPostnummer($postnr);
     $this->epost = $epost;
     $this->passord = password_hash($pw, PASSWORD_BCRYPT);
   }
@@ -24,7 +24,21 @@ class Medlem {
   }
 
   public function lagre() {
-    var_dump($this);
+    $sql = "INSERT INTO Medlem VALUES (?, ?, ?, ?, ?, ?)";
+
+    $conn = getConnection();
+    $stmt = $conn->prepare($sql);
+    $stmt-> bind_param("sssssss",
+      $this->fornavn,
+      $this->etternavn,
+      $this->adresse,
+      $this->postnummer,
+      $this->epost,
+      $this->passord
+    );
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
   }
 
 }

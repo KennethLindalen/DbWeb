@@ -1,11 +1,15 @@
 <?php
 
   function getConnection() {
-    $hostname = "";
-    $username = "";
-    $password = "";
-    $database = "";
+    $hostname = "localhost";
+    $username = "v18u130";
+    $password = "Pw130";
+    $database = "v18db130";
     return mysqli_connect($hostname, $username, $password, $database);
+  }
+
+  function closeConnection($conn) {
+    mysql_close($conn);
   }
 
 ?>
