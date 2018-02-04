@@ -36,8 +36,8 @@ class Medlem {
       $this->epost,
       $this->passord
     );
-    $stmt->execute();
-    /*$stmt->close();
+    /*$stmt->execute();
+    $stmt->close();
     $conn->close();*/
     echo "hey";
   }
