@@ -16,19 +16,19 @@ class Medlem {
     $this->fornavn = $fnavn;
     $this->etternavn = $enavn;
     $this->adresse = $adr;
-    $this->postnummer = $postnr
+    $this->postnummer = $postnr;
     //$this->poststed = $Poststed->fraPostnummer($postnr);
     $this->epost = $epost;
-    //$this->passord = password_hash($pw, PASSWORD_BCRYPT);
+    $this->passord = password_hash($pw, PASSWORD_BCRYPT);
   }
 
-  /*public static function søk() {
+  public static function søk() {
 
   }
 
   public function lagre() {
     var_dump($this);
-  }*/
+  }
 
 }
 
