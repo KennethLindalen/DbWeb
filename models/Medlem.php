@@ -28,7 +28,7 @@ class Medlem {
 
     $conn = getConnection();
     $stmt = $conn->prepare($sql);
-    $stmt-> bind_param("sssssss",
+    $stmt-> bind_param("ssssss",
       $this->fornavn,
       $this->etternavn,
       $this->adresse,
@@ -39,6 +39,7 @@ class Medlem {
     $stmt->execute();
     $stmt->close();
     $conn->close();
+    echo "hey";
   }
 
 }
