@@ -1,6 +1,6 @@
 <?php
 
-  include(dirname(__DIR__) . "/models/Medlem.php");
+  echo getcwd();
 
   function registrerMedlem() {
 
