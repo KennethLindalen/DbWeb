@@ -1,6 +1,6 @@
 <?php
 
-  include (dirname(__DIR__) . "/models/Medlem.php");
+  include_once (dirname(__DIR__) . "/models/Medlem.php");
 
   function registrerMedlem() {
 
