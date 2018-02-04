@@ -30,10 +30,11 @@ class Medlem {
     $conn = getConnection();
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssssss", $this->fornavn, $this->etternavn, $this->adresse, $this->postnummer, $this->telefonnummer, $this->epost, $this->passord);
+    $stmt->bind_result($res);
     $stmt->execute();
     $stmt->close();
     $conn->close();
-    echo "hey";
+    echo $res;
   }
 
 }
