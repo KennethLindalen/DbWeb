@@ -1,6 +1,6 @@
 <?php
 
-  //include_once "../models/Medlem.php";
+  include "../models/Medlem.php";
 
   function registrerMedlem() {
 
