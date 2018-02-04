@@ -20,7 +20,7 @@ class Medlem {
     $this->etternavn = $enavn;
     $this->adresse = $adr;
     $this->postnummer = $postnr
-    $this->poststed = $Poststed->fraPostnummer($postnr);
+    //$this->poststed = $Poststed->fraPostnummer($postnr);
     $this->epost = $epost;
     $this->passord = password_hash($pw, PASSWORD_BCRYPT);
   }
