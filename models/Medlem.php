@@ -1,6 +1,6 @@
 <?php
 
-echo getcwd();
+include_once('../models/Poststed.php');
 
 class Medlem {
 
