@@ -4,14 +4,14 @@ include_once(dirname(__FILE__)."/Poststed.php");
 
 class Medlem {
 
-  private $medlemsnummer;
+  /*private $medlemsnummer;
   private $fornavn;
   private $etternavn;
   private $adresse;
   private $postnummer;
   private $poststed;
   private $epost;
-  private $passord;
+  private $passord;*/
 
   public function __construct($mnr, $fnavn, $enavn, $adr, $postnr, $epost, $pw) {
     $this->medlemsnummer = $mnr;
