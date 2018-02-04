@@ -1,6 +1,6 @@
 <?php
 
-include_once('../models/Poststed.php');
+include_once(dirname(__FILE__)."/Poststed.php");
 
 class Medlem {
 
@@ -25,6 +25,10 @@ class Medlem {
   }
 
   public static function søk() {
+
+  }
+
+  public static function finn() {
 
   }
 
