@@ -17,7 +17,7 @@ $a = new Medlem(array(
 ));
 
 foreach ($a as $egenskap => $verdi) {
-  echo "$egenskap: $verdi \n";
+  echo "$egenskap: $verdi <br>";
 }
 
 ?>
