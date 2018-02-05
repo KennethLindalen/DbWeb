@@ -16,7 +16,6 @@ class Database {
     $stmt = $this->conn->prepare($query);
     //$stmt->bind_param(...$params);
     $stmt->execute();
-    $stmt->fetch();
     return $stmt->get_result();
   }
 
