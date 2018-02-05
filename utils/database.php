@@ -16,7 +16,7 @@ class Database {
     $stmt = $this->conn->prepare($query);
     //$stmt->bind_param(...$params);
     $stmt->execute();
-    return $stmt->get_result()->fetch();
+    return $stmt->get_result()->fetch_assoc();
   }
 
   public function getRows() {
