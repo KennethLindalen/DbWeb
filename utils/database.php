@@ -1,40 +1,11 @@
 <?php
 
-class Database {
-
-  private $conn;
-
-  public function __construct() {
-    $this->conn = mysqli_connect("localhost", "v18u130", "Pw130", "v18db130");
+  function getConnection() {
+    $hostname = "localhost";
+    $username = "v18u130";
+    $password = "Pw130";
+    $database = "v18db130";
+    return mysqli_connect($hostname, $username, $password, $database);
   }
-
-  public function disconnect() {
-    $this->conn->close();
-  }
-
-  public function getRow($query, $types = "", $params = []) {
-    $stmt = $this->conn->prepare($query);
-    $stmt->bind_param($types, ...$params);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
-  }
-
-  public function getRows() {
-
-  }
-
-  public function insertRow() {
-
-  }
-
-  public function updateRow() {
-
-  }
-
-  public function deleteRow() {
-
-  }
-
-}
 
 ?>
