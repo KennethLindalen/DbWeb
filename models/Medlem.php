@@ -5,7 +5,7 @@ include_once "models/Poststed.php";
 
 class Medlem {
 
-  public function __construct($medlem) {
+  public function __construct($medlem = []) {
     $this->medlemsnummer = $medlem["medlemsnummer"];
     $this->fornavn = $medlem["fornavn"];
     $this->etternavn = $medlem["etternavn"];
