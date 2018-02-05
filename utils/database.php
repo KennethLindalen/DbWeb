@@ -1,11 +1,38 @@
 <?php
 
-  function getConnection() {
-    $hostname = "localhost";
-    $username = "v18u130";
-    $password = "Pw130";
-    $database = "v18db130";
-    return mysqli_connect($hostname, $username, $password, $database);
+class Database {
+
+  private $database;
+
+  public function __construct() {
+    $this->database = mysqli_connect("localhost", "v18u1630", "Pw130", "v18db130");
+    var_dump($this->database);
   }
+
+  public function disconnect() {
+    $this->database->close();
+  }
+
+  public function getRow() {
+
+  }
+
+  public function getRows() {
+
+  }
+
+  public function insertRow() {
+
+  }
+
+  public function updateRow() {
+
+  }
+
+  public function deleteRow() {
+
+  }
+
+}
 
 ?>
