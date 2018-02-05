@@ -14,7 +14,10 @@ class Database {
 
   public function getRow($query, $params = []) {
     $stmt = $this->conn->prepare($query);
-    $stmt->execute($params);
+    foreach ($params as $value) {
+      $stmt->bind_param($value);
+    }
+    $stmt->execute();
     return $stmt->fetch();
   }
 
