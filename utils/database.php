@@ -5,7 +5,7 @@ class Database {
   private $database;
 
   public function __construct() {
-    $this->database = mysqli_connect("localhost", "v18u1630", "Pw130", "v18db130");
+    $this->database = mysqli_connect("localhost", "v18u130", "Pw130", "v18db130");
     var_dump($this->database);
   }
 
