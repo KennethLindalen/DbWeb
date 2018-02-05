@@ -2,21 +2,20 @@
 
 class Database {
 
-  private $database;
+  private $conn;
 
   public function __construct() {
-    $this->database = mysqli_connect("localhost", "v18u130", "Pw130", "v18db130");
+    $this->conn = mysqli_connect("localhost", "v18u130", "Pw130", "v18db130");
   }
 
   public function disconnect() {
-    var_dump($this->database);
-    echo "<br>";
-    $this->database->close();
-    var_dump($this->database);
+    $this->conn->close();
   }
 
-  public function getRow() {
-
+  public function getRow($query, $params = []) {
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute($params);
+    return $stmt->fetch();
   }
 
   public function getRows() {
