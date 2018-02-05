@@ -9,7 +9,8 @@ class Database {
   }
 
   public function disconnect() {
-    var_dump($this->database . "<br>");
+    var_dump($this->database);
+    echo "<br>";
     $this->database->close();
     var_dump($this->database);
   }
