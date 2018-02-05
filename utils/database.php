@@ -12,9 +12,9 @@ class Database {
     $this->conn->close();
   }
 
-  public function getRow($query, $params = []) {
+  public function getRow($query, $types = "", $params = []) {
     $stmt = $this->conn->prepare($query);
-    $stmt->bind_param("s", ...$params);
+    $stmt->bind_param($types, ...$params);
     $stmt->execute();
     return $stmt->get_result()->fetch_assoc();
   }
