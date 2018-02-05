@@ -16,6 +16,8 @@ $a = new Medlem(array(
   "passord" => "passord"
 ));
 
-var_dump($a);
+foreach ($a as $egenskap => $verdi) {
+  echo "$egenskap: $verdi \n";
+}
 
 ?>
