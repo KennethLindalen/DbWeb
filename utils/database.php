@@ -14,7 +14,7 @@ class Database {
 
   public function getRow($query, $params = []) {
     var_dump($query);
-    var_dump($params);
+    var_dump(...$params);
     $stmt = $this->conn->prepare($query);
     $stmt->bind_param("s", ...$params);
     $stmt->execute();
