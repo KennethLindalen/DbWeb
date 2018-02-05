@@ -3,7 +3,7 @@
 include_once "utils/database.php";
 include_once "models/Medlem.php";
 
-$a = new Medlem;
+$a = new Medlem();
 var_dump($a);
 
 ?>
