@@ -6,11 +6,11 @@ class Database {
 
   public function __construct() {
     $this->database = mysqli_connect("localhost", "v18u130", "Pw130", "v18db130");
-    var_dump($this->database);
   }
 
   public function disconnect() {
     $this->database->close();
+    var_dump($this->database);
   }
 
   public function getRow() {
