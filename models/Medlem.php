@@ -13,9 +13,7 @@ class Medlem {
     $this->postnummer = $medlem["postnummer"];
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost = $medlem["epost"];
-    $this->passord = $fraDatabase
-      ? $medlem["passord"]
-      : hash($medlem["passord"], PASSWORD_BCRYPT);
+    $this->passord = $fraDatabase ? $medlem["passord"] : password_hash($medlem["passord"], PASSWORD_BCRYPT);
   }
 
   private function valider() {
