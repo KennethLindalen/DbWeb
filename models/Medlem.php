@@ -2,6 +2,7 @@
 
 include_once "utils/database.php";
 
+
 class Medlem {
 
   public function __construct($medlem = [], $fraDatabase = false) {
@@ -16,9 +17,8 @@ class Medlem {
     if (!$fraDatabase) $this->valider();
   }
 
-  private function valider($medlem) {
-    // hvis gyldig, krypter passord
-    // hvis ugyldig, kast unntak
+  private function valider() {
+    // kast unntak ved feil
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
   }
 
