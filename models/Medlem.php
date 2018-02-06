@@ -26,6 +26,7 @@ class Medlem {
     // insert into medlem med prepared statement eller stored procedure
     // hent medlemsnummer fra databasen (auto-incremented) og lagre i objektet'
     // $this->medlemsnummer = "Medlemsnummer fra databasen";
+    return $this;
   }
 
   public static function finn() {
