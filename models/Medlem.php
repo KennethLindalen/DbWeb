@@ -15,7 +15,7 @@ class Medlem {
     $this->epost = $medlem["epost"];
     $this->passord = $fraDatabase
       ? $medlem["passord"]
-      : password_encrypt($medlem["passord"], PASSWORD_BCRYPT);
+      : hash($medlem["passord"], PASSWORD_BCRYPT);
   }
 
   private function valider() {

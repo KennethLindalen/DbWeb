@@ -2,10 +2,8 @@
 
 include_once "models/Medlem.php";
 
-if ($_POST) {
-  $medlem = new Medlem($_POST);
-  var_dump($medlem);
-}
+$medlem = new Medlem($_POST);
+var_dump($medlem);
 
 ?>
 
