@@ -17,8 +17,16 @@ class Medlem {
     if (!$fraDatabase) $this->valider();
   }
 
+<<<<<<< HEAD
+  private function valider($medlem) {
+    // hvis gyldig, krypter passord
+    // hvis ugyldig, kast unntak
+
+    //Validering skjer i validerRegistrering. Her må det bare bygges for å sjekkes om det er forsøk på SQLInject.
+=======
   private function valider() {
     // kast unntak ved feil
+>>>>>>> e5d8829e6275faccd7c6c6ebbac6ce2735861101
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
   }
 
