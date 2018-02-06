@@ -2,7 +2,8 @@
 
 include_once "models/Medlem.php";
 
-$a = var_dump($_POST);
+$medlem = new Medlem($_POST);
+var_dump($medlem);
 
 ?>
 
