@@ -7,6 +7,7 @@ passSjekkSmåBokstaver = /[a-zæøå]/;
 
 /*
   Alle testene er klare, må bare få en måte til å få de til å funke med modal. Modal lukkes hele tiden.
+  Funket på annen testside.
 */
 
   if(formNavn.RegistrerBrukernavn.value == ""){
