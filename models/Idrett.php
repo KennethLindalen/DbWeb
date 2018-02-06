@@ -1,18 +1,18 @@
 <?php
 
+include_once "utils/database.php";
+
+
 class Idrett {
 
-  private $idrettskode;
-  private $idrettsnavn;
-  private $anlegg;
-
-  public function __construct($idrettskode, $idrettsnavn) {
-    $this->idrettskode = $idrettskode;
-    $this->idrettsnavn = $idrettsnavn;
+  public function __construct($idrett = [], $fraDatabase = false) {
+    $this->idrettskode = $idrett["idrettskode"];
+    $this->navn        = $idrett["navn"];
+    if (!$fraDatabase) $this->valider();
   }
 
-  public function lagre() {
-
+  private function valider() {
+    // kast unntak ved feil
   }
 
 }
