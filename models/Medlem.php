@@ -16,7 +16,7 @@ class Medlem {
     $this->passord = $medlem["passord"];
   }
 
-  public static function søk() {
+  private function valider() {
 
   }
 
