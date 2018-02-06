@@ -18,6 +18,7 @@ var_dump($medlem);
     <form action="index.php" method="post">
       <input type="text" name="fornavn">
       <input type="text" name="etternavn">
+      <input type="password" name="passord">
       <button>faen</button>
     </form>
 

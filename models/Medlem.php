@@ -5,7 +5,7 @@ include_once "models/Poststed.php";
 
 class Medlem {
 
-  public function __construct($medlem = []) {
+  public function __construct($medlem = [], $fraDatabase = false) {
     $this->medlemsnummer = $medlem["medlemsnummer"];
     $this->fornavn = $medlem["fornavn"];
     $this->etternavn = $medlem["etternavn"];
@@ -13,7 +13,9 @@ class Medlem {
     $this->postnummer = $medlem["postnummer"];
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost = $medlem["epost"];
-    $this->passord = $medlem["passord"];
+    $this->passord = $fraDatabase
+      ? $medlem["passord"]
+      : password_encrypt($medlem["passord"], PASSWORD_BCRYPT);
   }
 
   private function valider() {
