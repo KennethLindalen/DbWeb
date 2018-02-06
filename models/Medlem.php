@@ -13,11 +13,14 @@ class Medlem {
     $this->postnummer = $medlem["postnummer"];
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost = $medlem["epost"];
-    $this->passord = $fraDatabase ? $medlem["passord"] : password_hash($medlem["passord"], PASSWORD_BCRYPT);
+    $this->passord = $medlem["passord"];
+    if (!$fraDatabase) valider();
   }
 
-  private function valider() {
-
+  private function valider($medlem) {
+    // Sørg for at hashede passord validerer til true
+    // hvis gyldig, krypter passord
+    echo "i valider";
   }
 
   public static function finn() {
