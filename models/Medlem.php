@@ -14,7 +14,7 @@ class Medlem {
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost = $medlem["epost"];
     $this->passord = $medlem["passord"];
-    if (!$fraDatabase) valider();
+    if (!$fraDatabase) $this->valider();
   }
 
   private function valider($medlem) {
