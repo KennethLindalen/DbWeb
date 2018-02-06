@@ -1,27 +1,30 @@
-function validerRegForm(formNavnNavn){
+function validerRegForm(formNavn){
 
 ikkeTilatteTegnBrukernavn = /^\w+$/;
 passSjekkTall = /[0-9]/;
 passSjekkStorBokstaver = /[A-ZÆØÅ]/;
 passSjekkSmåBokstaver = /[a-zæøå]/;
 
+/*
+  Alle testene er klare, må bare få en måte til å få de til å funke med modal. Modal lukkes hele tiden.
+*/
 
-  if(formNavnNavn.RegistrerBrukernavn.value == ""){
+  if(formNavn.RegistrerBrukernavn.value == ""){
     alert("Brukernavn boksen kan ikke være tom.")
     formNavn.RegistrerBrukernavn.focus();
     return false;
   }
-  if(!ikkeTilatteTegnBrukernavn.test(formNavnNavn.RegistrerBrukernavn.value){
+  if(!ikkeTilatteTegnBrukernavn.test(formNavn.RegistrerBrukernavn.value){
     alert("Brukernavnet kan bare inneholde bokstaver, tall, understreker og bindestreker.")
     formNavn.RegistrerBrukernavn.focus();
     return false;
   }
-  if(!ikkeTilatteTegnBrukernavn.test(formNavnNavn.RegistrerEpost.value){
+  if(!ikkeTilatteTegnBrukernavn.test(formNavn.RegistrerEpost.value){
     alert("Eposten kan bare inneholde bokstaver, tall, understreker og bindestreker.")
     formNavn.RegistrerBrukernavn.focus();
     return false;
   }
-  if(formNavnNavn.RegistrerPassord.value == formNavnNavn.RegistrerBrukernavn.value){
+  if(formNavn.RegistrerPassord.value == formNavn.RegistrerBrukernavn.value){
     alert("Passord kan ikke være det samme som brukernavnet ditt.")
     formNavn.RegistrerPassord.focus();
     return false;
