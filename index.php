@@ -1,7 +1,9 @@
 <?php
 
 include_once "utils/database.php";
+include_once "models/Medlem.php";
 
-var_dump($_GET);
+$a = new Medlem();
+var_dump($a);
 
 ?>
