@@ -5,6 +5,7 @@ include_once "utils/database.php";
 
 class Medlem {
 
+  // new Medlem($_POST);
   public function __construct($medlem = [], $fraDatabase = false) {
     $this->medlemsnummer = $medlem["medlemsnummer"];
     $this->fornavn       = $medlem["fornavn"];
@@ -19,6 +20,8 @@ class Medlem {
 
   private function valider() {
     // kast unntak ved feil
+    // $this->medlemsnummer MÅ være null her!!!
+    $this->medlemsnummer = null;
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
   }
 
@@ -40,7 +43,7 @@ class Medlem {
     // update medlem set values where medlemsnummer = $this->medlemsnummer
   }
 
-  public static function finn() {
+  public static function finn($identifikator) {
     // finn medlem med gitt medlemsnummer eller epost
   }
 
