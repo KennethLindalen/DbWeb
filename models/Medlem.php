@@ -23,10 +23,21 @@ class Medlem {
   }
 
   public function lagre() {
+    if ($this->medlemsnummer)
+      $this->oppdater();
+    else
+      $this->settInn();
+    return $this;
+  }
+
+  private function settInn() {
     // insert into medlem med prepared statement eller stored procedure
     // hent medlemsnummer fra databasen (auto-incremented) og lagre i objektet'
     // $this->medlemsnummer = "Medlemsnummer fra databasen";
-    return $this;
+  }
+
+  private function oppdater() {
+    // update medlem set values where medlemsnummer = $this->medlemsnummer
   }
 
   public static function finn() {
