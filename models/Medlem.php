@@ -22,7 +22,7 @@ class Medlem {
   private function valider() {
     $feil = [];
 
-
+    // TODO: validering for fornavn, etternavn og adresse
 
     if (!preg_match("/^\d{8}$/", $this->telefonnummer))
       $feil["telefonnummer"] = "Ugyldig telefonnummer";
