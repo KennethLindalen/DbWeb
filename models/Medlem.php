@@ -15,12 +15,19 @@ class Medlem {
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost         = $medlem["epost"];
     $this->passord       = $medlem["passord"];
+    $this->passord2      = $medlem["passord2"];
     if (!$fraDatabase) $this->valider();
   }
 
   private function valider() {
-    // kast unntak ved feil
-    // $this->medlemsnummer MÅ være null her!!!
+    $feil = [];
+
+    if (!preg_match("/(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØå]).{10,}/", $passord))
+      $feil["passord"] = "Passordet må bestå av minst 6 tegn, og inneholde både tall, store-, og små bokstaver"
+
+    if ($this->passord !== $this->passord2)
+      $feil["passord2"] = "Passordene må være like";
+
     $this->medlemsnummer = null;
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
   }

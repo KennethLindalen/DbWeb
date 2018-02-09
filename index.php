@@ -22,6 +22,5 @@ var_dump($medlem);
       <button>faen</button>
     </form>
 
-    <p><?php echo $a ?></p>
   </body>
 </html>
