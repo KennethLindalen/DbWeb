@@ -14,18 +14,18 @@
 	<header>
 		<div class="container">
 			<p>Logo</p>
-			<h1><a href="../index.html">Nederlaget<br>Idrettsklubb</a></h1>
+			<h1><a href="../index.php">Nederlaget<br>Idrettsklubb</a></h1>
 		</div>
 		<!-- Slutt på header container div -->
 	</header>
 	<nav>
 		<div class="container">
 			<ul>
-				<li><a href="nyheter.html">Nyheter</a>
+				<li><a href="nyheter.php">Nyheter</a>
 				</li>
-				<li><a href="aktiviteter.html">Aktiviteter</a>
+				<li><a href="aktiviteter.php">Aktiviteter</a>
 				</li>
-				<li><a href="resultater.html">Resultater</a>
+				<li><a href="resultater.php">Resultater</a>
 				</li>
 				<li><a href="#" onClick="openRegistrerModal()">Bli medlem</a>
 				</li>

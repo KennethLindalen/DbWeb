@@ -7,15 +7,14 @@
 	<link href="https://fonts.googleapis.com/css?family=Bungee+Hairline|Open+Sans+Condensed:300|Open+Sans" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet" type="text/css">
 	<link href="../css/modal.css" rel="stylesheet" type="text/css">
-	<script src="../skript/modal.js">
-	</script>
+	<script src="../skript/modal.js"></script>
 </head>
 
 <body>
 	<header>
 		<div class="container">
 			<p>Logo</p>
-			<h1><a href="../index.html">Nederlaget<br>
+			<h1><a href="../index.php">Nederlaget<br>
 			Idrettsklubb</a>
 			</h1>
 		</div>
@@ -24,11 +23,11 @@
 	<nav>
 		<div class="container">
 			<ul>
-				<li>	<a href="nyheter.html">Nyheter</a>
+				<li>	<a href="nyheter.php">Nyheter</a>
 				</li>
-				<li>	<a href="aktiviteter.html">Aktiviteter</a>
+				<li>	<a href="aktiviteter.php">Aktiviteter</a>
 				</li>
-				<li>	<a href="resultater.html">Resultater</a>
+				<li>	<a href="resultater.php">Resultater</a>
 				</li>
 				<li>	<a href="#" onclick="openRegistrerModal()">Bli medlem</a>
 				</li>
@@ -60,7 +59,7 @@
 			<!-- Slutt på card div -->
 			<div class="card">
 				<div class="card-body">
-					<h3>Spionering på svenseid IL</h3>
+					<h3>Spionering på Svenseid IL</h3>
 					<h6>Svenseid IL kan ikke slå oss lenger, vi må lære hvordan de trener!</h6>
 					<p>Når enn de har trenings</p>
 				</div>

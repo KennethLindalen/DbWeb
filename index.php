@@ -16,18 +16,18 @@
 	<header>
 		<div class="container">
 			<p>Logo</p>
-			<h1><a href="index.html">Nederlaget<br>Idrettsklubb</a></h1>
+			<h1><a href="index.php">Nederlaget<br>Idrettsklubb</a></h1>
 		</div>
 		<!-- Slutt på header container div -->
 	</header>
 	<nav>
 		<div class="container">
 			<ul>
-				<li><a href="p/nyheter.html">Nyheter</a>
+				<li><a href="p/nyheter.php">Nyheter</a>
 				</li>
-				<li><a href="p/aktiviteter.html">Aktiviteter</a>
+				<li><a href="p/aktiviteter.php">Aktiviteter</a>
 				</li>
-				<li><a href="p/resultater.html">Resultater</a>
+				<li><a href="p/resultater.php">Resultater</a>
 				</li>
 				<li><a href="#" onClick="openRegistrerModal()">Bli medlem</a>
 				</li>
@@ -81,7 +81,7 @@
 			</div>
 			<!-- Slutt på modal-header div -->
 			<div class="modal-body">
-				<lh4>Brukernavn(e-post)</h4>
+				<h4>Brukernavn(e-post)</h4>
 				<input type="text" name="loggInnBrukernavn" value="">
 				<br />
 				<br />
@@ -106,10 +106,6 @@
 			<!--Slutt på modal-header div -->
 			<div class="modal-body">
 				<div class="container" style="float:right; position:relative; size:50%; font-size: 10px; color: Black;">
-						<h4>Brukernavnet kan bare innholde bokstaver, tall, bindestreker og understreker.<br />
-						Eposten kan bare innholde bokstaver, tall, bindestreker og understreker.<br />
-						Passordet MÅ inneholde små bokstaver, store bokstaver og tall.<br />
-						Passordene må være like.</h4>
 					</div>
 				<!--Slutt på info container div -->
 				<div class="container">
@@ -126,13 +122,6 @@
 				</form>
 				</div>
 				<!--Slutt på form container div -->
-				<div class="validering" style="float: right; width:20%; font-size: 12px;">
-						Brukernavnet kan bare innholde bokstaver, tall, bindestreker og understreker
-						Eposten kan bare innholde bokstaver, tall, bindestreker og understreker
-						Passordet MÅ inneholde små bokstaver, store bokstaver og tall
-						Passordene må være like
-				</div>
-				<!--Slutt på validering div -->
 			</div>
 			<!-- Slutt på modal-body div -->
 			<div class="modal-footer">
