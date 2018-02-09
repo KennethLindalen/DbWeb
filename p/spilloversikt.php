@@ -2,27 +2,28 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Nederlaget IK - Resultater</title>
+    <title>Nederlaget IK - spilloversikt</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bungee+Hairline|Open+Sans+Condensed:300|Open+Sans">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/layout.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="javascript "src="../skript/modal.js"></script>
+
   </head>
   <body>
 
     <header>
       <div class="container">
         <p>Logo</p>
-        <h1><a href ="../index.html">Nederlaget<br>Idrettsklubb</a></h1>
+        <h1><a href ="../index.php">Nederlaget<br>Idrettsklubb</a></h1>
       </div>
     </header>
 
     <nav>
       <div class="container">
         <ul>
-          <li><a href="nyheter.html">Nyheter</a></li>
-          <li><a href="aktiviteter.html">Aktiviteter</a></li>
-          <li><a href="resultater.html">Spilloversikt</a></li>
+          <li><a href="nyheter.php">Nyheter</a></li>
+          <li><a href="aktiviteter.php">Aktiviteter</a></li>
+          <li><a href="spilloversikt.php">Spilloversikt</a></li>
           <li><a href="#">Bli medlem</a></li>
           <li><a href="#">Logg inn</a></li>
         </ul>
@@ -31,9 +32,9 @@
 
     <main>
       <div class="container">
-        <h1>Resultater</h1>
+        <h1>spilloversikt</h1>
         <p>
-          Her kan man se resultater og informasjon om sportsarrangementer som Nedelaget Idrettsklubb er involvert i
+          Her kan man se spilloversikt og informasjon om sportsarrangementer som Nedelaget Idrettsklubb er involvert i
         </p>
       </div>
 
@@ -193,6 +194,65 @@
       </div>
       </div>
     </main>
+    <footer>
 
+    </footer>
+
+    <div class="modal" id="loginModal">
+  		<div class="modal-content">
+  			<div class="modal-header">	<span class="closeBtn"></span>
+  				<h2>Logg inn</h2>
+  				<h6>Trykk på utsiden av boksen for å lukke</h6>
+  			</div>
+  			<!-- Slutt på modal-header div -->
+  			<div class="modal-body">
+  				<h4>Brukernavn(e-post)</h4>
+  				<input name="loggInnBrukernavn" type="text" value="">
+  				<br>
+  				<br>
+  				<h5>Passord</h5>
+  				<input name="loggInnPassord" type="password" value="">
+  			</div>
+  			<!-- Slutt på modal-body div -->
+  			<div class="modal-footer">
+  				<button class="loggInnKnapp" name="LoggInnBtn" type="button">Logg Inn</button>
+  			</div>
+  			<!-- Slutt på modal-footer div -->
+  		</div>
+  		<!-- Slutt på modal-content div -->
+  	</div>
+  	<!-- Slutt på loginModal div -->
+  	<div class="modal" id="registrerModal">
+  		<div class="modal-content">
+  			<div class="modal-header">	<span class="closeBtn"></span>
+  				<h2>Registrer deg</h2>
+  				<h6>Trykk på utsiden av boksen for å lukke</h6>
+  			</div>
+  			<!-- Slutt på modal-header div -->
+  			<div class="modal-body">
+  				<h4>Brukernavn(e-post)</h4>
+  				<input name="RegistrerBrukernavn" type="text" value="">
+  				<br>
+  				<h4>Epost</h4>
+  				<input name="RegistrerBrukernavn" type="text" value="">
+  				<br>
+  				<h4>Passord</h4>
+  				<input name="RegistrerPassord" type="password" value="">
+  				<br>
+  				<h4>Passord igjen</h4>
+  				<input name="RegistrerPassordIgjen" type="password" value="">
+  			</div>
+  			<!-- Slutt på modal-body div -->
+  			<div class="modal-footer">
+  				<button class="RegKnapp" name="RegKnapp" type="button">Registrer deg</button>
+  			</div>
+  			<!-- Slutt på modal-footer div -->
+  		</div>
+  		<!-- Slutt på modal-content div -->
+  	</div>
+  	<!-- Slutt på registrerModal div -->
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8" crossorigin="anonymous"></script>
+  	<!--Skript for jQuery 3.3.1 minified -->
   </body>
 </html>
