@@ -1,10 +1,7 @@
 <?php
-
 include_once "models/Medlem.php";
-
 $medlem = new Medlem($_POST);
 var_dump($medlem);
-
 ?>
 
 <!DOCTYPE html>
