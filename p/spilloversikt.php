@@ -27,7 +27,7 @@
 				</li>
 				<li>	<a href="aktiviteter.php">Aktiviteter</a>
 				</li>
-				<li>	<a href="spilloversikt.php">Spilloversikt</a>
+				<li>	<a href="resultater.php">Resultater</a>
 				</li>
 				<li>	<a href="#" onclick="openRegistrerModal()">Bli medlem</a>
 				</li>
@@ -39,9 +39,9 @@
 	</nav>
 	<main>
     <div class="container">
-      <h1>spilloversikt</h1>
+      <h1>resultater</h1>
       <p>
-        Her kan man se spilloversikt og informasjon om sportsarrangementer som Nedelaget Idrettsklubb er involvert i
+        Her kan man se resultater og informasjon om sportsarrangementer som Nedelaget Idrettsklubb er involvert i
       </p>
     </div>
 

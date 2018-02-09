@@ -25,7 +25,7 @@
 				</li>
 				<li><a href="aktiviteter.php">Aktiviteter</a>
 				</li>
-				<li><a href="spilloversikt.php">Spilloversikt</a>
+				<li><a href="resultater.php">Resultater</a>
 				</li>
 				<li><a href="#" onClick="openRegistrerModal()">Bli medlem</a>
 				</li>
