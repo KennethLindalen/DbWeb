@@ -59,7 +59,7 @@
 			<!-- Slutt på card div -->
 			<div class="card">
 				<div class="card-body">
-					<h3>Spionering på svenseid IL</h3>
+					<h3>Spionering på Svenseid IL</h3>
 					<h6>Svenseid IL kan ikke slå oss lenger, vi må lære hvordan de trener!</h6>
 					<p>Når enn de har trenings</p>
 				</div>
