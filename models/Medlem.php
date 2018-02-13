@@ -11,6 +11,7 @@ class Medlem {
     $this->etternavn     = $medlem["etternavn"];
     $this->adresse       = $medlem["adresse"];
     $this->postnummer    = $medlem["postnummer"];
+    $this->poststed      = $medlem["poststed"];
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost         = $medlem["epost"];
     $this->passord       = $medlem["passord"];
@@ -21,7 +22,14 @@ class Medlem {
   private function valider() {
     $feil = [];
 
-    // TODO: validering for fornavn, etternavn og adresse
+    if (!preg_match("/^[\pL\s'.-]+$/", $this->fornavn))
+      $feil["fornavn"] = "Ugyldig fornavn";
+
+    if (!preg_match("/^[\pL\s'.-]+$/", $this->etternavn))
+      $feil["etternavn"] = "Ugyldig etternavn";
+
+    if (!preg_match("/^[\pL\s\d'.,-]+$/", $this->adresse))
+      $feil["adresse"] = "Ugyldig adresse";
 
     if (!preg_match("/^\d{8}$/", $this->telefonnummer))
       $feil["telefonnummer"] = "Ugyldig telefonnummer";
