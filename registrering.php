@@ -1,4 +1,5 @@
 <?php
+  error_reporting( E_ALL );
   include_once "models/Medlem.php";
   include_once "utils/funksjoner.php";
 
