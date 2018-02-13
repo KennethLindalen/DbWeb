@@ -1,7 +1,7 @@
 <?php
 error_reporting(-1);
   include_once "models/Medlem.php";
-  include_once "utils/funksjoner.php";
+  include_once "utils/fundksjoner.php";
 
   $feil = [];
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
