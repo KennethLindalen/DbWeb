@@ -1,7 +1,12 @@
 <?php
   include_once "models/Medlem.php";
-  if ($_SERVER["REQUEST_METHOD"] === "POST")
-    $medlem = new Medlem($_POST);
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    try {
+      $medlem = new Medlem($_POST);
+    } catch (Exception $e) {
+      var_dump($e);
+    }
+  }
 ?>
 
 <!DOCTYPE html>
