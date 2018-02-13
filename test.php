@@ -2,7 +2,7 @@
   include_once "models/Medlem.php";
   include_once "utils/funksjoner.php";
 
-  $feil = [];
+  /*$feil = [];
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
@@ -12,8 +12,8 @@
     catch (Exception $e) {
       $feil = json_decode($e->getMessage(), true);
     }
- 
-  }
+
+  }*/
 
 ?>
 
