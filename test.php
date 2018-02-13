@@ -1,6 +1,7 @@
 <?php
   include_once "models/Medlem.php";
 
+  $feil = [];
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
       $medlem = new Medlem($_POST);
@@ -8,6 +9,7 @@
       $feil = $e;
     }
   }
+
 ?>
 
 <!DOCTYPE html>
