@@ -1,7 +1,7 @@
 <?php
-include_once "models/Medlem.php";
-$medlem = new Medlem($_POST);
-var_dump($medlem);
+  include_once "models/Medlem.php";
+  if ($_SERVER["REQUEST_METHOD"] === "POST")
+    $medlem = new Medlem($_POST);
 ?>
 
 <!DOCTYPE html>
@@ -12,13 +12,20 @@ var_dump($medlem);
   </head>
   <body>
 
-    <form action="index.php" method="post">
-      <input type="text" name="fornavn">
-      <input type="text" name="etternavn">
-      <input type="password" name="passord">
-      <button>faen</button>
+    <form action="test.php" method="post">
+      <input type="text" name="fornavn"><br>
+      <input type="text" name="etternavn"><br>
+      <input type="text" name="adresse"><br>
+      <input type="text" name="postnummer"><br>
+      <input type="text" name="telefonnummer"><br>
+      <input type="email" name="epost"><br>
+      <input type="password" name="passord"><br>
+      <input type="password" name="passord2"><br>
+      <button>Send</button>
     </form>
 
-    <p><?php echo $a ?></p>
+    <p>
+      <?php var_dump($medlem); ?>
+    </p>
   </body>
 </html>
