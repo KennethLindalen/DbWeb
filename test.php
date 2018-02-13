@@ -1,7 +1,7 @@
 <?php
   include_once "models/Medlem.php";
 
-  $feil = []
+  $feil = [];
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
       $medlem = new Medlem($_POST);
