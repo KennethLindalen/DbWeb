@@ -6,12 +6,12 @@ include_once "utils/database.php";
 class Medlem {
 
   public function __construct($medlem = [], $fraDatabase = false) {
-    $this->medlemsnummer = $medlem["medlemsnummer"];
+    $this->medlemsnummer = $fraDatabase ? $medlem["medlemsnummer"] : null;
     $this->fornavn       = $medlem["fornavn"];
     $this->etternavn     = $medlem["etternavn"];
     $this->adresse       = $medlem["adresse"];
     $this->postnummer    = $medlem["postnummer"];
-    $this->poststed      = $medlem["poststed"];
+    $this->poststed      = $fraDatabase ? $medlem["poststed"] : null;
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost         = $medlem["epost"];
     $this->passord       = $medlem["passord"];
@@ -44,11 +44,10 @@ class Medlem {
       $feil["passord2"] = "Passordene må være like";
 
     if (!empty($feil))
-      throw $e;
+      throw new Exception(json_encode($feil));
 
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
-    unset($this->passord2);
-    unset($this->medlemsnummer);
+    $this->passord2 = null;
   }
 
   public function lagre() {
