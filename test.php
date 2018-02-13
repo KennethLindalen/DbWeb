@@ -1,11 +1,13 @@
 <?php
   include_once "models/Medlem.php";
+  include_once "utils/funksjoner.php";
 
   $feil = [];
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
       $medlem = new Medlem($_POST);
+      header("Location: index.php");
     }
 
     catch (Exception $e) {
@@ -24,17 +26,34 @@
   </head>
   <body>
 
-    <form action="test.php" method="post">
-      <input type="text" name="fornavn" value="<?= 'hey' ?>"><?php if (isset($feil["fornavn"])) echo $feil["fornavn"]; ?><br>
-      <input type="text" name="etternavn"><?php if (isset($feil["etternavn"])) echo $feil["etternavn"]; ?><br>
-      <input type="text" name="adresse"><?php if (isset($feil["adresse"])) echo $feil["adresse"]; ?><br>
-      <input type="text" name="postnummer"><?php if (isset($feil["postnummer"])) echo $feil["postnummer"]; ?><br>
-      <input type="text" name="telefonnummer"><?php if (isset($feil["telefonnummer"])) echo $feil["telefonnummer"]; ?><br>
-      <input type="email" name="epost"><?php if (isset($feil["epost"])) echo $feil["epost"]; ?><br>
-      <input type="password" name="passord"><?php if (isset($feil["passord"])) echo $feil["passord"]; ?><br>
-      <input type="password" name="passord2"><?php if (isset($feil["passord2"])) echo $feil["passord2"]; ?><br>
+    <form method="post">
+      <input type="text" name="fornavn" value="<?= fraArray($_POST, 'fornavn') ?>">
+      <?= fraArray($feil, "fornavn") ?><br>
+
+      <input type="text" name="etternavn" value="<?= fraArray($_POST, 'etternavn') ?>">
+      <?= fraArray($feil, "etternavn") ?><br>
+
+      <input type="text" name="adresse" value="<?= fraArray($_POST, 'adresse') ?>">
+      <?= fraArray($feil, "adresse") ?><br>
+
+      <input type="text" name="postnummer" value="<?= fraArray($_POST, 'postnummer') ?>">
+      <?= fraArray($feil, "postnummer") ?><br>
+
+      <input type="text" name="telefonnummer" value="<?= fraArray($_POST, 'telefonnummer') ?>">
+      <?= fraArray($feil, "telefonnummer") ?><br>
+
+      <input type="email" name="epost" value="<?= fraArray($_POST, 'epost') ?>">
+      <?= fraArray($feil, "epost") ?><br>
+
+      <input type="password" name="passord" value="<?= fraArray($_POST, 'passord') ?>">
+      <?= fraArray($feil, "passord") ?><br>
+
+      <input type="password" name="passord2" value="<?= fraArray($_POST, 'passord2') ?>">
+      <?= fraArray($feil, "passord2") ?><br>
+
       <button>Send</button>
     </form>
 
+    <?php if (empty($feil)) echo "Ingen feil." ?>
   </body>
 </html>
