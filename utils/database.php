@@ -9,7 +9,9 @@ class Database {
   private static $tilkobling;
 
   private static function kobleTil() {
-    self::$tilkobling = mysqli_connect($this->hostname, $this->username, $this->password, $this->database);
+    self::$tilkobling = mysqli_connect(
+      self::$hostname, self::$username, self::$password, self::$database
+    );
   }
 
   private static function kobleFra() {
