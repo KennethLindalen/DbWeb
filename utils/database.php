@@ -18,7 +18,7 @@ class Database {
 
   public static function spørring() {
     self::kobleTil();
-    var_dump(self::$tilkobling);
+    
     self::kobleFra();
   }
 
