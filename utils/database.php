@@ -18,12 +18,10 @@ class Database {
 
   public static function spørring() {
     self::kobleTil();
-    
+
     self::kobleFra();
   }
 
 }
-
-Database::spørring();
 
 ?>
