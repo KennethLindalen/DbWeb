@@ -20,7 +20,7 @@
   <body>
 
     <form action="test.php" method="post">
-      <input type="text" name="fornavn" value="<?php echo $_POST['fornavn'] ?>"><?php echo $feil["fornavn"] ?? ""; ?><br>
+      <input type="text" name="fornavn" value="<?php echo $_POST['fornavn'] ?>"><?php if (isset($feil["fornavn"])) echo $feil["fornavn"]; ?><br>
       <input type="text" name="etternavn"><?php if (isset($feil["etternavn"])) echo $feil["etternavn"]; ?><br>
       <input type="text" name="adresse"><?php if (isset($feil["adresse"])) echo $feil["adresse"]; ?><br>
       <input type="text" name="postnummer"><?php if (isset($feil["postnummer"])) echo $feil["postnummer"]; ?><br>
