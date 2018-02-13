@@ -2,7 +2,7 @@
 
 class Database {
 
-  private static $hostname = "itfag.usn.no";
+  private static $hostname = "localhost";
   private static $username = "v18u130";
   private static $password = "Pw130";
   private static $database = "v18db130";
@@ -18,6 +18,7 @@ class Database {
 
   public static function spørring() {
     self::kobleTil();
+    var_dump(self::$tilkobling);
     self::kobleFra();
   }
 
