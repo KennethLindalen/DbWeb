@@ -6,7 +6,6 @@
     try {
       $medlem = new Medlem($_POST);
     } catch (Exception $e) {
-      var_dump($e);
       $feil = $e;
     }
   }
@@ -21,6 +20,7 @@
   <body>
 
     <form action="test.php" method="post">
+      <?php var_dump($feil); ?>
       <input type="text" name="fornavn"><?php if ($feil["fornavn"]) echo $feil["fornavn"]; ?><br>
       <input type="text" name="etternavn"><?php if ($feil["etternavn"]) echo $feil["etternavn"]; ?><br>
       <input type="text" name="adresse"><?php if ($feil["adresse"]) echo $feil["adresse"]; ?><br>
