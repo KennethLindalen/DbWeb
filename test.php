@@ -23,7 +23,7 @@
     <meta charset="utf-8">
     <title>asdfasdf</title>
   </head>
-  <body>
+  <body> 
 
     <form method="post">
       <input type="text" name="fornavn" value="<?= fraArray($_POST, 'fornavn') ?>">
