@@ -10,7 +10,7 @@ class Database {
 
   private static function kobleTil() {
     self::$tilkobling = mysqli_connect($hostname, $username, $password, $database);
-  }
+  } 
 
   private static function kobleFra() {
     self::$tilkobling->close();
