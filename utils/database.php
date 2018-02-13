@@ -13,12 +13,11 @@ class Database {
   }
 
   private static function kobleFra() {
-    self::$tilkobling->close(); 
+    self::$tilkobling->close();
   }
 
   public static function spørring() {
     self::kobleTil();
-    var_dump(self::$tilkobling);
     self::kobleFra();
   }
 
