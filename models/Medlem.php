@@ -48,8 +48,8 @@ class Medlem {
       //throw new Exception($feil);
 
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
-    $this->passord2 = null;
-    $this->medlemsnummer = null;
+    unset($this->passord2);
+    unset($this->medlemsnummer);
   }
 
   public function lagre() {
