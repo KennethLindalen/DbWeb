@@ -31,6 +31,9 @@ class Medlem {
     if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/", $this->adresse))
       $feil["adresse"] = "Ugyldig adresse";
 
+    if (!preg_match("/^\d{4}$/", $this->postnummer))
+      $feil["postnummer"] = "Ugyldig postnummer";
+
     if (!preg_match("/^\d{8}$/", $this->telefonnummer))
       $feil["telefonnummer"] = "Ugyldig telefonnummer";
 
