@@ -1,7 +1,7 @@
 <?php
 
 include_once "utils/database.php";
-
+Database::spørring();
 class Medlem {
 
   public function __construct($medlem = [], $fraDatabase = false) {

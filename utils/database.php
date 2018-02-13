@@ -2,24 +2,24 @@
 
 class Database {
 
-  private $hostname = "localhost";
-  private $username = "v18u130";
-  private $password = "Pw130";
-  private $database = "v18db130";
-  private $tilkobling = null;
+  private static $hostname = "localhost";
+  private static $username = "v18u130";
+  private static $password = "Pw130";
+  private static $database = "v18db130";
+  private static $tilkobling;
 
-  private function kobleTil() {
-    $this->tilkobling = mysqli_connect($hostname, $username, $password, $database);
+  private static function kobleTil() {
+    self::$tilkobling = mysqli_connect($this->hostname, $this->username, $this->password, $this->database);
   }
 
-  private function kobleFra() {
-    $this->tilkobling->close();
+  private static function kobleFra() {
+    self::$tilkobling->close();
   }
 
-  public function spørring() {
-    $this->kobleTil();
-
-    $this->kobleFra();
+  public static function spørring() {
+    self::$kobleTil();
+    var_dump(self::$tilkobling);
+    self::$kobleFra();
   }
 
 }
