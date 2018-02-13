@@ -43,8 +43,12 @@ class Medlem {
     if ($this->passord !== $this->passord2)
       $feil["passord2"] = "Passordene må være like";
 
-    $this->medlemsnummer = null;
+    if (!empty($feil))
+      throw new Exception($feil);
+
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
+    $this->passord2 = null;
+    $this->medlemsnummer = null;
   }
 
   public function lagre() {
