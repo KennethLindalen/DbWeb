@@ -41,7 +41,7 @@ class Medlem {
       $feil["epost"] = "Ugyldig e-postadresse";
 
     if (!preg_match("/(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ]).{6,}/", $this->passord))
-      $feil["passord"] = "Passordet må bestå av minst 6 tegn, og inneholde både tall, store-, og små bokstaver";
+      $feil["passord"] = "Passordet må bestå av minst 6 tegn og inneholde både tall, store-, og små bokstaver";
 
     if ($this->passord !== $this->passord2)
       $feil["passord2"] = "Passordene må være like";
