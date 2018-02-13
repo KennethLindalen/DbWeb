@@ -1,11 +1,16 @@
 <?php
   include_once "models/Medlem.php";
+
   $feil = [];
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    try
-      { $medlem = new Medlem($_POST); }
-    catch (Exception $e)
-      { $feil = json_decode($e->getMessage(), true); }
+
+    try {
+      $medlem = new Medlem($_POST);
+    }
+
+    catch (Exception $e) {
+      $feil = json_decode($e->getMessage(), true);
+    }
 
   }
 
@@ -20,7 +25,7 @@
   <body>
 
     <form action="test.php" method="post">
-      <input type="text" name="fornavn" value="<?php echo $_POST['fornavn'] ?>"><?php if (isset($feil["fornavn"])) echo $feil["fornavn"]; ?><br>
+      <input type="text" name="fornavn" value="<?= 'hey' ?>"><?php if (isset($feil["fornavn"])) echo $feil["fornavn"]; ?><br>
       <input type="text" name="etternavn"><?php if (isset($feil["etternavn"])) echo $feil["etternavn"]; ?><br>
       <input type="text" name="adresse"><?php if (isset($feil["adresse"])) echo $feil["adresse"]; ?><br>
       <input type="text" name="postnummer"><?php if (isset($feil["postnummer"])) echo $feil["postnummer"]; ?><br>
@@ -31,8 +36,5 @@
       <button>Send</button>
     </form>
 
-    <p>
-      <?php var_dump($feil); ?>
-    </p>
   </body>
 </html>

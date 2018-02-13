@@ -15,20 +15,20 @@ class Medlem {
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost         = $medlem["epost"];
     $this->passord       = $medlem["passord"];
-    $this->passord2      = $medlem["passord2"];
+    $this->passord2      = $fraDatabase ? null : $medlem["passord2"];
     if (!$fraDatabase) $this->valider();
   }
 
   private function valider() {
     $feil = [];
 
-    if (!preg_match("/^[\pL\s'.-]+$/", $this->fornavn))
+    if (!preg_match("/^[\pL\s'.-]{1,100}$/", $this->fornavn))
       $feil["fornavn"] = "Ugyldig fornavn";
 
-    if (!preg_match("/^[\pL\s'.-]+$/", $this->etternavn))
+    if (!preg_match("/^[\pL\s'.-]{1,100}$/", $this->etternavn))
       $feil["etternavn"] = "Ugyldig etternavn";
 
-    if (!preg_match("/^[\pL\s\d'.,-]+$/", $this->adresse))
+    if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/", $this->adresse))
       $feil["adresse"] = "Ugyldig adresse";
 
     if (!preg_match("/^\d{8}$/", $this->telefonnummer))
