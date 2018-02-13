@@ -6,7 +6,9 @@
     try {
       $medlem = new Medlem($_POST);
     } catch (Exception $e) {
+      var_dump($feil);
       $feil = $e;
+
     }
   }
 
