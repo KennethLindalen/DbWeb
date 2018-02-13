@@ -44,7 +44,7 @@ class Medlem {
       $feil["passord2"] = "Passordene må være like";
 
     if (!empty($feil))
-      throw new \Exception($feil);
+      throw $e;
 
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
     unset($this->passord2);
