@@ -4,7 +4,7 @@
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
       $medlem = new Medlem($_POST);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       var_dump($e);
     }
   }
