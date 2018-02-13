@@ -12,7 +12,7 @@
     catch (Exception $e) {
       $feil = json_decode($e->getMessage(), true);
     }
-
+ 
   }
 
 ?>
@@ -22,7 +22,7 @@
   <head>
     <meta charset="utf-8">
     <title>asdfasdf</title>
-  </head> 
+  </head>
   <body>
 
     <form method="post">
