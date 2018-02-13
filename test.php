@@ -7,7 +7,6 @@
 
     try {
       $medlem = new Medlem($_POST);
-      header("Location: index.php");
     }
 
     catch (Exception $e) {
