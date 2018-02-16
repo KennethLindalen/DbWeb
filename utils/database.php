@@ -2,7 +2,7 @@
 
 class Database {
 
-  private static $hostname = "localhost";
+  private static $hostname = "itfag.usn.no";
   private static $username = "v18u130";
   private static $password = "Pw130";
   private static $database = "v18db130";
@@ -10,7 +10,10 @@ class Database {
 
   private static function kobleTil() {
     self::$tilkobling = mysqli_connect(
-      self::$hostname, self::$username, self::$password, self::$database
+      self::$hostname,
+      self::$username,
+      self::$password,
+      self::$database
     );
   }
 
@@ -19,9 +22,9 @@ class Database {
   }
 
   public static function spørring() {
-    self::$kobleTil();
-    var_dump(self::$tilkobling);
-    self::$kobleFra();
+    self::kobleTil();
+    var_dump(self::$tilkobling->query("SELECT * FROM Poststed")->fetch_assoc());
+    self::kobleFra();
   }
 
 }
