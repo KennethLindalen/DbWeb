@@ -1,35 +1,55 @@
 <?php
 
 include_once "utils/database.php";
-
-
+Database::spørring();
 class Medlem {
 
-  // new Medlem($_POST);
   public function __construct($medlem = [], $fraDatabase = false) {
-    $this->medlemsnummer = $medlem["medlemsnummer"];
+    $this->medlemsnummer = $fraDatabase ? $medlem["medlemsnummer"] : null;
     $this->fornavn       = $medlem["fornavn"];
     $this->etternavn     = $medlem["etternavn"];
     $this->adresse       = $medlem["adresse"];
     $this->postnummer    = $medlem["postnummer"];
+    $this->poststed      = $fraDatabase ? $medlem["poststed"] : null;
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost         = $medlem["epost"];
     $this->passord       = $medlem["passord"];
-    $this->passord2      = $medlem["passord2"];
+    $this->passord2      = $fraDatabase ? null : $medlem["passord2"];
     if (!$fraDatabase) $this->valider();
   }
 
   private function valider() {
     $feil = [];
 
-    if (!preg_match("/(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØå]).{10,}/", $passord))
-      $feil["passord"] = "Passordet må bestå av minst 6 tegn, og inneholde både tall, store-, og små bokstaver"
+    if (!preg_match("/^[\pL\s'.-]{1,100}$/", $this->fornavn))
+      $feil["fornavn"] = "Ugyldig fornavn";
+
+    if (!preg_match("/^[\pL\s'.-]{1,100}$/", $this->etternavn))
+      $feil["etternavn"] = "Ugyldig etternavn";
+
+    if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/", $this->adresse))
+      $feil["adresse"] = "Ugyldig adresse";
+
+    if (!preg_match("/^\d{4}$/", $this->postnummer))
+      $feil["postnummer"] = "Ugyldig postnummer";
+
+    if (!preg_match("/^\d{8}$/", $this->telefonnummer))
+      $feil["telefonnummer"] = "Ugyldig telefonnummer";
+
+    if (!filter_var($this->epost, FILTER_VALIDATE_EMAIL))
+      $feil["epost"] = "Ugyldig e-postadresse";
+
+    if (!preg_match("/(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ]).{6,}/", $this->passord))
+      $feil["passord"] = "Passordet må bestå av minst 6 tegn og inneholde både tall, store-, og små bokstaver";
 
     if ($this->passord !== $this->passord2)
       $feil["passord2"] = "Passordene må være like";
 
-    $this->medlemsnummer = null;
+    if (!empty($feil))
+      throw new Exception(json_encode($feil));
+
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
+    $this->passord2 = null;
   }
 
   public function lagre() {
