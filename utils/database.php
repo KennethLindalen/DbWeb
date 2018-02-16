@@ -15,6 +15,7 @@ class Database {
       self::$password,
       self::$database
     );
+    self::$tilkobling->set_charset("utf8");
   }
 
   private static function kobleFra() {
@@ -23,8 +24,16 @@ class Database {
 
   public static function spørring() {
     self::kobleTil();
-    var_dump(self::$tilkobling->query("SELECT * FROM Poststed")->fetch_assoc());
     self::kobleFra();
+  }
+
+  public static function insert($tabell, $verdier) {
+    $kolonner = array_keys($verdier);
+    $verdier = array_values($verdier);
+
+    var_dump($tabell);
+    var_dump($kolonner);
+    var_dump($verdier);
   }
 
 }
