@@ -61,12 +61,7 @@ class Medlem {
   }
 
   private function settInn() {
-    // insert into medlem med prepared statement eller stored procedure
-    // hent medlemsnummer fra databasen (auto-incremented) og lagre i objektet'
-    // $this->medlemsnummer = "Medlemsnummer fra databasen";
-    echo "<pre>";
-    var_dump($this->toArray());
-    echo "</pre>";
+    Database::insert("medlem", $this->toArray());
   }
 
   private function oppdater() {
