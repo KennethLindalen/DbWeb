@@ -46,7 +46,7 @@ class Medlem {
       $feil["passord2"] = "Passordene må være like";
 
     if (!empty($feil))
-      throw new Exception(json_encode($feil));
+      throw new InvalidArgumentException(json_encode($feil));
 
     $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
     $this->passord2 = null;
@@ -61,7 +61,14 @@ class Medlem {
   }
 
   private function settInn() {
-    Database::insert("medlem", $this->toArray());
+    $con = new Database();
+    $res = $con->insert("medlem", $this->toArray());
+
+    if ($res->affected_rows < 0)
+      if ($res->errno == 1062)
+        throw new InvalidArgumentException(json_encode(["epost" => "E-postadressen er allerede i bruk"]));
+      if ($res->errno == 1452)
+        throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer"]));
   }
 
   private function oppdater() {

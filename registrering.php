@@ -9,9 +9,11 @@
       $medlem = new Medlem($_POST);
       $medlem->lagre();
     }
-
-    catch (Exception $e) {
+    catch (InvalidArgumentException $e) {
       $feil = json_decode($e->getMessage(), true);
+    }
+    catch (mysqli_sql_exception $e) {
+      echo "databasefeil";  
     }
 
   }
