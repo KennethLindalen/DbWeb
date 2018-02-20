@@ -7,6 +7,7 @@
 
     try {
       $medlem = new Medlem($_POST);
+      $medlem->lagre();
     }
 
     catch (Exception $e) {

@@ -1,7 +1,7 @@
 <?php
 
 include_once "utils/database.php";
-Database::insert("medlem", ["foo" => "bar", "hei" => "du"]);
+
 class Medlem {
 
   public function __construct($medlem = [], $fraDatabase = false) {
@@ -64,6 +64,9 @@ class Medlem {
     // insert into medlem med prepared statement eller stored procedure
     // hent medlemsnummer fra databasen (auto-incremented) og lagre i objektet'
     // $this->medlemsnummer = "Medlemsnummer fra databasen";
+    echo "<pre>";
+    var_dump($this->toArray());
+    echo "</pre>";
   }
 
   private function oppdater() {
@@ -76,6 +79,12 @@ class Medlem {
 
   public static function finnPassord() {
     // hent hashet passord for innlogging
+  }
+
+  private function toArray() {
+    $array = (array) $this;
+    $array = array_filter($array, function($var) { return $var != null; });
+    return $array;
   }
 
 }

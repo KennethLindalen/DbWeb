@@ -28,12 +28,10 @@ class Database {
   }
 
   public static function insert($tabell, $verdier) {
-    $kolonner = array_keys($verdier);
-    $verdier = array_values($verdier);
-
-    var_dump($tabell);
-    var_dump($kolonner);
-    var_dump($verdier);
+    $felter = join(", ", array_keys($verdier));
+    $parametre = join(", ", array_map(function() { return "?"; }, $verdier));
+    $sql = "INSERT INTO $tabell ($felter) VALUES ($parametre)";
+    var_dump($sql);
   }
 
 }
