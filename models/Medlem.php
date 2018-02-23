@@ -4,6 +4,8 @@ include_once "utils/database.php";
 
 class Medlem {
 
+  const TABELLNAVN = "medlem";
+
   public function __construct($medlem = [], $fraDatabase = false) {
     $this->medlemsnummer = $fraDatabase ? $medlem["medlemsnummer"] : null;
     $this->fornavn       = $medlem["fornavn"];
@@ -61,7 +63,7 @@ class Medlem {
 
   private function settInn() {
     $con = new Database();
-    $res = $con->insert("medlem", $this->toArray());
+    $res = $con->insert(self::TABELLNAVN, $this->toArray());
 
     if ($res->affected_rows < 1)
       if ($res->errno == 1062)
@@ -84,7 +86,7 @@ class Medlem {
     // hent hashet passord for innlogging
   }
 
-  private function toArray() {
+  public function toArray() {
     $array = (array) $this;
     $array = array_filter($array, function($var) { return $var != null; });
     return $array;

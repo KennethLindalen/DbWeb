@@ -18,7 +18,7 @@
 <body>
 	<header>
 		<div class="container">
-			<img class="article-image" src="img/logo.jpg" height="100" width="200">
+			<p>Logo</p> <!-- <img class="article-image" src="img/logo.jpg" height="100" width="200"> -->
 			<h1><a href="index">Nederlaget<br>Idrettsklubb</a></h1>
 		</div>
 		<!-- Slutt på header container div -->

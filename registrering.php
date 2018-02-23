@@ -8,13 +8,12 @@
     try {
       $medlem = new Medlem($_POST);
       $medlem->lagre();
-      var_dump($medlem);
     }
     catch (InvalidArgumentException $e) {
       $feil = json_decode($e->getMessage(), true);
     }
     catch (mysqli_sql_exception $e) {
-      echo "databasefeil";
+      header("Location: error.php");
     }
 
   }
@@ -30,28 +29,28 @@
   <body>
 
     <form method="post">
-      <input type="text" name="fornavn" value="<?= fraArray($_POST, 'fornavn') ?>">
+      <input type="text" name="fornavn" placeholder="fornavn" value="<?= fraArray($_POST, 'fornavn') ?>">
       <?= fraArray($feil, "fornavn") ?><br>
 
-      <input type="text" name="etternavn" value="<?= fraArray($_POST, 'etternavn') ?>">
+      <input type="text" name="etternavn" placeholder="etternavn" value="<?= fraArray($_POST, 'etternavn') ?>">
       <?= fraArray($feil, "etternavn") ?><br>
 
-      <input type="text" name="adresse" value="<?= fraArray($_POST, 'adresse') ?>">
+      <input type="text" name="adresse" placeholder="adresse" value="<?= fraArray($_POST, 'adresse') ?>">
       <?= fraArray($feil, "adresse") ?><br>
 
-      <input type="text" name="postnummer" value="<?= fraArray($_POST, 'postnummer') ?>">
+      <input type="text" name="postnummer" placeholder="postnummer" value="<?= fraArray($_POST, 'postnummer') ?>">
       <?= fraArray($feil, "postnummer") ?><br>
 
-      <input type="text" name="telefonnummer" value="<?= fraArray($_POST, 'telefonnummer') ?>">
+      <input type="text" name="telefonnummer" placeholder="telefonnummer" value="<?= fraArray($_POST, 'telefonnummer') ?>">
       <?= fraArray($feil, "telefonnummer") ?><br>
 
-      <input type="email" name="epost" value="<?= fraArray($_POST, 'epost') ?>">
+      <input type="email" name="epost" placeholder="epost" value="<?= fraArray($_POST, 'epost') ?>">
       <?= fraArray($feil, "epost") ?><br>
 
-      <input type="password" name="passord" value="<?= fraArray($_POST, 'passord') ?>">
+      <input type="password" name="passord" placeholder="passord" value="<?= fraArray($_POST, 'passord') ?>">
       <?= fraArray($feil, "passord") ?><br>
 
-      <input type="password" name="passord2" value="<?= fraArray($_POST, 'passord2') ?>">
+      <input type="password" name="passord2" placeholder="passord2" value="<?= fraArray($_POST, 'passord2') ?>">
       <?= fraArray($feil, "passord2") ?><br>
 
       <button>Send</button>

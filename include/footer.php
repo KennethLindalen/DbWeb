@@ -1,8 +1,7 @@
 </main>
 <footer>
   <div class="container">
-    <p>Hey</p>
-    <p>Halla</p>
+    <p>Footer</p>
   </div>
   <!-- Slutt på footer container div -->
 </footer>
