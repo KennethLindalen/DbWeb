@@ -57,18 +57,19 @@ class Medlem {
       $this->oppdater();
     else
       $this->settInn();
-    return $this;
   }
 
   private function settInn() {
     $con = new Database();
     $res = $con->insert("medlem", $this->toArray());
 
-    if ($res->affected_rows < 0)
+    if ($res->affected_rows < 1)
       if ($res->errno == 1062)
         throw new InvalidArgumentException(json_encode(["epost" => "E-postadressen er allerede i bruk"]));
       if ($res->errno == 1452)
         throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer"]));
+
+    $this->medlemsnummer = $res->insert_id;
   }
 
   private function oppdater() {

@@ -34,7 +34,7 @@ class Database extends mysqli {
     return $stmt;
   }
 
-  public static function datatyper($verdier) {
+  private static function datatyper($verdier) {
     $datatyper = "";
     foreach ($verdier as $verdi) {
       if (gettype($verdi) == "integer")
