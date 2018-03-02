@@ -22,14 +22,9 @@ class Database extends mysqli {
     $this->close();
   }
 
-  public function insert($tabell, $data) {
-    $kolonner = join(", ", array_keys($data));
-    $verdier = array_values($data);
-    $parametre = join(", ", array_fill(0, count($data), "?"));
-    $datatyper = self::datatyper($verdier);
-
-    $stmt = $this->prepare("INSERT INTO $tabell ($kolonner) VALUES ($parametre)");
-    $stmt->bind_param($datatyper, ...$verdier);
+  public function spørring($sql, $verdier) {
+    $stmt = $this->prepare($sql);
+    $stmt->bind_param(self::datatyper($verdier), ...$verdier);
     $stmt->execute();
     return $stmt;
   }
