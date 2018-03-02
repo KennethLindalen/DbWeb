@@ -12,6 +12,10 @@
       <?= $feil["autentisering"] ?? "" ?>
     </pre>
 
+    <pre>
+      <?= $_SESSION["medlemsnummer"] ?? "ikke innlogget" ?>
+    </pre>
+
     <form method="post">
       <input type="text" name="identifikator" placeholder="identifikator"><br>
       <input type="text" name="passord" placeholder="passord"><br>
