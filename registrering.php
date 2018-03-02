@@ -1,30 +1,11 @@
-<?php
-  include_once "models/Medlem.php";
-  include_once "utils/funksjoner.php";
-
-  $feil = [];
-  if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    try {
-      $medlem = new Medlem($_POST);
-      $medlem->lagre();
-    }
-    catch (InvalidArgumentException $e) {
-      $feil = json_decode($e->getMessage(), true);
-    }
-    catch (mysqli_sql_exception $e) {
-      header("Location: error.php");
-    }
-
-  }
-
-?>
+<?php include "utils/registrering.php"; ?>
+<?php include "utils/funksjoner.php"; ?>
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>asdfasdf</title>
+    <title>Registrering - Test</title>
   </head>
   <body>
 
