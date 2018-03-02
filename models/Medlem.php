@@ -4,8 +4,6 @@ include_once "utils/database.php";
 
 class Medlem {
 
-  const TABELLNAVN = "medlem";
-
   public function __construct($medlem = [], $fraDatabase = false) {
     $this->medlemsnummer = $fraDatabase ? $medlem["medlemsnummer"] : null;
     $this->fornavn       = $medlem["fornavn"];
@@ -62,8 +60,13 @@ class Medlem {
   }
 
   private function settInn() {
+    $sql = "
+      INSERT INTO medlem (fornavn, etternavn, adresse, postnummer, telefonnummer, epost, passord)
+      VALUES (?, ?, ?, ?, ?, ?, ?);
+    ";
+
     $con = new Database();
-    $res = $con->insert(self::TABELLNAVN, $this->toArray());
+    $res = $con->spørring($sql, array_values($this->toArray()));
 
     if ($res->affected_rows < 1)
       if ($res->errno == 1062)
@@ -78,12 +81,28 @@ class Medlem {
     // update medlem set values where medlemsnummer = $this->medlemsnummer
   }
 
-  public static function finn($identifikator) {
+  public static function finn($medlemsnummer) {
     // finn medlem med gitt medlemsnummer eller epost
   }
 
-  public static function finnPassord() {
-    // hent hashet passord for innlogging
+  public static function autentiser($identifikator, $passord) {
+    $sql = "
+      SELECT medlemsnummer, passord
+      FROM medlem
+      WHERE medlemsnummer = ? OR epost = ?;
+    ";
+
+    $con = new Database();
+    $res = $con
+      ->spørring($sql, [$identifikator, $identifikator])
+      ->get_result()
+      ->fetch_assoc();
+
+    if (password_verify($passord, $res["passord"]))
+      return $res["medlemsnummer"];
+
+    throw new InvalidArgumentException(json_encode(["autentisering" => "Innlogging feilet"]));
+
   }
 
   public function toArray() {
