@@ -17,8 +17,8 @@
     </pre>
 
     <form method="post">
-      <input type="text" name="identifikator" placeholder="Medlemsnummer eller e-postadresse"><br>
-      <input type="text" name="passord" placeholder="Passord"><br>
+      <input type="text" name="Medlemsnummer eller e-postadresse" placeholder="identifikator"><br>
+      <input type="text" name="Passord" placeholder="passord"><br>
       <button>Logg inn</button>
     </form>
 
