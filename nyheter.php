@@ -8,7 +8,7 @@
 			<div class="container">
 				<article>
 					<a href="#">
-						<img class="article-image" src="/img/loss.jpg">
+						<img class="article-image" src="/img/loss.jpg"> 
 						<h2 class="article-header">Årsrapporten viser dystre tall</h2>
 					</a>
 				</article>
