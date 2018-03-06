@@ -8,7 +8,7 @@
 			</article>
 			<article>
 				<a href="#">
-					<img class="article-image" src="/img/football.jpg">
+					<img class="article-image" src="/img/football.jpg" alt="football">
 					<h2 class="article-header">Nytt nederlag - tapte 4-0 mot Svenseid IL</h2>
 				</a>
 			</article>
