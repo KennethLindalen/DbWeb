@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $feil = json_decode($e->getMessage(), true);
   }
   catch (mysqli_sql_exception $e) {
-    header("Location: error.php");
+    header("Location: error.php?id=1");
   }
 
 }
