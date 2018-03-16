@@ -1,7 +1,7 @@
 <?php
 
-// mysqli skal kaste unntak ved hver feil som oppstår.
-mysqli_report(MYSQLI_REPORT_ALL);
+// Ber mysqli om å kaste unntak ved de fleste feil.
+mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 
 // Databaseklasse for tilkobling til database og utførelse av spørringer.
 class Database extends mysqli {
