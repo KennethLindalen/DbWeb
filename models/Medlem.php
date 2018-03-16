@@ -75,24 +75,21 @@ class Medlem {
   // Metode for å lagre et medlemsobjekt til databasen.
   public function lagre() {
 
-    // UPDATE-spørring dersom medlemsnummer finnes, INSERT-spørring ellers.
     try {
       if ($this->medlemsnummer)
-        $this->oppdater();
+        $this->oppdater();  // Dersom medlemsnummer er kjent, oppdater.
       else
-        $this->settInn();
+        $this->settInn();   // Dersom meldemsnummer er ukjent, sett inn.
     }
 
-    // Feilkode 1062 - brudd på UNIQUE i databasen - e-postadressen eksisterer.
-    // Feilkode 1452 - brudd på fremmednøkkelkrav i databasen - ugyldig postnummer.
-    // Kaster unntaket videre dersom det ikke er relatert til validering.
     catch (mysqli_sql_exception $e) {
-      if ($e->getCode() == 1062)
+      if ($e->getCode() == 1062)  // Feilkode 1062 - Brudd på UNIQUE-krav i databasen.
         throw new InvalidArgumentException(json_encode(["epost" => "E-postadressen er allerede i bruk"]));
-      if ($e->getCode() == 1452)
+      if ($e->getCode() == 1452)  // Feilkode 1452 - Brudd på fremmednøkkelkrav i databasen.
         throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer"]));
-      throw $e;
+      throw $e; // Feilen er ikke relatert til validering - kast videre.
     }
+
   }
 
 
@@ -120,9 +117,10 @@ class Medlem {
     $con = new Database();
     $res = $con->spørring($sql, $verdier);
 
-    // Hent medlemsnummer fra databasen (autoincrement) og knytt til objektet.
-    // Passordet fjernes fra objektet for sikkerhets skyld.
+    // Henter medlemsnummer fra databasen (autoincrement) og knytter det til objektet.
     $this->medlemsnummer = $res->insert_id;
+
+    // Passordet fjernes fra objektet for sikkerhets skyld.
     $this->passord = null;
   }
 
@@ -157,7 +155,7 @@ class Medlem {
 
     // Kobler til databasen og utfører spørringen.
     $con = new Database();
-    $res = $con->spørring($sql, $verdier);
+    $con->spørring($sql, $verdier);
   }
 
 
