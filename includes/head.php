@@ -6,5 +6,4 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/modal.css">
 	<script src="skript/modal.js"></script>
-	<script src="skript/validering/validerFornavn.js"></script>
 </head>
