@@ -93,7 +93,6 @@ class Medlem {
         throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer"]));
       throw $e;
     }
-
   }
 
 
@@ -121,8 +120,7 @@ class Medlem {
     $con = new Database();
     $res = $con->spørring($sql, $verdier);
 
-    // Hent medlemsnummer fra databasen (autoincrement) og knytt til objektet.
-    // Passordet fjernes fra objektet for sikkerhets skyld.
+    // Henter medlemsnummer fra nyinnsatt rad og fjerner passordet fra objektet.
     $this->medlemsnummer = $res->insert_id;
     $this->passord = null;
   }
