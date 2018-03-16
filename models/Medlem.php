@@ -71,11 +71,11 @@ class Medlem {
     $this->passord2 = null;
   }
 
+
   // Metode for å lagre et medlemsobjekt til databasen.
   public function lagre() {
 
-    // Feil kan oppstå ved blant annet tilkobling til databasen og ved
-    // utførelsen av de aktuelle spørringene, derfor try-catch-blokk.
+    // try-catch for å fange opp databasefeil i forbindelse med spørringene.
     try {
 
       // Oppdatering av eksisterende medlem hvis medlemsnummer allerede er definert
@@ -101,7 +101,9 @@ class Medlem {
       // Kast unntaket videre dersom det ikke er relatert til validering.
       throw $e;
     }
+
   }
+
 
   // Metode for innsetting av nye medlemmer.
   private function settInn() {
@@ -132,6 +134,7 @@ class Medlem {
     $this->medlemsnummer = $res->insert_id;
     $this->passord = null;
   }
+
 
   // Metode for oppdatering av eksisterende medlemmer.
   private function oppdater() {
@@ -165,6 +168,7 @@ class Medlem {
     $con = new Database();
     $res = $con->spørring($sql, $verdier);
   }
+
 
   // Statisk metode for å finne et medlem basert på gitt medlemsnummer.
   public static function finn($medlemsnummer) {
@@ -200,6 +204,7 @@ class Medlem {
     return new Medlem($res, true);
   }
 
+
   // Statisk metode for autentisering av brukere ved innlogging.
   public static function autentiser($identifikator, $passord) {
 
@@ -225,6 +230,7 @@ class Medlem {
     // Kast unntak dersom autentiseringen feilet og gi passende tilbakemelding.
     throw new InvalidArgumentException(json_encode(["autentisering" => "Autentisering feilet"]));
   }
+
 
   // Metode for omgjøring av et medlemsobjekt til et assosiativt array uten null-verdier.
   public function toArray() {
