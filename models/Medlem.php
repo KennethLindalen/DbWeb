@@ -13,7 +13,7 @@ class Medlem {
     $this->poststed      = $fraDatabase ? $medlem["poststed"] : null;
     $this->telefonnummer = $medlem["telefonnummer"];
     $this->epost         = $medlem["epost"];
-    $this->passord       = $medlem["passord"];
+    $this->passord       = $fraDatabase ? null : $medlem["passord"];
     $this->passord2      = $fraDatabase ? null : $medlem["passord2"];
     if (!$fraDatabase) $this->valider();
   }
@@ -36,7 +36,7 @@ class Medlem {
     if (!preg_match("/^\d{8}$/", $this->telefonnummer))
       $feil["telefonnummer"] = "Ugyldig telefonnummer";
 
-    if (!filter_var($this->epost, FILTER_VALIDATE_EMAIL))
+    if (!filter_var($this->epost, FILTER_VALIDATE_EMAIL) || strlen($this->epost) > 100)
       $feil["epost"] = "Ugyldig e-postadresse";
 
     if (!preg_match("/(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ]).{8,}/", $this->passord))
@@ -53,10 +53,19 @@ class Medlem {
   }
 
   public function lagre() {
-    if ($this->medlemsnummer)
-      $this->oppdater();
-    else
-      $this->settInn();
+    try {
+      if ($this->medlemsnummer)
+        $this->oppdater();
+      else
+        $this->settInn();
+    }
+    catch (mysqli_sql_exception $e) {
+      if ($e->getCode() == 1062)
+        throw new InvalidArgumentException(json_encode(["epost" => "E-postadressen er allerede i bruk"]));
+      if ($e->getCode() == 1452)
+        throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer"]));
+      throw $e;
+    }
   }
 
   private function settInn() {
@@ -65,24 +74,77 @@ class Medlem {
       VALUES (?, ?, ?, ?, ?, ?, ?);
     ";
 
-    $con = new Database();
-    $res = $con->spørring($sql, array_values($this->toArray()));
+    $verdier = [
+      $this->fornavn,
+      $this->etternavn,
+      $this->adresse, 
+      $this->postnummer, 
+      $this->telefonnummer, 
+      $this->epost, 
+      $this->passord
+    ];
 
-    if ($res->affected_rows < 1)
-      if ($res->errno == 1062)
-        throw new InvalidArgumentException(json_encode(["epost" => "E-postadressen er allerede i bruk"]));
-      if ($res->errno == 1452)
-        throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer"]));
+    $con = new Database();
+    $res = $con->spørring($sql, $verdier);
 
     $this->medlemsnummer = $res->insert_id;
+    $this->passord = null;
   }
 
   private function oppdater() {
-    // update medlem set values where medlemsnummer = $this->medlemsnummer
+    $sql = "
+      UPDATE medlem
+      SET
+        fornavn = ?,
+        etternavn = ?,
+        adresse = ?,
+        postnummer = ?,
+        telefonnummer = ?,
+        epost = ?
+      WHERE
+        medlemsnummer = ?
+    ";
+
+    $verdier = [
+      $this->fornavn,
+      $this->etternavn,
+      $this->adresse,
+      $this->postnummer,
+      $this->telefonnummer,
+      $this->epost,
+      $this->medlemsnummer
+    ];
+
+    $con = new Database();
+    $res = $con->spørring($sql, $verdier);
   }
 
   public static function finn($medlemsnummer) {
-    // finn medlem med gitt medlemsnummer eller epost
+    $sql = "
+      SELECT
+        m.medlemsnummer,
+        m.fornavn,
+        m.etternavn,
+        m.adresse,
+        p.postnummer,
+        p.poststed,
+        m.telefonnummer,
+        m.epost
+      FROM
+        medlem AS m,
+        poststed AS p
+      WHERE
+        m.postnummer = p.postnummer AND
+        medlemsnummer = ?;
+    ";
+
+    $con = new Database();
+    $res = $con
+      ->spørring($sql, [$medlemsnummer])
+      ->get_result()
+      ->fetch_assoc();
+
+    return new Medlem($res, true);
   }
 
   public static function autentiser($identifikator, $passord) {
@@ -101,14 +163,11 @@ class Medlem {
     if (password_verify($passord, $res["passord"]))
       return $res["medlemsnummer"];
 
-    throw new InvalidArgumentException(json_encode(["autentisering" => "Innlogging feilet"]));
-
+    throw new InvalidArgumentException(json_encode(["autentisering" => "Autentisering feilet"]));
   }
 
   public function toArray() {
-    $array = (array) $this;
-    $array = array_filter($array, function($var) { return $var != null; });
-    return $array;
+    return array_filter((array) $this, function($var) { return $var != null; });
   }
 
 }
