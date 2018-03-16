@@ -75,33 +75,24 @@ class Medlem {
   // Metode for å lagre et medlemsobjekt til databasen.
   public function lagre() {
 
-    // try-catch for å fange opp databasefeil i forbindelse med spørringene.
+    // UPDATE-spørring dersom medlemsnummer finnes, INSERT-spørring ellers.
     try {
-
-      // Oppdatering av eksisterende medlem hvis medlemsnummer allerede er definert
       if ($this->medlemsnummer)
         $this->oppdater();
-
-      // Innsetting av nytt medlem dersom objektet ikke allerede har medlemsnummer.
       else
         $this->settInn();
     }
 
-    // Vi filtrerer ut noen av feilene som kan oppstå som er relatert til validering av inndata.
+    // Feilkode 1062 - brudd på UNIQUE i databasen - e-postadressen eksisterer.
+    // Feilkode 1452 - brudd på fremmednøkkelkrav i databasen - ugyldig postnummer.
+    // Kaster unntaket videre dersom det ikke er relatert til validering.
     catch (mysqli_sql_exception $e) {
-
-      // Feilkode 1062 - brudd på UNIQUE i databasen - e-postadressen eksisterer.
       if ($e->getCode() == 1062)
         throw new InvalidArgumentException(json_encode(["epost" => "E-postadressen er allerede i bruk"]));
-
-      // Feilkode 1452 - brudd på fremmednøkkelkrav i databasen - ugyldig postnummer.
       if ($e->getCode() == 1452)
         throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer"]));
-
-      // Kast unntaket videre dersom det ikke er relatert til validering.
       throw $e;
     }
-
   }
 
 
