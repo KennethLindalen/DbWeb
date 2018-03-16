@@ -6,7 +6,7 @@
       <li><a href="/nyheter.php">Nyheter</a></li>
       <li><a href="/aktiviteter.php">Aktiviteter</a></li>
       <li><a href="/resultater.php">Resultater</a></li>
-      <?php if ($_SESSION["erInnlogget"]): ?>
+      <?php if ($_SESSION["medlemsnummer"]): ?>
         <li><a href="/minside.php">Min side</a></li>
         <li><a href="/utlogging.php">Logg ut</a></li>
       <?php else: ?>
