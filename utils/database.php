@@ -1,6 +1,6 @@
 <?php
 
-mysqli_report(MYSQLI_REPORT_STRICT);
+mysqli_report(MYSQLI_REPORT_ALL);
 
 class Database extends mysqli {
 
