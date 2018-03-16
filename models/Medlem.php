@@ -93,7 +93,7 @@ class Medlem {
         throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer"]));
       throw $e;
     }
-    
+
   }
 
 
