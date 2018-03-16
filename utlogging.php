@@ -2,7 +2,7 @@
 
 include_once "utils/session.php";
 
-session_destroy();
+$_SESSION["medlemsnummer"] = false;
 header("Location: /");
 
 ?>
