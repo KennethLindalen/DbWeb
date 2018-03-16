@@ -1,5 +1,4 @@
 <?php include_once "utils/session.php"; ?>
-
 <nav>
   <div class="container">
     <ul>
