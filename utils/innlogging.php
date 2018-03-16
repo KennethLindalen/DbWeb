@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   try {
     $medlemsnummer = Medlem::autentiser($_POST["identifikator"], $_POST["passord"]);
     $_SESSION["medlemsnummer"] = $medlemsnummer;
-    $_SESSION["erInnlogget"] = true;
     header("Location: /");
   }
   catch (InvalidArgumentException $e) {
