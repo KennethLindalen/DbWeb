@@ -1,5 +1,8 @@
 <?php include "utils/registrering.php"; ?>
 <?php include "utils/funksjoner.php"; ?>
+<?php include "includes/head.php"; ?>
+<?php include "includes/header.php"; ?>
+<?php include "includes/navbar.php"; ?>
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +12,9 @@
   </head>
   <body>
 
+    <h3>Oppgi dine personalia - og bli medlem! </h3>
     <form method="post">
+
       <input type="text" name="fornavn" placeholder="Fornavn" value="<?= $_POST['fornavn'] ?? ""?>">
       <?= $feil["fornavn"] ?? "" ?><br>
 
@@ -34,9 +39,11 @@
       <input type="password" name="passord2" placeholder="Gjenta passord" value="<?= $_POST['passord2'] ?? "" ?>">
       <?= $feil["passord2"] ?? "" ?><br>
 
-      <button>Send</button>
-    </form>
+      <button>Bli Medlem!</button>
 
-    <?php if (empty($feil)) echo "Ingen feil." ?>
+
+    <?php if (empty($feil)) echo "Ingen feil" ?>
+
+</form>
   </body>
 </html>
