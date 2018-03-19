@@ -31,15 +31,15 @@ class Medlem {
     $feil = [];
 
     // Fornavn kan bestå av bokstaver, bindestrek, apostrof og punktum. Maks 100 tegn.
-    if (!preg_match("/^[\pL\s'.-]{1,100}$/", $this->fornavn))
+    if (!preg_match("/^[\pL\s'.-]{1,100}$/u", $this->fornavn))
       $feil["fornavn"] = "Ugyldig fornavn";
 
     // Etternavn kan bestå av bokstaver, bindestrek, apostrof og punktum. Maks 100 tegn.
-    if (!preg_match("/^[\pL\s'.-]{1,100}$/", $this->etternavn))
+    if (!preg_match("/^[\pL\s'.-]{1,100}$/u", $this->etternavn))
       $feil["etternavn"] = "Ugyldig etternavn";
 
     // Fornavnet kan kun bestå av bokstaver, tall, bindestrek, apostrof, komma og punktum. Maks 100 tegn.
-    if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/", $this->adresse))
+    if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/u", $this->adresse))
       $feil["adresse"] = "Ugyldig adresse";
 
     // Postnummeret må bestå av 4 siffer
