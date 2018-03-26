@@ -11,6 +11,16 @@ include_once "models/Medlem.php";
 // Eventuelle feil ved registrering vil gjøres tilgjengelig for GUI her.
 $feil = [];
 
+// Funksjon som returnerer bootstrap-klassenavn for input-felter der feil finnes.
+// Må bruke global-nøkkelordet for å få tilgang til variabler utenfor funksjoner.
+function erGyldig($felt) {
+  global $feil;
+  if ($_SERVER["REQUEST_METHOD"] === "GET")
+    return;
+  if ($_SERVER["REQUEST_METHOD"] === "POST")
+    return isset($feil[$felt]) ? "is-invalid" : "is-valid";
+}
+
 // Modulen brukes kun ved POST-requests til registreringssiden.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
