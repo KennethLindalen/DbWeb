@@ -1,26 +1,20 @@
 <?php
+	$feilmeldinger = [
+		"0" => "Noe gikk galt.",
+		"1" => "Feil ved tilkobling til databasen.",
+		"2" => "Du må være innlogget for å vise denne siden.",
+		"3" => "Denne siden er kun tilgjengelig for administrator."
+	];
+	$feilmelding = $feilmeldinger[$_GET["id"] ?? 0] ?? $feilmeldinger[0];
 
-$feilmeldinger = [
-	"0" => "Noe gikk galt",
-	"1" => "Feil ved tilkobling til databasen",
-	"2" => "Denne siden er kun tilgjengelig for klubbens medlemmer"
-];
-
-$feilmelding = $feilmeldinger[$_GET["id"] ?? 0] ?? $feilmeldinger[0];
-
+	$tittel = "Feil - Nederlaget Idrettsklubb";
+  include "layout/førInnhold.php";
 ?>
+<!-- Innhold starter her -->
 
-<!DOCTYPE html>
-<html>
-	<?php include "includes/head.php"; ?>
-	<body>
-		<?php include "includes/header.php"; ?>
-		<?php include "includes/navbar.php"; ?>
-		<main>
-			<div class="container">
-				<p><?= $feilmelding ?></p>
-			</div>
-		</main>
-		<?php include "includes/footer.php"; ?>
-	</body>
-</html>
+<h1 class="display-4">Oops...</h1>
+<hr>
+<p><?= $feilmelding ?></p>
+
+<!-- Innhold stopper her -->
+<?php include "layout/etterInnhold.php"; ?>
