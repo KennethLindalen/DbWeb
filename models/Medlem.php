@@ -32,35 +32,35 @@ class Medlem {
 
     // Fornavn kan bestå av bokstaver, bindestrek, apostrof og punktum. Maks 100 tegn.
     if (!preg_match("/^[\pL\s'.-]{1,100}$/u", $this->fornavn))
-      $feil["fornavn"] = "Ugyldig fornavn";
+      $feil["fornavn"] = "Ugyldig fornavn.";
 
     // Etternavn kan bestå av bokstaver, bindestrek, apostrof og punktum. Maks 100 tegn.
     if (!preg_match("/^[\pL\s'.-]{1,100}$/u", $this->etternavn))
-      $feil["etternavn"] = "Ugyldig etternavn";
+      $feil["etternavn"] = "Ugyldig etternavn.";
 
     // Fornavnet kan kun bestå av bokstaver, tall, bindestrek, apostrof, komma og punktum. Maks 100 tegn.
     if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/u", $this->adresse))
-      $feil["adresse"] = "Ugyldig adresse";
+      $feil["adresse"] = "Ugyldig adresse.";
 
     // Postnummeret må bestå av 4 siffer
     if (!preg_match("/^\d{4}$/", $this->postnummer))
-      $feil["postnummer"] = "Ugyldig postnummer";
+      $feil["postnummer"] = "Ugyldig postnummer.";
 
     // Telefonnummer må bestå av 8 siffer. Vi begrenser oss altså til norske telefonnummer.
     if (!preg_match("/^\d{8}$/", $this->telefonnummer))
-      $feil["telefonnummer"] = "Ugyldig telefonnummer";
+      $feil["telefonnummer"] = "Ugyldig telefonnummer.";
 
     // Bruker PHP sitt innebygde filter for å validere e-postadresse. Maks 100 tegn.
     if (!filter_var($this->epost, FILTER_VALIDATE_EMAIL) || strlen($this->epost) > 100)
-      $feil["epost"] = "Ugyldig e-postadresse";
+      $feil["epost"] = "Ugyldig e-postadresse.";
 
     // Passordet må inneholde store- og små bokstaver og tall. Minst 8 tegn.
     if (!preg_match("/(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ]).{8,}/", $this->passord))
-      $feil["passord"] = "Passordet må bestå av minst 8 tegn og inneholde både tall, store-, og små bokstaver";
+      $feil["passord"] = "Passordet må bestå av minst 8 tegn og inneholde både tall, store-, og små bokstaver.";
 
     // Bruker må oppgi passord to ganger for å sikre at han/hun ikke har tastet feil
     if ($this->passord !== $this->passord2)
-      $feil["passord2"] = "Passordene må være like";
+      $feil["passord2"] = "Passordene må være like.";
 
     // Dersom noen av valideringene feilet, kast unntak og send med forklaringer.
     if (!empty($feil))
@@ -88,9 +88,9 @@ class Medlem {
     // Kaster unntaket videre dersom det ikke er relatert til validering.
     catch (mysqli_sql_exception $e) {
       if ($e->getCode() == 1062)
-        throw new InvalidArgumentException(json_encode(["epost" => "E-postadressen er allerede i bruk"]));
+        throw new InvalidArgumentException(json_encode(["epost" => "E-postadressen er allerede i bruk."]));
       if ($e->getCode() == 1452)
-        throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer"]));
+        throw new InvalidArgumentException(json_encode(["postnummer" => "Ugyldig postnummer."]));
       throw $e;
     }
   }
@@ -218,7 +218,7 @@ class Medlem {
       return $res["medlemsnummer"];
 
     // Kast unntak dersom autentiseringen feilet og gi passende tilbakemelding.
-    throw new InvalidArgumentException(json_encode(["autentisering" => "Autentisering feilet"]));
+    throw new InvalidArgumentException(json_encode(["autentisering" => "Feil brukernavn eller passord."]));
   }
 
 
