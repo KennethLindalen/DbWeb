@@ -8,4 +8,4 @@
           <?php include "includes/header.php"; ?>
           <?php include "includes/navbar.php"; ?>
         </div>
-        <div class="col-9">
+        <div class="col-9 pl-5">
