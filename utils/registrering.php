@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   try {
     $medlem = new Medlem($_POST);
     $medlem->lagre();
+    header("Location: /");
   }
 
   // Dersom feil oppstår ved validering, legg feilene inn i feil-arrayet.
