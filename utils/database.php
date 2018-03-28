@@ -29,9 +29,10 @@ class Database extends mysqli {
 
   // Metode for utførelse av spørringer.
   // Gjøres ved hjelp av prepared statements for å unngå SQL-injection.
-  public function spørring($sql, $verdier) {
+  public function spørring($sql, $verdier = null) {
     $stmt = $this->prepare($sql);
-    $stmt->bind_param(self::datatyper($verdier), ...$verdier);
+    if ($verdier)
+      $stmt->bind_param(self::datatyper($verdier), ...$verdier);
     $stmt->execute();
     return $stmt;
   }
