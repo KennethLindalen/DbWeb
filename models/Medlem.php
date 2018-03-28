@@ -6,7 +6,6 @@ include_once "utils/database.php";
 // Klasse som representerer klubbens medlemmer
 class Medlem {
 
-  // Konstruktørmetode
   // Medlemsobjekter opprettes direkte fra $_POST ved registrering, eller fra
   // et assosiativt array som hentes fra eksisterende oppføringer i databasen.
   // Ulike objektvariabler benyttes basert på hvor dataene kommer fra.
@@ -24,7 +23,7 @@ class Medlem {
     if (!$fraDatabase) $this->valider();
   }
 
-  // Metode for validering av felter
+  // Metode for validering av felter.
   // Utføres kun når medlemsobjektet konstrueres fra $_POST ved registrering,
   // altså stoler vi på dataene dersom de kommer direkte fra databasen.
   private function valider() {
@@ -38,7 +37,7 @@ class Medlem {
     if (!preg_match("/^[\pL\s'.-]{1,100}$/u", $this->etternavn))
       $feil["etternavn"] = "Ugyldig etternavn.";
 
-    // Fornavnet kan kun bestå av bokstaver, tall, bindestrek, apostrof, komma og punktum. Maks 100 tegn.
+    // Adressen kan kun bestå av bokstaver, tall, bindestrek, apostrof, komma og punktum. Maks 100 tegn.
     if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/u", $this->adresse))
       $feil["adresse"] = "Ugyldig adresse.";
 
