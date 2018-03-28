@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   try {
     $medlemsnummer = Medlem::autentiser($_POST["identifikator"], $_POST["passord"]);
     $_SESSION["medlemsnummer"] = $medlemsnummer;
-    header("Location: /");
+    header("Location: minside.php");
   }
 
   // Dersom autentiseringen feiler, legg feilmelding inn i feil-arrayet.
