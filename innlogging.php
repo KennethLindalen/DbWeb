@@ -22,18 +22,18 @@
     </div>
   <?php endif; ?>
 
-  <form method="post">
+  <form method="post" novalidate>
     <div class="form-row">
       <div class="form-group col-12">
         <label for="identifikator">E-postadresse</label>
-        <input type="text" name="identifikator" id="identifikator" class="form-control" placeholder="E-postadresse" required>
+        <input type="text" name="identifikator" id="identifikator" class="form-control" placeholder="E-postadresse">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-12">
         <label for="passord">Passord</label>
-        <input type="password" name="passord" id="passord" class="form-control" placeholder="Passord" required>
+        <input type="password" name="passord" id="passord" class="form-control" placeholder="Passord">
       </div>
     </div>
 
