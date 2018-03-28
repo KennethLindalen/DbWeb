@@ -13,8 +13,6 @@ $("#fornavn").focusout(e => {
   }
 
   // Validerer fornavn etter samme regler som i medlemsklassen i PHP.
-  // Legger til klassen "is-valid" eller "is-invalid" basert på resultatet.
-  // Dersom ugyldig, skrives også en tilbakemelding til brukeren.
   let regex = /^[\p{L}\s'.-]{1,100}$/u;
   if (regex.test(e.target.value)) {
     $(e.target).addClass("is-valid").removeClass("is-invalid");
@@ -37,8 +35,6 @@ $("#etternavn").focusout(e => {
   }
 
   // Validerer etternavn etter samme regler som i medlemsklassen i PHP.
-  // Legger til klassen "is-valid" eller "is-invalid" basert på resultatet.
-  // Dersom ugyldig, skrives også en tilbakemelding til brukeren.
   let regex = /^[\p{L}\s'.-]{1,100}$/u;
   if (regex.test(e.target.value)) {
     $(e.target).addClass("is-valid").removeClass("is-invalid");
@@ -61,8 +57,6 @@ $("#adresse").focusout(e => {
   }
 
   // Validerer adresse etter samme regler som i medlemsklassen i PHP.
-  // Legger til klassen "is-valid" eller "is-invalid" basert på resultatet.
-  // Dersom ugyldig, skrives også en tilbakemelding til brukeren.
   let regex = /^[\p{L}\s\d'.,-]{1,100}$/u;
   if (regex.test(e.target.value)) {
     $(e.target).addClass("is-valid").removeClass("is-invalid");
@@ -94,8 +88,6 @@ $("#postnummer").focusout(e => {
   }
 
   // Gjør en ajax-forespørsel til APIet til Bring og behandler resultatet.
-  // Dersom gyldig, settes poststedfeltet til det poststedet vi får fra Bring.
-  // Dersom ugyldig gis tilbakemelding til bruker.
   $.ajax({
     url: `https://api.bring.com/shippingguide/api/postalCode.json?clientUrl=http://itfag.usn.no/~113049/&pnr=${e.target.value}`,
     success: data => {
@@ -123,8 +115,6 @@ $("#telefonnummer").focusout(e => {
   }
 
   // Validerer telefonnummer etter samme regler som i medlemsklassen i PHP.
-  // Legger til klassen "is-valid" eller "is-invalid" basert på resultatet.
-  // Dersom ugyldig, skrives også en tilbakemelding til brukeren.
   let regex = /^\d{8}$/;
   if (regex.test(e.target.value)) {
     $(e.target).addClass("is-valid").removeClass("is-invalid");
@@ -148,8 +138,6 @@ $("#epost").focusout(e => {
 
   // Validerer e-postadresse ved hjelp av et regulært uttrykk.
   // Avviker fra valideringen i PHP, som har et innebygd filter for e-postadresser.
-  // Legger til klassen "is-valid" eller "is-invalid" basert på resultatet.
-  // Dersom ugyldig, skrives også en tilbakemelding til brukeren.
   let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
   if (regex.test(e.target.value)) {
     $(e.target).addClass("is-valid").removeClass("is-invalid");
@@ -172,8 +160,6 @@ $("#passord").focusout(e => {
   }
 
   // Validerer passord etter samme regler som i medlemsklassen i PHP.
-  // Legger til klassen "is-valid" eller "is-invalid" basert på resultatet.
-  // Dersom ugyldig, skrives også en tilbakemelding til brukeren.
   let regex = /(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ]).{8,}/;
   if (regex.test(e.target.value)) {
     $(e.target).addClass("is-valid").removeClass("is-invalid");
@@ -196,8 +182,6 @@ $("#passord2").focusout(e => {
   }
 
   // Sjekker om passordet er identisk med passordet i det første passordfeltet.
-  // Legger til klassen "is-valid" eller "is-invalid" basert på resultatet.
-  // Dersom ugyldig, skrives også en tilbakemelding til brukeren.
   if (e.target.value == $("#passord").val()) {
     $(e.target).addClass("is-valid").removeClass("is-invalid");
   } else {
