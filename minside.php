@@ -1,5 +1,5 @@
 <?php
-	include_once "utils/beskyttet.php";
+	include_once "utils/krevMedlem.php";
 	include_once "models/Medlem.php";
 	$medlem = Medlem::finn($_SESSION["medlemsnummer"]);
 
