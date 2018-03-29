@@ -17,8 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   // Henter medlemsnummeret til medlemmet der identifikator og passord matcher.
   // Medlemmet logges inn ved at medlemsnummeret defineres i sesjonen.
   try {
-    $medlemsnummer = Medlem::autentiser($_POST["identifikator"], $_POST["passord"]);
-    $_SESSION["medlemsnummer"] = $medlemsnummer;
+    $medlem = Medlem::autentiser($_POST["identifikator"], $_POST["passord"]);
+    $_SESSION["medlemsnummer"] = $medlem["medlemsnummer"];
+    $_SESSION["administrator"] = $medlem["administrator"];
     header("Location: minside.php");
   }
 
