@@ -159,6 +159,21 @@ class Medlem {
   }
 
 
+  // Statisk metode for sletting av medlemmer fra databasen.
+  public static function slett($medlemsnummer) {
+
+    // SQL-spørring med parametre for bruk i prepared statement.
+    $sql = "
+      DELETE FROM medlem
+      WHERE medlemsnummer = ?;
+    ";
+
+    // Kobler til databasen og utfører spørringen.
+    $con = new Database();
+    $con->spørring($sql, [$medlemsnummer]);
+  }
+
+
   // Statisk metode for å finne et medlem basert på gitt medlemsnummer.
   public static function finn($medlemsnummer) {
 
@@ -193,15 +208,43 @@ class Medlem {
     return new Medlem($res, true);
   }
 
+  public static function finnAlle() {
+
+    $sql = "
+    SELECT
+      m.medlemsnummer,
+      m.fornavn,
+      m.etternavn,
+      m.adresse,
+      p.postnummer,
+      p.poststed,
+      m.telefonnummer,
+      m.epost
+    FROM
+      medlem AS m,
+      poststed AS p
+    WHERE
+      m.postnummer = p.postnummer;
+    ";
+
+    $con = new Database();
+    $res = $con
+      ->spørring($sql)
+      ->get_result()
+      ->fetch_all(MYSQLI_ASSOC);
+
+    return array_map(function($rad) { return new Medlem($rad, true); }, $res);
+  }
+
 
   // Statisk metode for autentisering av brukere ved innlogging.
   public static function autentiser($identifikator, $passord) {
 
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
-      SELECT medlemsnummer, passord
-      FROM medlem
-      WHERE medlemsnummer = ? OR epost = ?;
+      SELECT m.medlemsnummer, m.passord, (a.medlemsnummer IS NOT NULL) as administrator
+      FROM medlem as m LEFT OUTER JOIN administrator as a ON m.medlemsnummer = a.medlemsnummer
+      WHERE m.medlemsnummer = ? OR m.epost = ?;
     ";
 
     // Kobler til databasen og utfører spørringen.
@@ -214,16 +257,22 @@ class Medlem {
 
     // Verifiserer passordet ved å sammenlikne brukerinput og hash fra databasen.
     if (password_verify($passord, $res["passord"]))
-      return $res["medlemsnummer"];
+      return ["medlemsnummer" => $res["medlemsnummer"], "administrator" => (bool) $res["administrator"]];
 
     // Kast unntak dersom autentiseringen feilet og gi passende tilbakemelding.
     throw new InvalidArgumentException(json_encode(["autentisering" => "Feil brukernavn eller passord."]));
   }
 
 
-  // Metode for omgjøring av et medlemsobjekt til et assosiativt array uten null-verdier.
-  public function toArray() {
-    return array_filter((array) $this, function($var) { return $var != null; });
+  // Returnerer hele navnet til medlemmet.
+  public function fulltNavn() {
+    return $this->fornavn . " " . $this->etternavn;
+  }
+
+
+  // Returnerer adressen med postnummer og sted.
+  public function fullAdresse() {
+    return $this->adresse . ", " . $this->postnummer . " " . $this->poststed;
   }
 
 }
