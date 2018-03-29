@@ -20,6 +20,7 @@ class Database extends mysqli {
       $this->password,
       $this->database
     );
+    $this->set_charset("utf8");
   }
 
   // Destruktørmetode - stenger tilkoblingen når objektet ikke lenger refereres til.
