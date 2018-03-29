@@ -23,6 +23,15 @@
     </li>
   </ul>
 
+  <?php if ($_SESSION["administrator"]): ?>
+    <ul class="nav nav-pills flex-column w-100 mb-3">
+      <span class="navbar-text text-uppercase">Administrator</span>
+      <li class="nav-item">
+        <a class="nav-link <?= erAktiv("administrasjon") ?>" href="administrasjon.php">Administrasjon</a>
+      </li>
+    </ul>
+  <?php endif; ?>
+
   <ul class="nav nav-pills flex-column w-100 mb-3">
     <span class="navbar-text text-uppercase">Medlemmer</span>
   <?php if ($_SESSION["medlemsnummer"]): ?>
