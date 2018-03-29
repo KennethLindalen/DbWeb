@@ -15,8 +15,9 @@ class Idrett {
     if (!$fraDatabase) $this->valider();
   }
 
+
   // Metode for validering av felter.
-  // Utføres kun når medlemsobjektet konstrueres fra $_POST ved registrering,
+  // Utføres kun når idrettsobjektet konstrueres fra $_POST ved registrering,
   // altså stoler vi på dataene dersom de kommer direkte fra databasen.
   private function valider() {
     $feil = [];
@@ -32,12 +33,23 @@ class Idrett {
 
 
   // Metode for å lagre et idrettsobjekt til databasen.
-  // UPDATE-spørring dersom idrettskode finnes, INSERT-spørring ellers.
   public function lagre() {
-    if ($this->idrettskode)
-      $this->oppdater();
-    else
-      $this->settInn();
+
+    // UPDATE-spørring dersom medlemsnummer finnes, INSERT-spørring ellers.
+    try {
+      if ($this->idrettskode)
+        $this->oppdater();
+      else
+        $this->settInn();
+    }
+
+    // Feilkode 1062 - brudd på UNIQUE i databasen - idrettsnavnet eksisterer.
+    // Kaster unntaket videre dersom det ikke er relatert til validering.
+    catch (mysqli_sql_exception $e) {
+      if ($e->getCode() == 1062)
+        throw new InvalidArgumentException(json_encode(["navn" => "Idretten er allerede registrert"]));
+      throw $e;
+    }
   }
 
 
@@ -72,6 +84,21 @@ class Idrett {
     // Kobler til databasen og utfører spørringen.
     $con = new Database();
     $res = $con->spørring($sql, $verdier);
+  }
+
+
+  // Statisk metode for sletting av idretter fra databasen.
+  public static function slett($idrettskode) {
+
+    // SQL-spørring med parametre for bruk i prepared statement.
+    $sql = "
+      DELETE FROM idrett
+      WHERE idrettskode = ?;
+    ";
+
+    // Kobler til databasen og utfører spørringen.
+    $con = new Database();
+    $con->spørring($sql, [$idrettskode]);
   }
 
 
@@ -115,14 +142,8 @@ class Idrett {
       ->get_result()
       ->fetch_all(MYSQLI_ASSOC);
 
-    // Funksjon som omgjør databaseresultater til idrettsobjekter.
-    // Brukes i PHP-funksjonen "array_map" på hvert element i $res-arrayet.
-    function arrayTilObjekt($rad) {
-      return new Idrett($rad, true);
-    }
-
-    // Returnerer et array av idrettsobjekter.
-    return array_map("arrayTilObjekt", $res);
+  // Returnerer et array av idrettsobjekter.
+    return array_map(function($rad) { return new Idrett($rad, true); }, $res);
   }
 
 }
