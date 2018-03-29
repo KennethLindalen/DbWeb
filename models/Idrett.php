@@ -142,7 +142,7 @@ class Idrett {
       ->get_result()
       ->fetch_all(MYSQLI_ASSOC);
 
-  // Returnerer et array av idrettsobjekter.
+    // Returnerer et array av idrettsobjekter.
     return array_map(function($rad) { return new Idrett($rad, true); }, $res);
   }
 

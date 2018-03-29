@@ -208,8 +208,11 @@ class Medlem {
     return new Medlem($res, true);
   }
 
+
+  // Statisk metode som lister opp alle medlemmer i databasen.
   public static function finnAlle() {
 
+    // SQL-spørring for uthenting av alle medlemmer.
     $sql = "
     SELECT
       m.medlemsnummer,
@@ -227,12 +230,15 @@ class Medlem {
       m.postnummer = p.postnummer;
     ";
 
+    // Kobler til databasen og utfører spørringen.
+    // Henter resultatet fra spørringen i et assosiativt array ($res).
     $con = new Database();
     $res = $con
       ->spørring($sql)
       ->get_result()
       ->fetch_all(MYSQLI_ASSOC);
 
+    // Returnerer et array av idrettsobjekter.
     return array_map(function($rad) { return new Medlem($rad, true); }, $res);
   }
 
