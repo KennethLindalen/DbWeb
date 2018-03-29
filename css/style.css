@@ -2,3 +2,19 @@
   color: inherit;
   text-decoration: none;
 }
+
+.input-min {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 100%;
+}
+
+.input-min:focus {
+  outline: 0;
+}
+
+select.input-min {
+  width: 120px;
+}
