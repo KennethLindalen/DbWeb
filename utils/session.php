@@ -10,5 +10,6 @@ session_start();
 
 // Brukere er innlogget dersom medlemsnummeret er definert i sesjonen.
 $_SESSION["medlemsnummer"] = $_SESSION["medlemsnummer"] ?? false;
+$_SESSION["administrator"] = $_SESSION["administrator"] ?? false;
 
 ?>
