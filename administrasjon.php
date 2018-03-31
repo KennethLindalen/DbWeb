@@ -2,8 +2,9 @@
   include_once "utils/krevAdmin.php";
   include_once "utils/administrasjon.php";
 
-  $medlemmer = Medlem::finnAlle();
-  $idretter  = Idrett::finnAlle();
+  $alleMedlemmer = Medlem::finnAlle();
+  $alleIdretter  = Idrett::finnAlle();
+  $alleAnlegg    = Anlegg::finnAlle();
 
   $tittel = "Administrasjon - Nederlaget Idrettsklubb";
   include "layout/førInnhold.php";
@@ -21,7 +22,7 @@
         <li><?= $melding ?></li>
       <?php endforeach; ?>
     </ul>
-    <button type="button" class="close" data-dismiss="alert">
+    <button class="close" data-dismiss="alert">
       <span>&times;</span>
     </button>
   </div>
@@ -42,18 +43,18 @@
         <table class="table table-light table-striped table-hover mb-0">
           <thead class="thead-light">
             <tr>
-              <th scope="col" class="pl-2">ID</th>
+              <th scope="col" style="width: 5%;" class="px-2">ID</th>
               <th scope="col">Navn</th>
               <th scope="col">Adresse</th>
               <th scope="col">Telefon</th>
               <th scope="col">E-postadresse</th>
-              <th></th>
+              <th style="width: 5%;"></th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($medlemmer as $medlem): ?>
+            <?php foreach ($alleMedlemmer as $medlem): ?>
               <tr>
-                <th scope="row" class="pl-2"><?= $medlem->medlemsnummer ?></th>
+                <th scope="row" class="px-2"><?= $medlem->medlemsnummer ?></th>
                 <td><?= $medlem->fulltNavn() ?></td>
                 <td><?= $medlem->fullAdresse() ?></td>
                 <td><?= $medlem->telefonnummer ?></td>
@@ -88,15 +89,15 @@
         <table class="table table-light table-striped table-hover mb-0">
           <thead class="thead-light">
             <tr>
-              <th scope="col" class="pl-2">ID</th>
+              <th scope="col" style="width: 5%;" class="px-2">ID</th>
               <th scope="col">Navn</th>
               <th style="width: 5%;"></th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($idretter as $idrett): ?>
+            <?php foreach ($alleIdretter as $idrett): ?>
               <tr>
-                <th scope="row" class="pl-2"><?= $idrett->idrettskode ?></th>
+                <th scope="row" class="px-2"><?= $idrett->idrettskode ?></th>
                 <td><?= $idrett->navn ?></td>
                 <td class="ml-auto">
                   <form method="post">
@@ -146,15 +147,21 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach ([] as $idrett): ?>
+            <?php foreach ($alleAnlegg as $anlegg): ?>
               <tr>
-                <th></th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th class="pl-2"><?= $anlegg->anleggskode ?></th>
+                <td><?= $anlegg->getIdrett()->navn ?></td>
+                <td><?= $anlegg->navn ?></td>
+                <td><?= $anlegg->åpningstid ?>:00</td>
+                <td><?= $anlegg->stengetid ?>:00</td>
+                <td>kr <?= $anlegg->timepris ?>,-</td>
+                <td>
+                  <form method="post">
+                    <input type="hidden" name="operasjon" value="slettAnlegg">
+                    <input type="hidden" name="anleggskode" value="<?= $anlegg->anleggskode ?>">
+                    <button class="badge badge-danger border-0">&minus;</button>
+                  </form>
+                </td>
               </tr>
             <?php endforeach; ?>
             <tr>
@@ -162,8 +169,8 @@
                 <input type="hidden" name="operasjon" value="nyttAnlegg">
                 <th class="pl-2">Ny</th>
                 <td>
-                  <select class="input-min" name="idrettskode">
-                    <?php foreach ($idretter as $idrett): ?>
+                  <select class="input-min py-0 my-0" name="idrettskode">
+                    <?php foreach ($alleIdretter as $idrett): ?>
                       <option value="<?= $idrett->idrettskode ?>">
                         <?= $idrett->navn ?>
                       </option>
