@@ -53,7 +53,7 @@ class Idrett {
   }
 
 
-  // Metode for innsetting av nye medlemmer.
+  // Metode for innsetting av nye idretter.
   private function settInn() {
 
     // SQL-spørring med parametre for bruk i prepared statement.
@@ -78,7 +78,7 @@ class Idrett {
       WHERE idrettskode = ?;
     ";
 
-    // verdier som skal settes inn.
+    // Verdier som skal settes inn.
     $verdier = [$this->navn, $this->idrettskode];
 
     // Kobler til databasen og utfører spørringen.
@@ -131,7 +131,8 @@ class Idrett {
     // SQL-spørring for uthenting av alle idretter.
     $sql = "
       SELECT idrettskode, navn
-      FROM idrett;
+      FROM idrett
+      ORDER BY navn;
     ";
 
     // Kobler til databasen og utfører spørringen.

@@ -227,7 +227,9 @@ class Medlem {
       medlem AS m,
       poststed AS p
     WHERE
-      m.postnummer = p.postnummer;
+      m.postnummer = p.postnummer
+    ORDER BY
+      m.etternavn ASC, m.fornavn ASC;
     ";
 
     // Kobler til databasen og utfører spørringen.
@@ -248,8 +250,8 @@ class Medlem {
 
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
-      SELECT m.medlemsnummer, m.passord, (a.medlemsnummer IS NOT NULL) as administrator
-      FROM medlem as m LEFT OUTER JOIN administrator as a ON m.medlemsnummer = a.medlemsnummer
+      SELECT m.medlemsnummer, m.passord, (a.medlemsnummer IS NOT NULL) AS administrator
+      FROM medlem AS m LEFT OUTER JOIN administrator AS a ON m.medlemsnummer = a.medlemsnummer
       WHERE m.medlemsnummer = ? OR m.epost = ?;
     ";
 
@@ -272,7 +274,7 @@ class Medlem {
 
   // Returnerer hele navnet til medlemmet.
   public function fulltNavn() {
-    return $this->fornavn . " " . $this->etternavn;
+    return $this->etternavn . ", " . $this->fornavn;
   }
 
 
