@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   try {
 
-    
+    //
     switch ($_POST["operasjon"]) {
 
       //
@@ -32,10 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
       //
       case "nyttAnlegg":
+        $anlegg = new Anlegg($_POST);
+        $anlegg->lagre();
         break;
 
       //
       case "slettAnlegg":
+        Anlegg::slett($_POST["anleggskode"]);
         break;
 
       //
