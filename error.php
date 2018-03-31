@@ -12,7 +12,7 @@
 ?>
 <!-- Innhold starter her -->
 
-<h1 class="display-4">Oops...</h1>
+<h1 class="display-4">Oops!</h1>
 <hr>
 <p><?= $feilmelding ?></p>
 
