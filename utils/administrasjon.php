@@ -5,7 +5,7 @@ include_once "models/Idrett.php";
 include_once "models/Anlegg.php";
 include_once "models/Reservasjon.php";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $feil = [];
 
@@ -17,33 +17,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       //
       case "slettMedlem":
         Medlem::slett($_POST["medlemsnummer"]);
-        break;
+      break;
 
       //
       case "nyIdrett":
         $idrett = new Idrett($_POST);
         $idrett->lagre();
-        break;
+      break;
 
       //
       case "slettIdrett":
         Idrett::slett($_POST["idrettskode"]);
-        break;
+      break;
 
       //
       case "nyttAnlegg":
         $anlegg = new Anlegg($_POST);
         $anlegg->lagre();
-        break;
+      break;
 
       //
       case "slettAnlegg":
         Anlegg::slett($_POST["anleggskode"]);
-        break;
+      break;
 
       //
       case "slettReservasjon":
-        break;
+      break;
     }
 
   }
