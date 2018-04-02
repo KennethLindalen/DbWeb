@@ -19,7 +19,7 @@
       <a class="nav-link <?= erAktiv("aktiviteter") ?>" href="aktiviteter.php">Aktiviteter</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link <?= erAktiv("bestilling") ?>" href="bestilling.php">Banebestilling</a>
+      <a class="nav-link <?= erAktiv("timeplan") ?>" href="timeplan.php">Timeplan</a>
     </li>
   </ul>
 
@@ -37,9 +37,6 @@
   <?php if ($_SESSION["medlemsnummer"]): ?>
     <li class="nav-item">
       <a class="nav-link <?= erAktiv("minside") ?>" href="minside.php">Min side</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link <?= erAktiv("faktura") ?>" href="faktura.php">Faktura</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="utlogging.php">Logg ut</a>
