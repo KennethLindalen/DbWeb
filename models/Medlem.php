@@ -20,25 +20,24 @@ class Medlem {
     $this->epost         = $medlem["epost"];
     $this->passord       = $fraDatabase ? null : $medlem["passord"];
     $this->passord2      = $fraDatabase ? null : $medlem["passord2"];
-    if (!$fraDatabase) $this->valider();
   }
 
   // Metode for validering av felter.
   // Utføres kun når medlemsobjektet konstrueres fra $_POST ved registrering,
   // altså stoler vi på dataene dersom de kommer direkte fra databasen.
-  private function valider() {
+  private function valider($validerPassord) {
     $feil = [];
 
     // Fornavn kan bestå av bokstaver, bindestrek, apostrof og punktum. Maks 100 tegn.
-    if (!preg_match("/^[\pL\s'.-]{1,100}$/u", $this->fornavn))
+    if (!preg_match("/^[a-zæøå '.-]{1,100}$/i", $this->fornavn))
       $feil["fornavn"] = "Ugyldig fornavn.";
 
     // Etternavn kan bestå av bokstaver, bindestrek, apostrof og punktum. Maks 100 tegn.
-    if (!preg_match("/^[\pL\s'.-]{1,100}$/u", $this->etternavn))
+    if (!preg_match("/^[a-zæøå '.-]{1,100}$/i", $this->etternavn))
       $feil["etternavn"] = "Ugyldig etternavn.";
 
     // Adressen kan kun bestå av bokstaver, tall, bindestrek, apostrof, komma og punktum. Maks 100 tegn.
-    if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/u", $this->adresse))
+    if (!preg_match("/^[\wæøå '.,-]{1,100}$/i", $this->adresse))
       $feil["adresse"] = "Ugyldig adresse.";
 
     // Postnummeret må bestå av 4 siffer
@@ -53,21 +52,25 @@ class Medlem {
     if (!filter_var($this->epost, FILTER_VALIDATE_EMAIL) || strlen($this->epost) > 100)
       $feil["epost"] = "Ugyldig e-postadresse.";
 
-    // Passordet må inneholde store- og små bokstaver og tall. Minst 8 tegn.
-    if (!preg_match("/(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ]).{8,}/", $this->passord))
-      $feil["passord"] = "Passordet må bestå av minst 8 tegn og inneholde både tall, store-, og små bokstaver.";
+    // Dersom passordet skal valideres, f.eks. ved passordbytte, utføres også dette.
+    if ($validerPassord) {
 
-    // Bruker må oppgi passord to ganger for å sikre at han/hun ikke har tastet feil
-    if ($this->passord !== $this->passord2)
-      $feil["passord2"] = "Passordene må være like.";
+      // Passordet må inneholde store- og små bokstaver og tall. Minst 8 tegn.
+      if (!preg_match("/(?=.*\d)(?=.*[a-zæøå])(?=.*[A-ZÆØÅ]).{8,}/", $this->passord))
+        $feil["passord"] = "Passordet må bestå av minst 8 tegn og inneholde både tall, store-, og små bokstaver.";
+
+      // Bruker må oppgi passord to ganger for å sikre at han/hun ikke har tastet feil
+      if ($this->passord !== $this->passord2)
+        $feil["passord2"] = "Passordene må være like.";
+
+      // Dersom valideringene er godkjent, krypter passord og fjern ukryptert passord fra objekt.
+      $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
+      $this->passord2 = null;
+    }
 
     // Dersom noen av valideringene feilet, kast unntak og send med forklaringer.
-    if (!empty($feil))
-      throw new InvalidArgumentException(json_encode($feil));
-
-    // Dersom valideringene er godkjent, krypter passord og fjern ukryptert fra objekt.
-    $this->passord = password_hash($this->passord, PASSWORD_BCRYPT);
-    $this->passord2 = null;
+      if (!empty($feil))
+        throw new InvalidArgumentException(json_encode($feil));
   }
 
 
@@ -76,10 +79,19 @@ class Medlem {
 
     // UPDATE-spørring dersom medlemsnummer finnes, INSERT-spørring ellers.
     try {
-      if ($this->medlemsnummer)
-        $this->oppdater();
-      else
+      if ($this->medlemsnummer) {
+        if ($this->passord) {
+          $this->valider(true);
+          $this->oppdaterPassord();
+        } else {
+          $this->valider(false);
+          $this->oppdater();
+        }
+      }
+      else {
+        $this->valider(true);
         $this->settInn();
+      }
     }
 
     // Feilkode 1062 - brudd på UNIQUE i databasen - e-postadressen eksisterer.
@@ -156,6 +168,25 @@ class Medlem {
     // Kobler til databasen og utfører spørringen.
     $con = new Database();
     $con->spørring($sql, $verdier);
+  }
+
+
+  // Metode for oppdatering av passord.
+  private function oppdaterPassord() {
+
+    // SQL-spørring med parametre for bruk i prepared statement.
+    $sql = "
+      UPDATE medlem
+      SET passord = ?
+      WHERE medlemsnummer = ?;
+    ";
+
+    // Kobler til databasen og utfører spørringen.
+    $con = new Database();
+    $con->spørring($sql, [$this->passord, $this->medlemsnummer]);
+
+    // Fjerner det krypterte passordet fra objektet.
+    $this->passord = null;
   }
 
 
@@ -268,19 +299,21 @@ class Medlem {
       return ["medlemsnummer" => $res["medlemsnummer"], "administrator" => (bool) $res["administrator"]];
 
     // Kast unntak dersom autentiseringen feilet og gi passende tilbakemelding.
-    throw new InvalidArgumentException(json_encode(["autentisering" => "Feil brukernavn eller passord."]));
+    throw new InvalidArgumentException(json_encode(["autentisering" => "Autentisering feilet."]));
   }
 
 
   // Returnerer hele navnet til medlemmet.
-  public function fulltNavn() {
-    return $this->etternavn . ", " . $this->fornavn;
+  public function fulltNavn($etternavnFørst = false) {
+    return $etternavnFørst
+      ? "$this->etternavn, $this->fornavn"
+      : "$this->fornavn $this->etternavn";
   }
 
 
   // Returnerer adressen med postnummer og sted.
   public function fullAdresse() {
-    return $this->adresse . ", " . $this->postnummer . " " . $this->poststed;
+    return "$this->adresse, $this->postnummer $this->poststed";
   }
 
 }
