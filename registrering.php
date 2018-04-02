@@ -2,6 +2,7 @@
   $tittel = "Registrering - Nederlaget Idrettsklubb";
   include "layout/førInnhold.php";
   include "utils/registrering.php";
+  include "utils/funksjoner.php";
 ?>
 <!-- Innhold starter her -->
 
@@ -13,7 +14,7 @@
     Fyll ut skjemaet for å bli medlem i klubben. <br> Medlemskap koster kr 100,- per måned.
   </div>
 
-  <form method="post" novalidate>
+  <form method="post" name="nyttMedlem" novalidate>
     <div class="form-row">
 
       <div class="form-group col-6">
@@ -21,8 +22,8 @@
         <input
           type="text" class="form-control <?= erGyldig("fornavn") ?>"
           name="fornavn" id="fornavn" placeholder="Fornavn"
-          value="<?= $_POST["fornavn"] ?? "" ?>">
-        <div class="invalid-feedback"><?= $feil["fornavn"] ?? "" ?></div>
+          value="<?= fraArray($_POST, "fornavn") ?>">
+        <div class="invalid-feedback"><?= fraArray($feil, "fornavn") ?></div>
       </div>
 
       <div class="form-group col-6">
@@ -30,8 +31,8 @@
         <input
           type="text" class="form-control <?= erGyldig("etternavn") ?>"
           name="etternavn" id="etternavn" placeholder="Etternavn"
-          value="<?= $_POST["etternavn"] ?? "" ?>">
-        <div class="invalid-feedback"><?= $feil["etternavn"] ?? "" ?></div>
+          value="<?= fraArray($_POST, "etternavn") ?>">
+        <div class="invalid-feedback"><?= fraArray($feil, "etternavn") ?></div>
       </div>
 
     </div>
@@ -43,8 +44,8 @@
         <input
           type="text" class="form-control <?= erGyldig("adresse") ?>"
           name="adresse" id="adresse" placeholder="Adresse"
-          value="<?= $_POST["adresse"] ?? "" ?>">
-        <div class="invalid-feedback"><?= $feil["adresse"] ?? "" ?></div>
+          value="<?= fraArray($_POST, "adresse") ?>">
+        <div class="invalid-feedback"><?= fraArray($feil, "adresse") ?></div>
       </div>
 
     </div>
@@ -56,8 +57,8 @@
         <input
           type="text" class="form-control <?= erGyldig("postnummer") ?>"
           name="postnummer" id="postnummer" placeholder="Postnummer"
-          value="<?= $_POST["postnummer"] ?? "" ?>">
-        <div class="invalid-feedback"><?= $feil["postnummer"] ?? "" ?></div>
+          value="<?= fraArray($_POST, "postnummer") ?>">
+        <div class="invalid-feedback"><?= fraArray($feil, "postnummer") ?></div>
       </div>
 
       <div class="form-group col-8">
@@ -74,8 +75,8 @@
         <input
           type="phone" class="form-control <?= erGyldig("telefonnummer") ?>"
           name="telefonnummer" id="telefonnummer" placeholder="Telefonnummer"
-          value="<?= $_POST["telefonnummer"] ?? "" ?>">
-        <div class="invalid-feedback"><?= $feil["telefonnummer"] ?? "" ?></div>
+          value="<?= fraArray($_POST, "telefonnummer") ?>">
+        <div class="invalid-feedback"><?= fraArray($feil, "telefonnummer") ?></div>
       </div>
 
     </div>
@@ -87,8 +88,8 @@
         <input
           type="email" class="form-control <?= erGyldig("epost") ?>"
           name="epost" id="epost" placeholder="E-postadresse"
-          value="<?= $_POST["epost"] ?? "" ?>">
-        <div class="invalid-feedback"><?= $feil["epost"] ?? "" ?></div>
+          value="<?= fraArray($_POST, "epost") ?>">
+        <div class="invalid-feedback"><?= fraArray($feil, "epost") ?></div>
       </div>
 
     </div>
@@ -100,7 +101,7 @@
         <input
           type="password" class="form-control <?= erGyldig("passord") ?>"
           name="passord" id="passord" placeholder="Passord">
-        <div class="invalid-feedback"><?= $feil["passord"] ?? "" ?></div>
+        <div class="invalid-feedback"><?= fraArray($feil, "passord") ?></div>
       </div>
 
       <div class="form-group col-6">
@@ -108,20 +109,20 @@
         <input
           type="password" class="form-control <?= erGyldig("passord2") ?>"
           name="passord2" id="passord2" placeholder="Gjenta passord">
-        <div class="invalid-feedback"><?= $feil["passord2"] ?? "" ?></div>
+        <div class="invalid-feedback"><?= fraArray($feil, "passord2") ?></div>
       </div>
 
     </div>
 
     <div class="form-group row col-12 align-items-center">
-      <button class="btn btn-primary col-4" id="submit">Bli medlem</button>
+      <button class="btn btn-primary col-4" id="nyttMedlem">Bli medlem</button>
       <div class="invalid-feedback col-8 m-0">Alle feltene må være gyldige.</div>
     </div>
   </form>
 
 </div>
 
-<script src="js/validerRegistrering.js"></script>
+<script src="js/validerMedlem.js"></script>
 
 <!-- Innhold stopper her -->
 <?php include "layout/etterInnhold.php"; ?>
