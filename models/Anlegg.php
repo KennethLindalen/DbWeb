@@ -42,6 +42,10 @@ class Anlegg {
     if (!preg_match("/^\d{1,2}$/", $this->stengetid) || $this->stengetid < 0 || $this->stengetid > 23)
       $feil["stengetid"] = "Stengetid må være mellom 0 og 23.";
 
+    // Anleggets åpningstid må være tidligere på dagen enn anleggets stengetid.
+    if (!isset($feil["åpningstid"]) && !isset($feil["stengetid"]) && $this->stengetid < $this->åpningstid)
+      $feil["åpningstid"] = "Anlegget kan ikke stenge før det åpner.";
+
     // Timepris må bestå av et positivt heltall.
     if (!preg_match("/^\d+$/", $this->timepris) || $this->timepris < 0)
       $feil["timepris"] = "Timepris må være et positivt heltall.";
@@ -70,7 +74,7 @@ class Anlegg {
       if ($e->getCode() == 1062)
         throw new InvalidArgumentException(json_encode(["navn" => "Et anlegg med dette navnet finnes allerede."]));
       if ($e->getCode() == 1452)
-        throw new InvalidArgumentException(json_encode(["idrettskode" => "Fant ikke tilsvarende idrett."]));
+        throw new InvalidArgumentException(json_encode(["idrettskode" => "Idretten finnes ikke."]));
       throw $e;
     }
   }
@@ -180,7 +184,12 @@ class Anlegg {
 
 
   // Statisk metode for å liste opp alle idrettsanlegg.
-  public static function finnAlle() {
+  public static function finnAlle($kriterier = []) {
+
+    // Bygger opp WHERE-delen av SQL-spørringen basert på søkekriteriene som oppgis.
+    $where = sizeof($kriterier) > 0
+      ? "AND " . join(" AND ", array_map(function($felt) { return "a.$felt = ?"; }, array_keys($kriterier)))
+      : "";
 
     // SQL-spørring for uthenting av alle anlegg.
     // Sorteres alfabetisk etter tilhørende idrettsnavn.
@@ -193,7 +202,9 @@ class Anlegg {
         a.stengetid,
         a.timepris
       FROM anlegg AS a, idrett AS i
-      WHERE a.idrettskode = i.idrettskode
+      WHERE
+        a.idrettskode = i.idrettskode
+        $where
       ORDER BY i.navn, a.navn;
     ";
 
@@ -201,7 +212,7 @@ class Anlegg {
     // Henter resultatet fra spørringen i et assosiativt array ($res).
     $con = new Database();
     $res = $con
-      ->spørring($sql)
+      ->spørring($sql, array_values($kriterier))
       ->get_result()
       ->fetch_all(MYSQLI_ASSOC);
 
