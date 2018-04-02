@@ -15,8 +15,6 @@ $feil = [];
 // Må bruke global-nøkkelordet for å få tilgang til variabler utenfor funksjoner.
 function erGyldig($felt) {
   global $feil;
-  if ($_SERVER["REQUEST_METHOD"] === "GET")
-    return;
   if ($_SERVER["REQUEST_METHOD"] === "POST")
     return isset($feil[$felt]) ? "is-invalid" : "is-valid";
 }
