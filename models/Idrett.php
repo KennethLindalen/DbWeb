@@ -2,6 +2,7 @@
 
 // Includes
 include_once "utils/database.php";
+include_once "models/Anlegg.php";
 
 // Klasse som representerer de ulike idrettene klubben driver med.
 class Idrett {
@@ -121,7 +122,7 @@ class Idrett {
       ->fetch_assoc();
 
     // Returnerer et nytt idrettsobjekt.
-    return new Idrett($res, true);
+    return $res ? new Idrett($res, true) : null;
   }
 
 
@@ -145,6 +146,10 @@ class Idrett {
 
     // Returnerer et array av idrettsobjekter.
     return array_map(function($rad) { return new Idrett($rad, true); }, $res);
+  }
+
+  public function getAnlegg() {
+    return Anlegg::finnAlle(["idrettskode" => $this->idrettskode]);
   }
 
 }
