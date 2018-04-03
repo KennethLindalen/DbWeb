@@ -2,8 +2,9 @@
 	$tittel = "Min side - Nederlaget Idrettsklubb";
 	include "utils/krevMedlem.php";
 	include "utils/minside.php";
-	include "utils/funksjoner.php";
 	include "layout/førInnhold.php";
+
+	include_once "utils/cache.php";
 ?>
 <!-- Innhold starter her -->
 
@@ -20,9 +21,72 @@
       </button>
     </h5>
   </div>
-  <div id="faktura-body" class="collapse">
+  <div id="faktura-body" class="collapse <?= kategoriErValgt("faktura") ?>">
     <div class="card-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+			<form method="post">
+				<div class="row">
+					<div class="input-group mb-3 col-6">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="velgMåned">Velg måned</label>
+						</div>
+						<input type="hidden" name="operasjon" value="faktura">
+						<input type="month" class="form-control" name="måned" id="velgMåned" value="<?= $valgtMåned ?>">
+					</div>
+					<div class="input-group mb-3 col-2 offset-4">
+						<button name="button" class="btn btn-outline-primary">Vis faktura</button>
+					</div>
+				</div>
+			</form>
+
+			<?php if (isset($reservasjoner)): ?>
+				<div class="container">
+					<div class="row">
+						<table class="table table-sm border mb-0">
+							<thead class="thead-light">
+								<tr>
+									<th colspan="4">Faste kostnader</th>
+									<th>Beløp</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="4">Medlemskontingent</td>
+									<td>kr 100,-</td>
+								</tr>
+							</tbody>
+							<thead class="thead-light">
+								<tr>
+									<th colspan="5">Reservasjoner</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php if (sizeof($reservasjoner) == 0): ?>
+									<tr>
+										<td colspan="5">Ingen reservasjoner denne måned.</td>
+									</tr>
+								<?php endif; ?>
+								<?php foreach ($reservasjoner as $reservasjon): ?>
+									<tr>
+										<td class="dato" style="width: 20%;"><?= $reservasjon->dato ?></td>
+										<td style="width: 20%;"><?= $reservasjon->time ?>:00 - <?= $reservasjon->time + 1 ?>:00</td>
+										<td><?= $reservasjon->getAnlegg()->getIdrett()->navn ?></td>
+										<td><?= $reservasjon->getAnlegg()->navn ?></td>
+										<td style="width: 20%;">kr <?= $reservasjon->getAnlegg()->timepris ?>,-</td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
+							<thead class="thead-light">
+								<tr>
+									<th class="border-0" colspan="4">Totalt utestående beløp</th>
+									<th class="border-0">kr <?= $sum ?>,-</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			<?php endif; ?>
+
     </div>
   </div>
 </div>
@@ -35,7 +99,7 @@
       </button>
     </h5>
   </div>
-  <div id="endredata-body" class="collapse <?= fraArray($_POST, "operasjon") == "endreMedlem" ? "show" : "" ?>">
+  <div id="endredata-body" class="collapse <?= kategoriErValgt("endreMedlem") ?>">
     <div class="card-body col-7">
 
 			<form method="post" name="endreMedlem" novalidate>
@@ -44,7 +108,7 @@
 			    <div class="form-group col-6">
 			      <label for="fornavn">Fornavn</label>
 			      <input
-			        type="text" class="form-control"
+			        type="text" class="form-control valideres <?= inputErGyldig("fornavn") ?>"
 			        name="fornavn" id="fornavn" placeholder="Fornavn"
 			        value="<?= $medlem->fornavn ?>">
 			      <div class="invalid-feedback"><?= fraArray($feil, "fornavn") ?></div>
@@ -53,7 +117,7 @@
 		      <div class="form-group col-6">
 		        <label for="etternavn">Etternavn</label>
 		        <input
-		          type="text" class="form-control <?= erGyldig("etternavn") ?>"
+		          type="text" class="form-control valideres <?= inputErGyldig("etternavn") ?>"
 		          name="etternavn" id="etternavn" placeholder="Etternavn"
 		          value="<?= $medlem->etternavn ?>">
 		        <div class="invalid-feedback"><?= fraArray($feil, "etternavn") ?></div>
@@ -64,7 +128,7 @@
 		      <div class="form-group col-12">
 		        <label for="adresse">Adresse</label>
 		        <input
-		          type="text" class="form-control <?= erGyldig("adresse") ?>"
+		          type="text" class="form-control valideres <?= inputErGyldig("adresse") ?>"
 		          name="adresse" id="adresse" placeholder="Adresse"
 		          value="<?= $medlem->adresse ?>">
 		        <div class="invalid-feedback"><?= fraArray($feil, "adresse") ?></div>
@@ -75,7 +139,7 @@
 		      <div class="form-group col-4">
 		        <label for="postnummer">Postnummer</label>
 		        <input
-		          type="text" class="form-control <?= erGyldig("postnummer") ?>"
+		          type="text" class="form-control valideres <?= inputErGyldig("postnummer") ?>"
 		          name="postnummer" id="postnummer" placeholder="Postnummer"
 		          value="<?= $medlem->postnummer ?>">
 		        <div class="invalid-feedback"><?= fraArray($feil, "postnummer") ?></div>
@@ -94,7 +158,7 @@
 		      <div class="form-group col-12">
 		        <label for="telefonnummer">Telefonnummer</label>
 		        <input
-		          type="phone" class="form-control <?= erGyldig("telefonnummer") ?>"
+		          type="phone" class="form-control valideres <?= inputErGyldig("telefonnummer") ?>"
 		          name="telefonnummer" id="telefonnummer" placeholder="Telefonnummer"
 		          value="<?= $medlem->telefonnummer ?>">
 		        <div class="invalid-feedback"><?= fraArray($feil, "telefonnummer") ?></div>
@@ -105,7 +169,7 @@
 		      <div class="form-group col-12">
 		        <label for="epost">E-postadresse</label>
 		        <input
-		          type="email" class="form-control <?= erGyldig("epost") ?>"
+		          type="email" class="form-control valideres <?= inputErGyldig("epost") ?>"
 		          name="epost" id="epost" placeholder="E-postadresse"
 		          value="<?= $medlem->epost ?>">
 		        <div class="invalid-feedback"><?= fraArray($feil, "epost") ?></div>
@@ -131,7 +195,7 @@
       </button>
     </h5>
   </div>
-  <div id="endrepassord-body" class="collapse <?= fraArray($_POST, "operasjon") == "endrePassord" ? "show" : "" ?>">
+  <div id="endrepassord-body" class="collapse <?= kategoriErValgt("endrePassord") ?>">
     <div class="card-body col-6">
 
 			<form method="post" name="endrePassord" novalidate>
@@ -139,7 +203,7 @@
 					<div class="form-group col-6">
 						<label for="gammeltPassord">Gammelt passord</label>
 						<input
-							type="password" class="form-control <?= erGyldig("autentisering") ?>"
+							type="password" class="form-control <?= inputErGyldig("autentisering") ?>"
 							name="gammeltPassord" id="gammeltPassord" placeholder="Passord">
 						<div class="invalid-feedback"><?= fraArray($feil, "autentisering") ?></div>
 					</div>
@@ -149,7 +213,7 @@
 		      <div class="form-group col-6">
 		        <label for="passord">Nytt passord</label>
 		        <input
-		          type="password" class="form-control <?= erGyldig("passord") ?>"
+		          type="password" class="form-control <?= inputErGyldig("passord") ?>"
 		          name="passord" id="passord" placeholder="Passord">
 		        <div class="invalid-feedback"><?= fraArray($feil, "passord") ?></div>
 		      </div>
@@ -157,7 +221,7 @@
 		      <div class="form-group col-6">
 		        <label for="passord2">Gjenta nytt passord</label>
 		        <input
-		          type="password" class="form-control <?= erGyldig("passord2") ?>"
+		          type="password" class="form-control <?= inputErGyldig("passord2") ?>"
 		          name="passord2" id="passord2" placeholder="Gjenta passord">
 		        <div class="invalid-feedback"><?= fraArray($feil, "passord2") ?></div>
 		      </div>
@@ -175,6 +239,7 @@
 </div>
 
 <script src="js/validerMedlem.js"></script>
+<script src="js/behandleDato.js"></script>
 
 <!-- Innhold stopper her -->
 <?php include "layout/etterInnhold.php"; ?>

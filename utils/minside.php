@@ -7,6 +7,8 @@
 
 // Krever tilgang til medlemsklassen.
 include_once "models/Medlem.php";
+include_once "models/Reservasjon.php";
+include_once "utils/funksjoner.php";
 
 // Hent medlemsobjektet fra databasen.
 $medlem = Medlem::finn($_SESSION["medlemsnummer"]);
@@ -14,18 +16,46 @@ $medlem = Medlem::finn($_SESSION["medlemsnummer"]);
 // Eventuelle feil ved endring vil gjøres tilgjengelig for GUI her.
 $feil = [];
 
-// Funksjon som returnerer bootstrap-klassenavn for input-felter der feil finnes.
-// Må bruke global-nøkkelordet for å få tilgang til variabler utenfor funksjoner.
-function erGyldig($felt) {
+// Returnerer "is-valid" eller "is-invalid" som klassenavn dersom
+// det finnes valideringsfeil fra serveren ved gitt tekstboks.
+function inputErGyldig($felt) {
   global $feil;
   if ($_SERVER["REQUEST_METHOD"] === "POST")
     return isset($feil[$felt]) ? "is-invalid" : "is-valid";
 }
 
-// Modulen brukes kun ved POST-requests til "min side".
+// Returnerer "show" som klassenavn for å holde kategorien
+// som brukeren gjorde POST-forespørselen fra utvidet.
+function kategoriErValgt($kategori) {
+  if ($_SERVER["REQUEST_METHOD"] === "POST")
+    return $_POST["operasjon"] == $kategori ? "show" : "";
+}
+
+// Setter nødvendige variabler ved GET-forespørsler.
+if ($_SERVER["REQUEST_METHOD"] === "GET") {
+  $valgtMåned = date("Y-m");
+}
+
+// Logikk for behandling av POST-forespørsler
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   try {
+
+    // Henter reservasjonsdata dersom operasjonen er "faktura".
+    if ($_POST["operasjon"] == "faktura") {
+      $valgtMåned = $_POST["måned"] == "" ? date("Y-m") : fraArray($_POST, "måned");
+
+      // Henter alle brukerens reservasjoner med "dato LIKE <måned>%".
+      $reservasjoner = Reservasjon::finnAlle([
+        "medlemsnummer" => $_SESSION["medlemsnummer"],
+        "dato" => $valgtMåned . "%"]
+      );
+
+      $sum = 100;
+      foreach ($reservasjoner as $reservasjon) {
+        $sum += $reservasjon->getAnlegg()->timepris;
+      }
+    }
 
     // Oppdaterer felter og lagrer dersom operasjonen er "endreMedlem".
     if ($_POST["operasjon"] == "endreMedlem") {
