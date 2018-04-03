@@ -2,6 +2,7 @@
 
 // Includes
 include_once "utils/database.php";
+include_once "utils/cache.php";
 
 // Klasse som representerer klubbens medlemmer
 class Medlem {
@@ -29,15 +30,15 @@ class Medlem {
     $feil = [];
 
     // Fornavn kan bestå av bokstaver, bindestrek, apostrof og punktum. Maks 100 tegn.
-    if (!preg_match("/^[a-zæøå '.-]{1,100}$/i", $this->fornavn))
+    if (!preg_match("/^[a-zæøåÆØÅ '.-]{1,100}$/i", $this->fornavn))
       $feil["fornavn"] = "Ugyldig fornavn.";
 
     // Etternavn kan bestå av bokstaver, bindestrek, apostrof og punktum. Maks 100 tegn.
-    if (!preg_match("/^[a-zæøå '.-]{1,100}$/i", $this->etternavn))
+    if (!preg_match("/^[a-zæøåÆØÅ '.-]{1,100}$/i", $this->etternavn))
       $feil["etternavn"] = "Ugyldig etternavn.";
 
     // Adressen kan kun bestå av bokstaver, tall, bindestrek, apostrof, komma og punktum. Maks 100 tegn.
-    if (!preg_match("/^[\wæøå '.,-]{1,100}$/i", $this->adresse))
+    if (!preg_match("/^[\wæøåÆØÅ '.,-]{1,100}$/i", $this->adresse))
       $feil["adresse"] = "Ugyldig adresse.";
 
     // Postnummeret må bestå av 4 siffer
@@ -78,6 +79,7 @@ class Medlem {
   public function lagre() {
 
     // UPDATE-spørring dersom medlemsnummer finnes, INSERT-spørring ellers.
+    // Dersom både medlemsnummer og passord finnes på objektet, skal passordet endres.
     try {
       if ($this->medlemsnummer) {
         if ($this->passord) {
@@ -205,8 +207,18 @@ class Medlem {
   }
 
 
+  // Metode for å slette et medlem fra databasen.
+  public function slettDenne($medlemsnummer) {
+    self::slett($this->medlemsnummer);
+  }
+
+
   // Statisk metode for å finne et medlem basert på gitt medlemsnummer.
   public static function finn($medlemsnummer) {
+
+    // Returnerer medlem fra cache hvis det finnes der.
+    if ($medlem = Cache::get("medlem", $medlemsnummer))
+      return $medlem;
 
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
@@ -235,8 +247,9 @@ class Medlem {
       ->get_result()
       ->fetch_assoc();
 
-    // Returnerer et nytt medlemsobjekt.
-    return new Medlem($res, true);
+    // Oppretter nytt medlemsobjekt, lagrer i cache og returnerer.
+    $medlem = $res ? new Medlem($res, true) : null;
+    return Cache::set("medlem", $medlemsnummer, $medlem);
   }
 
 
@@ -272,7 +285,9 @@ class Medlem {
       ->fetch_all(MYSQLI_ASSOC);
 
     // Returnerer et array av idrettsobjekter.
-    return array_map(function($rad) { return new Medlem($rad, true); }, $res);
+    return array_map(function($rad) {
+      return Cache::set("medlem", $rad["medlemsnummer"], new Medlem($rad, true));
+    }, $res);
   }
 
 

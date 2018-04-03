@@ -3,6 +3,7 @@
 // Includes
 include_once "utils/database.php";
 include_once "models/Idrett.php";
+include_once "utils/cache.php";
 
 // Klasse som representerer ulike idrettsanlegg tilknyttet klubbens idretter.
 class Anlegg {
@@ -17,7 +18,6 @@ class Anlegg {
     $this->åpningstid  = $anlegg["åpningstid"];
     $this->stengetid   = $anlegg["stengetid"];
     $this->timepris    = $anlegg["timepris"];
-    if (!$fraDatabase) $this->valider();
   }
 
   // Metode for validering av felter.
@@ -31,7 +31,7 @@ class Anlegg {
       $feil["idrettskode"] = "Idrettskode må være et positivt heltall.";
 
     // Anleggsnavn kan bestå av bokstaver, tall, bindestrek, apostrof, komma og punktum. Maks 100 tegn.
-    if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/u", $this->navn))
+    if (!preg_match("/^[\wæøåÆØÅ '.,-]{1,100}$/i", $this->navn))
       $feil["navn"] = "Ugyldig idrettsnavn.";
 
     // Åpningstid må bestå av et positivt heltall mellom 0 og 23 (tilsvarer time).
@@ -61,6 +61,8 @@ class Anlegg {
 
     // UPDATE-spørring dersom medlemsnummer finnes, INSERT-spørring ellers.
     try {
+      $this->valider();
+
       if ($this->anleggskode)
         $this->oppdater();
       else
@@ -154,8 +156,18 @@ class Anlegg {
   }
 
 
+  // Metode for å slette et anlegg fra databasen.
+  public function slettDenne() {
+    self::slett($this->anleggskode);
+  }
+
+
   // Statisk metode for å finne et idrettsanlegg gitt ved sin anleggskode.
   public static function finn($anleggskode) {
+
+    // Returnerer anlegg fra cache hvis det finnes der.
+    if ($anlegg = Cache::get("anlegg", $anleggskode)) 
+      return $anlegg;
 
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
@@ -178,8 +190,9 @@ class Anlegg {
       ->get_result()
       ->fetch_assoc();
 
-    // Returnerer et nytt idrettsobjekt.
-    return new Anlegg($res, true);
+    // Oppretter nytt anleggsobjekt, lagrer i cache og returnerer.
+    $anlegg = $res ? new Anlegg($res, true) : null;
+    return Cache::set("anlegg", $anleggskode, $anlegg);
   }
 
 
@@ -216,8 +229,10 @@ class Anlegg {
       ->get_result()
       ->fetch_all(MYSQLI_ASSOC);
 
-    // Returnerer et array av anleggsobjekter.
-    return array_map(function($rad) { return new Anlegg($rad, true); }, $res);
+    // Returnerer et array av anleggsobjekter og lagrer i cache.
+    return array_map(function($rad) {
+      return Cache::set("anlegg", $rad["anleggskode"], new Anlegg($rad, true));
+    }, $res);
   }
 
 

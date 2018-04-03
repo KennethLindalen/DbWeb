@@ -3,6 +3,7 @@
 // Includes
 include_once "utils/database.php";
 include_once "models/Anlegg.php";
+include_once "utils/cache.php";
 
 // Klasse som representerer de ulike idrettene klubben driver med.
 class Idrett {
@@ -13,7 +14,6 @@ class Idrett {
   public function __construct($idrett = [], $fraDatabase = false) {
     $this->idrettskode = $fraDatabase ? $idrett["idrettskode"] : null;
     $this->navn        = $idrett["navn"];
-    if (!$fraDatabase) $this->valider();
   }
 
 
@@ -38,6 +38,8 @@ class Idrett {
 
     // UPDATE-spørring dersom medlemsnummer finnes, INSERT-spørring ellers.
     try {
+      $this->valider();
+
       if ($this->idrettskode)
         $this->oppdater();
       else
@@ -103,8 +105,18 @@ class Idrett {
   }
 
 
+  // Metode for å slette en idrett fra databasen.
+  public function slettDenne() {
+    self::slett($this->idrettskode);
+  }
+
+
   // Statisk metode for å finne en idrett gitt ved sin idrettskode.
   public static function finn($idrettskode) {
+
+    // Returnerer idrett fra cache hvis det finnes der.
+    if ($idrett = Cache::get("idrett", $idrettskode)) 
+      return $idrett;
 
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
@@ -121,8 +133,9 @@ class Idrett {
       ->get_result()
       ->fetch_assoc();
 
-    // Returnerer et nytt idrettsobjekt.
-    return $res ? new Idrett($res, true) : null;
+    // Oppretter nytt idrettsobjekt, lagrer i cache og returnerer.
+    $idrett = $res ? new Idrett($res, true) : null;
+    return Cache::set("idrett", $idrettskode, $idrett);
   }
 
 
@@ -144,8 +157,10 @@ class Idrett {
       ->get_result()
       ->fetch_all(MYSQLI_ASSOC);
 
-    // Returnerer et array av idrettsobjekter.
-    return array_map(function($rad) { return new Idrett($rad, true); }, $res);
+    // Returnerer et array av idrettsobjekter og lagrer i cache.
+    return array_map(function($rad) {
+      return Cache::set("idrett", $rad["idrettskode"], new Idrett($rad, true));
+    }, $res);
   }
 
   public function getAnlegg() {
