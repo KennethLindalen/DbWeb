@@ -5,6 +5,10 @@ include_once "models/Idrett.php";
 include_once "models/Anlegg.php";
 include_once "models/Reservasjon.php";
 
+$alleMedlemmer = Medlem::finnAlle();
+$alleIdretter  = Idrett::finnAlle();
+$alleAnlegg    = Anlegg::finnAlle();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $feil = [];

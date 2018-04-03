@@ -1,12 +1,7 @@
 <?php
+  $tittel = "Administrasjon - Nederlaget Idrettsklubb";
   include_once "utils/krevAdmin.php";
   include_once "utils/administrasjon.php";
-
-  $alleMedlemmer = Medlem::finnAlle();
-  $alleIdretter  = Idrett::finnAlle();
-  $alleAnlegg    = Anlegg::finnAlle();
-
-  $tittel = "Administrasjon - Nederlaget Idrettsklubb";
   include "layout/førInnhold.php";
 ?>
 <!-- Innhold starter her -->
@@ -43,18 +38,18 @@
       <table class="table table-light table-striped table-hover mb-0">
         <thead class="thead-light">
           <tr>
-            <th scope="col" style="width: 5%;" class="px-2">ID</th>
-            <th scope="col">Navn</th>
-            <th scope="col">Adresse</th>
-            <th scope="col">Telefon</th>
-            <th scope="col">E-postadresse</th>
+            <th style="width: 5%;">ID</th>
+            <th>Navn</th>
+            <th>Adresse</th>
+            <th>Telefon</th>
+            <th>E-postadresse</th>
             <th style="width: 5%;"></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($alleMedlemmer as $medlem): ?>
             <tr>
-              <th scope="row" class="px-2"><?= $medlem->medlemsnummer ?></th>
+              <th><?= $medlem->medlemsnummer ?></th>
               <td><?= $medlem->fulltNavn(true) ?></td>
               <td><?= $medlem->fullAdresse() ?></td>
               <td><?= $medlem->telefonnummer ?></td>
@@ -89,15 +84,15 @@
       <table class="table table-light table-striped table-hover mb-0">
         <thead class="thead-light">
           <tr>
-            <th scope="col" style="width: 5%;" class="px-2">ID</th>
-            <th scope="col">Navn</th>
+            <th style="width: 5%;">ID</th>
+            <th>Navn</th>
             <th style="width: 5%;"></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($alleIdretter as $idrett): ?>
             <tr>
-              <th scope="row" class="px-2"><?= $idrett->idrettskode ?></th>
+              <th><?= $idrett->idrettskode ?></th>
               <td><?= $idrett->navn ?></td>
               <td class="ml-auto pt-2 pb-1">
                 <form method="post">
@@ -111,7 +106,7 @@
           <tr>
             <form method="post">
               <input type="hidden" name="operasjon" value="nyIdrett">
-              <th class="pl-2">Ny</th>
+              <th>Ny</th>
               <td><input type="text" class="input-min" name="navn" placeholder="Navn"></td>
               <td class="pt-2 pb-1"><button class="btn btn-success btn-sm w-100">&plus;</button></td>
             </form>
@@ -137,19 +132,19 @@
       <table class="table table-light table-striped table-hover mb-0">
         <thead class="thead-light">
           <tr>
-            <th scope="col" class="pl-2">ID</th>
-            <th scope="col">Idrett</th>
-            <th scope="col">Navn</th>
-            <th scope="col">Åpningstid</th>
-            <th scope="col">Stengetid</th>
-            <th scope="col">Timepris</th>
+            <th>ID</th>
+            <th>Idrett</th>
+            <th>Navn</th>
+            <th>Åpningstid</th>
+            <th>Stengetid</th>
+            <th>Timepris</th>
             <th style="width: 5%;"></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($alleAnlegg as $anlegg): ?>
             <tr>
-              <th class="pl-2"><?= $anlegg->anleggskode ?></th>
+              <th><?= $anlegg->anleggskode ?></th>
               <td><?= $anlegg->getIdrett()->navn ?></td>
               <td><?= $anlegg->navn ?></td>
               <td><?= $anlegg->åpningstid ?>:00</td>
@@ -167,7 +162,7 @@
           <tr>
             <form method="post">
               <input type="hidden" name="operasjon" value="nyttAnlegg">
-              <th class="pl-2">Ny</th>
+              <th>Ny</th>
               <td>
                 <select class="input-min py-0 my-0" name="idrettskode">
                   <?php foreach ($alleIdretter as $idrett): ?>
