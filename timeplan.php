@@ -85,7 +85,7 @@
                   </td>
                   <td><?= $res ? "Reservert" : "Ledig" ?></td>
                   <td><?= $res ? $res->getMedlem()->fulltNavn() : "" ?></td>
-                  <td><?= $anlegg->timepris ?>,-</td>
+                  <td>kr <?= $anlegg->timepris ?>,-</td>
                   <td class="pt-2 pb-1">
                     <?php if ($_SESSION["medlemsnummer"]): ?>
                       <form method="post">
