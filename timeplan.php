@@ -39,7 +39,7 @@
 
 <?php if (!empty($feil)): ?>
   <div class="alert alert-danger alert-dismissible fade show">
-    <p>Feil oppstod under forrige operasjon:</p>
+    <p>Feil oppstod under reservasjon:</p>
     <ul>
       <?php foreach ($feil as $melding): ?>
         <li><?= $melding ?></li>
@@ -49,7 +49,9 @@
       <span>&times;</span>
     </button>
   </div>
-<?php elseif ($valgtIdrett): ?>
+<?php endif; ?>
+
+<?php if ($valgtIdrett): ?>
   <?php foreach ($valgtIdrett->getAnlegg() as $anlegg): ?>
 
     <div class="card mb-3">
@@ -77,7 +79,10 @@
 
               <?php foreach (hentReservasjoner($anlegg, $valgtDato) as $time => $res): ?>
                 <tr class="<?= $res ? "text-muted" : "" ?>">
-                  <td><?= $time ?>:00 - <?= $time + 1 ?>:00</td>
+                  <td>
+                    <?= str_pad($time, 2, "0", STR_PAD_LEFT) ?>:00 -
+                    <?= str_pad($time + 1, 2, "0", STR_PAD_LEFT) ?>:00
+                  </td>
                   <td><?= $res ? "Reservert" : "Ledig" ?></td>
                   <td><?= $res ? $res->getMedlem()->fulltNavn() : "" ?></td>
                   <td><?= $anlegg->timepris ?>,-</td>
