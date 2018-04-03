@@ -35,12 +35,12 @@ class Anlegg {
       $feil["navn"] = "Ugyldig idrettsnavn.";
 
     // Åpningstid må bestå av et positivt heltall mellom 0 og 23 (tilsvarer time).
-    if (!preg_match("/^\d{1,2}$/", $this->åpningstid) || $this->åpningstid < 0 || $this->åpningstid > 23)
-      $feil["åpningstid"] = "Åpningstid må være et heltall mellom 0 og 23.";
+    if (!preg_match("/^\d{1,2}$/", $this->åpningstid) || $this->åpningstid < 0 || $this->åpningstid > 24)
+      $feil["åpningstid"] = "Åpningstid må være et heltall mellom 0 og 24.";
 
     // Stengetid må bestå av et positivt heltall mellom 0 og 23 (tilsvarer time).
-    if (!preg_match("/^\d{1,2}$/", $this->stengetid) || $this->stengetid < 0 || $this->stengetid > 23)
-      $feil["stengetid"] = "Stengetid må være mellom 0 og 23.";
+    if (!preg_match("/^\d{1,2}$/", $this->stengetid) || $this->stengetid < 0 || $this->stengetid > 24)
+      $feil["stengetid"] = "Stengetid må være mellom 0 og 24.";
 
     // Anleggets åpningstid må være tidligere på dagen enn anleggets stengetid.
     if (!isset($feil["åpningstid"]) && !isset($feil["stengetid"]) && $this->stengetid < $this->åpningstid)
@@ -144,6 +144,9 @@ class Anlegg {
   // Statisk metode for sletting av anlegg fra databasen.
   public static function slett($anleggskode) {
 
+    // Slett fra cache hvis objektet finnes.
+    Cache::set("anlegg", $anleggskode, null);
+
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
       DELETE FROM anlegg
@@ -166,7 +169,7 @@ class Anlegg {
   public static function finn($anleggskode) {
 
     // Returnerer anlegg fra cache hvis det finnes der.
-    if ($anlegg = Cache::get("anlegg", $anleggskode)) 
+    if ($anlegg = Cache::get("anlegg", $anleggskode))
       return $anlegg;
 
     // SQL-spørring med parametre for bruk i prepared statement.

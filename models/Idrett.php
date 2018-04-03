@@ -93,6 +93,9 @@ class Idrett {
   // Statisk metode for sletting av idretter fra databasen.
   public static function slett($idrettskode) {
 
+    // Slett fra cache hvis objektet finnes.
+    Cache::set("idrett", $idrettskode, null);
+
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
       DELETE FROM idrett
@@ -115,7 +118,7 @@ class Idrett {
   public static function finn($idrettskode) {
 
     // Returnerer idrett fra cache hvis det finnes der.
-    if ($idrett = Cache::get("idrett", $idrettskode)) 
+    if ($idrett = Cache::get("idrett", $idrettskode))
       return $idrett;
 
     // SQL-spørring med parametre for bruk i prepared statement.

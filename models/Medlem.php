@@ -195,6 +195,9 @@ class Medlem {
   // Statisk metode for sletting av medlemmer fra databasen.
   public static function slett($medlemsnummer) {
 
+    // Slett fra cache hvis objektet finnes.
+    Cache::set("medlem", $medlemsnummer, null);
+
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
       DELETE FROM medlem
