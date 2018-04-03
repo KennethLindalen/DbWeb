@@ -51,7 +51,7 @@ class Reservasjon {
 
     // Feilkode 1062 - brudd på UNIQUE i databasen - anlegget er allerede reservert.
     // Feilkode 1452 - brudd på fremmednøkkelkrav i databasen - medlem eller anlegg finnes ikke.
-    // Feilkode 1644 - brudd på krav definert i tabellens BEFORE INSERT-trigger - time utenfor åpningstid.
+    // Feilkode 1644 - brudd på tabellens "BEFORE INSERT"-trigger - time utenfor åpningstid.
     // Kaster unntaket videre dersom det ikke er relatert til validering.
     catch (mysqli_sql_exception $e) {
       if ($e->getCode() == 1062)
@@ -100,9 +100,19 @@ class Reservasjon {
         time = ?;
     ";
 
-    // Kobler til databasen og utfører spørringen.
-    $con = new Database();
-    $con->spørring($sql, [$anleggskode, $dato, $time]);
+    try {
+      // Kobler til databasen og utfører spørringen.
+      $con = new Database();
+      $con->spørring($sql, [$anleggskode, $dato, $time]);
+    }
+
+    // Feilkode 1644 - brudd på tabellens "BEFORE DELETE"-trigger - kanselleringsfrist utgått.
+    catch (mysqli_sql_exception $e) {
+      if ($e->getCode() == 1644)
+        throw new InvalidArgumentException(json_encode(["time" => $e->getMessage()]));
+      throw $e;
+    }
+
   }
 
 
