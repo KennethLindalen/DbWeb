@@ -115,30 +115,30 @@ class Reservasjon {
   // Metode for å finne en reservasjon gitt ved sine primærnøkkelfelter.
   public static function finn($anleggskode, $dato, $time) {
 
-        // SQL-spørring med parametre for bruk i prepared statement.
-        $sql = "
-          SELECT
-            medlemsnummer,
-            anleggskode,
-            dato,
-            time
-          FROM reservasjon
-          WHERE
-            anleggskode = ? AND
-            dato = ? AND
-            time = ?;
-        ";
+    // SQL-spørring med parametre for bruk i prepared statement.
+    $sql = "
+      SELECT
+        medlemsnummer,
+        anleggskode,
+        dato,
+        time
+      FROM reservasjon
+      WHERE
+        anleggskode = ? AND
+        dato = ? AND
+        time = ?;
+    ";
 
-        // Kobler til databasen og utfører spørringen.
-        // Henter resultatet fra spørringen i et assosiativt array ($res).
-        $con = new Database();
-        $res = $con
-          ->spørring($sql, [$anleggskode, $dato, $time])
-          ->get_result()
-          ->fetch_assoc();
+    // Kobler til databasen og utfører spørringen.
+    // Henter resultatet fra spørringen i et assosiativt array ($res).
+    $con = new Database();
+      $res = $con
+      ->spørring($sql, [$anleggskode, $dato, $time])
+      ->get_result()
+      ->fetch_assoc();
 
-        // Returnerer et nytt idrettsobjekt.
-        return $res ? new Reservasjon($res, true) : null;
+    // Returnerer et nytt idrettsobjekt.
+    return $res ? new Reservasjon($res, true) : null;
   }
 
 
@@ -147,7 +147,7 @@ class Reservasjon {
 
     // Bygger opp WHERE-delen av SQL-spørringen basert på søkekriteriene som oppgis.
     $where = sizeof($kriterier) > 0
-      ? "WHERE " . join(" AND ", array_map(function($felt) { return "$felt = ?"; }, array_keys($kriterier)))
+      ? "WHERE " . join(" AND ", array_map(function($felt) { return "$felt LIKE ?"; }, array_keys($kriterier)))
       : "";
 
     // SQL-spørring med parametre for bruk i prepared statement.
