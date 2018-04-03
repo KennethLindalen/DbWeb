@@ -24,7 +24,7 @@ $("#fornavn").focusout(e => {
     e.target.nextElementSibling.innerText = "Ugyldig fornavn.";
   }
 
-}).trigger("focusout");
+});
 
 
 // Validering for etternavnfeltet.
@@ -46,7 +46,7 @@ $("#etternavn").focusout(e => {
     e.target.nextElementSibling.innerText = "Ugyldig etternavn.";
   }
 
-}).trigger("focusout");
+});
 
 
 // Validering for adressefeltet.
@@ -68,7 +68,7 @@ $("#adresse").focusout(e => {
     e.target.nextElementSibling.innerText = "Ugyldig adresse.";
   }
 
-}).trigger("focusout");
+});
 
 
 // Validering for postnummerfeltet.
@@ -104,7 +104,7 @@ $("#postnummer").focusout(e => {
     }
   });
 
-}).trigger("focusout");
+});
 
 
 // Validering for telefonnummerfeltet.
@@ -126,7 +126,7 @@ $("#telefonnummer").focusout(e => {
     e.target.nextElementSibling.innerText = "Ugyldig telefonnummer.";
   }
 
-}).trigger("focusout");
+});
 
 
 // Validering for e-postadressefeltet.
@@ -149,7 +149,7 @@ $("#epost").focusout(e => {
     e.target.nextElementSibling.innerText = "Ugyldig e-postadresse.";
   }
 
-}).trigger("focusout");
+});
 
 
 // Validering for passordfeltet.
@@ -171,7 +171,7 @@ $("#passord").focusout(e => {
     e.target.nextElementSibling.innerText = "Passordet må bestå av minst 8 tegn og inneholde både tall, store-, og små bokstaver.";
   }
 
-}).trigger("focusout");
+});
 
 
 // Validering av det andre passordfeltet.
@@ -191,7 +191,12 @@ $("#passord2").focusout(e => {
     e.target.nextElementSibling.innerText = "Passordene må være like.";
   }
 
-}).trigger("focusout");
+});
+
+
+// Trigger "focusout"-eventet på alle inputfelter med klassenavn
+// "valideres" som ikke har fått valideringsklassenavn fra serveren.
+$("input.valideres").not(".is-valid").not(".is-invalid").trigger("focusout");
 
 
 // Ved registrering av nye medlemmer, lar bruker kun klikke på submit-knappen
