@@ -16,7 +16,7 @@
       </div>
       <select class="custom-select" style="height: 100%;" name="idrettskode" id="velgIdrett">
         <?php foreach ($alleIdretter as $idrett): ?>
-          <option value="<?= $idrett->idrettskode ?>" <?= erValgt($idrett->idrettskode) ?>>
+          <option value="<?= $idrett->idrettskode ?>" <?= idrettErValgt($idrett->idrettskode) ?>>
             <?= $idrett->navn ?>
           </option>
         <?php endforeach; ?>
@@ -60,7 +60,7 @@
           </button>
         </h5>
       </div>
-      <div id="anlegg<?= $anlegg->anleggskode ?>-body" class="collapse">
+      <div id="anlegg<?= $anlegg->anleggskode ?>-body" class="collapse <?= anleggErValgt($anlegg->anleggskode) ?>">
         <div class="card-body p-0">
 
           <table class="table table-striped m-0">

@@ -12,9 +12,15 @@ $alleIdretter = Idrett::finnAlle();
 $feil = [];
 
 // Returnerer "selected" slik at valgt idrett forblir valgt i select-felt.
-function erValgt($idrettskode) {
+function idrettErValgt($idrettskode) {
   if ($_SERVER["REQUEST_METHOD"] == "POST")
     return $_POST["idrettskode"] == $idrettskode ? "selected" : "";
+}
+
+// Returnerer "show" slik at listen for valgt anlegg forblir utvidet.
+function anleggErValgt($anleggskode) {
+  if ($_SERVER["REQUEST_METHOD"] == "POST")
+    return $_POST["anleggskode"] == $anleggskode ? "show" : "";
 }
 
 // Henter reservasjoner for et gitt anlegg på en gitt dato.
