@@ -7,16 +7,18 @@ FOR EACH ROW
 
 BEGIN
 
-    SELECT åpningstid, stengetid
-    INTO @åpningstid, @stengetid
-    FROM anlegg
-    WHERE anleggskode = NEW.anleggskode;
+  SELECT åpningstid, stengetid
+  INTO @åpningstid, @stengetid
+  FROM anlegg
+  WHERE anleggskode = NEW.anleggskode;
 
-    IF (NEW.time NOT BETWEEN @åpningstid AND @stengetid - 1)
-    THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Kan ikke reservere utenfor åpningstiden.";
-    END IF;
+  SET @klokkeslett = TIMESTAMP(NEW.dato, MAKETIME(NEW.time, 0, 0));
 
+  IF (NEW.time NOT BETWEEN @åpningstid AND @stengetid - 1) THEN
+    SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Du kan ikke reservere et anlegg utenfor  åpningstiden.";
+  ELSEIF (@klokkeslett < NOW()) THEN
+    SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Du kan ikke reservere et anlegg i fortiden.";
+  END IF;
 
 END$$
 
