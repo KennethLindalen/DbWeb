@@ -19,7 +19,7 @@ function idrettErValgt($idrettskode) {
 
 // Returnerer "show" slik at listen for valgt anlegg forblir utvidet.
 function anleggErValgt($anleggskode) {
-  if ($_SERVER["REQUEST_METHOD"] == "POST")
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anleggskode"]))
     return $_POST["anleggskode"] == $anleggskode ? "show" : "";
 }
 
