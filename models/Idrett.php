@@ -24,7 +24,7 @@ class Idrett {
     $feil = [];
 
     // Idrettsnavn kan bestå av bokstaver, tall, bindestrek, apostrof, komma og punktum. Maks 100 tegn.
-    if (!preg_match("/^[\pL\s\d'.,-]{1,100}$/u", $this->navn))
+    if (!preg_match("/^[\wæøåÆØÅ '.,-]{1,100}$/i", $this->navn))
       $feil["navn"] = "Ugyldig idrettsnavn.";
 
     // Dersom noen av valideringene feilet, kast unntak og send med forklaringer.
