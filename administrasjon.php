@@ -1,7 +1,7 @@
 <?php
   $tittel = "Administrasjon - Nederlaget Idrettsklubb";
-  include_once "utils/krevAdmin.php";
-  include_once "utils/administrasjon.php";
+  include "utils/krevAdmin.php";
+  include "kontrollere/administrasjon.php";
   include "layout/førInnhold.php";
 ?>
 <!-- Innhold starter her -->

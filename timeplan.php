@@ -1,6 +1,6 @@
 <?php
   $tittel = "Timeplan - Nederlaget Idrettsklubb";
-  include "utils/timeplan.php";
+  include "kontrollere/timeplan.php";
   include "layout/førInnhold.php";
 ?>
 <!-- Innhold starter her -->

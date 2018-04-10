@@ -1,7 +1,7 @@
 <?php
 	$tittel = "Min side - Nederlaget Idrettsklubb";
 	include "utils/krevMedlem.php";
-	include "utils/minside.php";
+	include "kontrollere/minside.php";
 	include "layout/førInnhold.php";
 
 	include_once "utils/cache.php";

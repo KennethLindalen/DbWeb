@@ -1,7 +1,7 @@
 <?php
   $tittel  = "Innlogging - Nederlaget Idrettsklubb";
   include "layout/førInnhold.php";
-  include "utils/innlogging.php";
+  include "kontrollere/innlogging.php";
 ?>
 <!-- Innhold starter her -->
 

@@ -1,8 +1,8 @@
 <?php
   $tittel = "Registrering - Nederlaget Idrettsklubb";
-  include "layout/førInnhold.php";
-  include "utils/registrering.php";
+  include "kontrollere/registrering.php";
   include "utils/funksjoner.php";
+  include "layout/førInnhold.php";
 ?>
 <!-- Innhold starter her -->
 
