@@ -1,6 +1,6 @@
 <?php
 
-// Klasse for mellomlagring av objekter.
+// Singletonklasse for mellomlagring av objekter.
 class Cache {
 
   // Privat konstruktørmetode - kan ikke lage objekter av klassen utenfra.

@@ -1,5 +1,10 @@
 <?php
 
+// Modul for reservasjon av idrettsanlegg.
+// Inkluderes på siden der reservasjoner skal foregå.
+// Tilgjengeliggjør informasjon (feilsituasjoner, etc.)
+// for GUI slik at bruker kan få relevante tilbakemeldinger.
+
 // Includes
 include_once "utils/session.php";
 include_once "utils/funksjoner.php";
