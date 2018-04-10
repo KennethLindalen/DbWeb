@@ -17,7 +17,7 @@ BEGIN
   IF (NEW.time NOT BETWEEN @åpningstid AND @stengetid - 1) THEN
     SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Du kan ikke reservere et anlegg utenfor  åpningstiden.";
   ELSEIF (@klokkeslett < NOW()) THEN
-    SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Du kan ikke reservere et anlegg i fortiden.";
+    SIGNAL SQLSTATE "45000" SET MESSAGE_TEXT = "Du kan ikke reservere et anlegg på et tidspunkt som har passert.";
   END IF;
 
 END$$
