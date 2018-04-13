@@ -13,7 +13,7 @@
   <img class="img-fluid" src="<?= rens($artikkel->bildeUrl) ?>">
   <p class="lead my-4"><?= rens($artikkel->undertittel) ?></p>
   <p><?= rens($artikkel->innhold) ?></p>
-  <p><small>Skrevet av <?= $artikkel->getMedlem()->fulltNavn() ?>.</small></p>
+  <p class="mt-5"><small>Skrevet av <?= $artikkel->getMedlem()->fulltNavn() ?></small></p>
 </div>
 
 <!-- Innhold stopper her -->
