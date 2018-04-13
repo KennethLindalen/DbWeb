@@ -1,5 +1,6 @@
 <?php
   $tittel = "Nyheter - Nederlaget Idrettsklubb";
+  include "kontrollere/nyheter.php";
   include "layout/førInnhold.php";
 ?>
 <!-- Innhold starter her -->
@@ -10,55 +11,39 @@
 <div class="container">
   <div class="row">
 
-		<div class="col-12 col-lg-6 pb-3">
-      <div class="card">
-        <a href="#">
-          <img class="card-img-top" src="img/football.jpg">
-          <div class="card-body">
-            <h4 class="card-title">Nytt nederlag</h4>
-            <p class="card-text">Tapte 4-0 mot Svenseid IL</p>
-          </div>
-        </a>
-      </div>
-    </div>
+    <?php if (sizeof($alleArtikler) == 0): ?>
+      <p>Ingen artikler å vise.</p>
+    <?php endif; ?>
 
-    <div class="col-12 col-lg-6 pb-3">
-      <div class="card">
-        <a href="#">
-          <img class="card-img-top" src="img/tennis.jpg">
-          <div class="card-body">
-            <h4 class="card-title">Tennisbanen er åpen</h4>
-            <p class="card-text">Sesongen er i gang</p>
-          </div>
-        </a>
+    <?php foreach ($alleArtikler as $artikkel): ?>
+  		<div class="col-12 col-lg-6 pb-3">
+        <div class="card">
+          <a href="artikkel.php?id=<?= $artikkel->artikkelkode ?>">
+            <img class="card-img-top" src="<?= $artikkel->bildeUrl ?>">
+            <div class="card-body">
+              <h4 class="card-title"><?= $artikkel->tittel ?></h4>
+              <p class="card-text"><?= $artikkel->undertittel ?></p>
+            </div>
+          </a>
+        </div>
       </div>
-    </div>
-
-    <div class="col-12 col-lg-6 pb-3">
-      <div class="card">
-        <a href="#">
-          <img class="card-img-top" src="img/moose.jpg">
-          <div class="card-body">
-            <h4 class="card-title">Orienteringsløpet avbrutt</h4>
-            <p class="card-text">Illsint elg angrep deltakere</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <div class="col-12 col-lg-6 pb-3">
-      <div class="card">
-        <a href="#">
-          <img class="card-img-top" src="img/loss.jpg">
-          <div class="card-body">
-            <h4 class="card-title">Økonomisk krise</h4>
-            <p class="card-text">Årsrapporten viser dystre tall</p>
-          </div>
-        </a>
-      </div>
-    </div>
+    <?php endforeach; ?>
 
   </div>
+
+  <div class="row justify-content-center">
+    <?php if ($side > 1): ?>
+      <div class="col-2">
+        <a href="nyheter.php?s=<?= $side - 1 ?>">Forrige side</a>
+      </div>
+    <?php endif; ?>
+    <?php if (sizeof($alleArtikler) >= $artiklerPerSide): ?>
+      <div class="col-2">
+        <a href="nyheter.php?s=<?= $side + 1 ?>">Neste side</a>
+      </div>
+    <?php endif; ?>
+  </div>
+
 </div>
 
 <!-- Innhold stopper her -->

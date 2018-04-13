@@ -3,7 +3,8 @@
 		"0" => "Noe gikk galt.",
 		"1" => "Feil ved tilkobling til databasen.",
 		"2" => "Du må være innlogget for å vise denne siden.",
-		"3" => "Denne siden er kun tilgjengelig for administrator."
+		"3" => "Denne siden er kun tilgjengelig for administrator.",
+		"4" => "Artikkelen du spurte etter finnes ikke."
 	];
 	$feilmelding = $feilmeldinger[$_GET["id"] ?? 0] ?? $feilmeldinger[0];
 

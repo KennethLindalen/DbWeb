@@ -29,6 +29,9 @@
       <li class="nav-item">
         <a class="nav-link <?= erAktiv("administrasjon") ?>" href="administrasjon.php">Administrasjon</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link <?= erAktiv("administrasjonNyheter") ?>" href="administrasjonNyheter.php">Endre nyheter</a>
+      </li>
     </ul>
   <?php endif; ?>
 

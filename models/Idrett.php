@@ -86,7 +86,7 @@ class Idrett {
 
     // Kobler til databasen og utfører spørringen.
     $con = new Database();
-    $res = $con->spørring($sql, $verdier);
+    $con->spørring($sql, $verdier);
   }
 
 
