@@ -18,3 +18,28 @@
 
 <!-- Innhold stopper her -->
 <?php include "layout/etterInnhold.php"; ?>
+
+<!--Nederlaget IK tapte 4-0 for tabelljumbo Svenseid IL
+NIK hold unna lenge for tabelljumboen Svenseid men måtte til slutt
+gi tapt for overmakten med scoringer i det 86, 87, 88 og 89. minutt.
+Dagens Nederlagsmann ble Bjartmar Olsen med sine 2 selvmål og rødt kort-->
+
+
+
+<!--Tennisbanene er åpnet
+Med god støtte fra Conrad Pløsen og hans elleville Lamborghinitraktor er endelig sneen
+borte fra Tennisbanen. Dette feirer vi med "serveoff" neste lørdag klokka 12
+på tennisbanen med kanapeer, det vil bla satt opp egne ladestasjoner for
+teslaer i denne anledning. antrekk: lacoste
+-->
+
+<!--Orienteringsløpet avbrutt
+Orienteringsløpet sist søndag ble avbrutt etter at en løper ved en av postene
+løp på en fødende elgku. Hannen tok grep og kastet løperen buskimellom
+Løpsadministrasjonen valgte derfor å avbryte løpet med hensyn til den fødende-->
+
+
+<!-- Årsrapporten for 2017
+I riktig nederlagsånd viser det seg at klubben er på kanten av av
+økonomisk ruin. utgifter til kanapeer og strøm til lading av el bil er
+de største utgiftspostene-->
