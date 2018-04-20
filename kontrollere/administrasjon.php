@@ -23,7 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       // Sletting av medlemmer.
       case "slettMedlem":
-        Medlem::slett($_POST["medlemsnummer"]);
+        if ($_POST["medlemsnummer"] == $_SESSION["medlemsnummer"])
+          $feil["generelt"] = "Du kan ikke slette din egen bruker."
+        else
+          Medlem::slett($_POST["medlemsnummer"]);
       break;
 
       // Innsetting av nye medlemmer.
