@@ -93,11 +93,7 @@ class Reservasjon {
 
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
-      DELETE FROM reservasjon
-      WHERE
-        anleggskode = ? AND
-        dato = ? AND
-        time = ?;
+      CALL slett_reservasjon(?, ?, ?);
     ";
 
     try {

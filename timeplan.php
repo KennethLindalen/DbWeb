@@ -84,7 +84,7 @@
                     <?= str_pad($time + 1, 2, "0", STR_PAD_LEFT) ?>:00
                   </td>
                   <td><?= $res ? "Reservert" : "Ledig" ?></td>
-                  <td><?= $res ? $res->getMedlem()->fulltNavn() : "" ?></td>
+                  <td><?= $res ? $res->medlemsnummer ? $res->getMedlem()->fulltNavn(): "Slettet medlem" : "" ?></td>
                   <td>kr <?= $anlegg->timepris ?>,-</td>
                   <td class="pt-2 pb-1">
                     <?php if ($_SESSION["medlemsnummer"]): ?>
@@ -96,7 +96,7 @@
                         <?php if (!$res): ?>
                           <input type="hidden" name="operasjon" value="nyReservasjon">
                           <button class="btn btn-success btn-sm w-100 h-100">Reserver</button>
-                        <?php elseif ($res->medlemsnummer == $_SESSION["medlemsnummer"] || $_SESSION["administrator"]): ?>
+                        <?php elseif ($res->medlemsnummer && ($res->medlemsnummer == $_SESSION["medlemsnummer"] || $_SESSION["administrator"])): ?>
                           <input type="hidden" name="operasjon" value="slettReservasjon">
                           <button class="btn btn-danger btn-sm w-100 h-100">Kanseller</button>
                         <?php endif; ?>

@@ -98,8 +98,7 @@ class Idrett {
 
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
-      DELETE FROM idrett
-      WHERE idrettskode = ?;
+      CALL slett_idrett(?);
     ";
 
     // Kobler til databasen og utfører spørringen.

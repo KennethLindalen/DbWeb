@@ -2,6 +2,7 @@
   $tittel = "Nyheter - Nederlaget Idrettsklubb";
   include "kontrollere/nyheter.php";
   include "layout/førInnhold.php";
+  include "utils/funksjoner.php";
 ?>
 <!-- Innhold starter her -->
 
@@ -19,7 +20,7 @@
   		<div class="col-12 col-lg-6 pb-3">
         <div class="card">
           <a href="artikkel.php?id=<?= $artikkel->artikkelkode ?>">
-            <img class="card-img-top" src="<?= $artikkel->bildeUrl ?>">
+            <img class="card-img-top" src="<?= $artikkel->bildeUrl ?>" alt="<?= rens($artikkel->tittel) ?>">
             <div class="card-body">
               <h4 class="card-title"><?= $artikkel->tittel ?></h4>
               <p class="card-text"><?= $artikkel->undertittel ?></p>

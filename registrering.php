@@ -73,7 +73,7 @@
       <div class="form-group col-12">
         <label for="telefonnummer">Telefonnummer</label>
         <input
-          type="phone" class="form-control valideres <?= erGyldig("telefonnummer") ?>"
+          type="tel" class="form-control valideres <?= erGyldig("telefonnummer") ?>"
           name="telefonnummer" id="telefonnummer" placeholder="Telefonnummer"
           value="<?= fraArray($_POST, "telefonnummer") ?>">
         <div class="invalid-feedback"><?= fraArray($feil, "telefonnummer") ?></div>

@@ -33,7 +33,7 @@
     </h5>
   </div>
   <div id="medlem-body" class="collapse">
-    <div class="card-body p-0">
+    <div class="card-body p-0" style="font-size: 0.8rem;">
 
       <table class="table table-light table-striped table-hover mb-0">
         <thead class="thead-light">

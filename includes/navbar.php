@@ -8,15 +8,12 @@
   }
 ?>
 
-<nav class="navbar navbar-expand navbar-light p-0 flex-column border-bottom">
+<nav class="navbar navbar-expand navbar-light p-0 flex-column border-bottom align-items-start">
 
+  <span class="navbar-text text-uppercase">Navigasjon</span>
   <ul class="nav nav-pills flex-column w-100 mb-3">
-    <span class="navbar-text text-uppercase">Navigasjon</span>
     <li class="nav-item">
       <a class="nav-link <?= erAktiv("nyheter") ?>" href="nyheter.php">Nyheter</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link <?= erAktiv("aktiviteter") ?>" href="aktiviteter.php">Aktiviteter</a>
     </li>
     <li class="nav-item">
       <a class="nav-link <?= erAktiv("timeplan") ?>" href="timeplan.php">Timeplan</a>
@@ -24,8 +21,8 @@
   </ul>
 
   <?php if ($_SESSION["administrator"]): ?>
+    <span class="navbar-text text-uppercase">Administrator</span>
     <ul class="nav nav-pills flex-column w-100 mb-3">
-      <span class="navbar-text text-uppercase">Administrator</span>
       <li class="nav-item">
         <a class="nav-link <?= erAktiv("administrasjon") ?>" href="administrasjon.php">Administrasjon</a>
       </li>
@@ -35,8 +32,8 @@
     </ul>
   <?php endif; ?>
 
+  <span class="navbar-text text-uppercase">Medlemmer</span>
   <ul class="nav nav-pills flex-column w-100 mb-3">
-    <span class="navbar-text text-uppercase">Medlemmer</span>
   <?php if ($_SESSION["medlemsnummer"]): ?>
     <li class="nav-item">
       <a class="nav-link <?= erAktiv("minside") ?>" href="minside.php">Min side</a>

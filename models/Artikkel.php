@@ -97,8 +97,7 @@ class Artikkel {
   public static function slett($artikkelkode) {
 
     $sql = "
-      DELETE FROM artikkel
-      WHERE artikkelkode = ?;
+      CALL slett_artikkel(?);
     ";
 
     $con = new Database();

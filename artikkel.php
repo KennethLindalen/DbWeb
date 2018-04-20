@@ -10,10 +10,10 @@
 <hr>
 
 <div class="col-10">
-  <img class="img-fluid" src="<?= rens($artikkel->bildeUrl) ?>">
-  <p class="lead my-4"><?= rens($artikkel->undertittel) ?></p>
+  <img class="img-fluid" src="<?= rens($artikkel->bildeUrl) ?>" alt="<?= rens($artikkel->tittel) ?>">
+  <h5 class="my-4"><?= rens($artikkel->undertittel) ?></h5>
   <p><?= rens($artikkel->innhold) ?></p>
-  <p class="mt-5"><small>Skrevet av <?= $artikkel->getMedlem()->fulltNavn() ?></small></p>
+  <p class="mt-5"><small>Skrevet av <?= $forfatter ?></small></p>
 </div>
 
 <!-- Innhold stopper her -->

@@ -149,8 +149,7 @@ class Anlegg {
 
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
-      DELETE FROM anlegg
-      WHERE anleggskode = ?;
+      CALL slett_anlegg(?);
     ";
 
     // Kobler til databasen og utfører spørringen.

@@ -200,8 +200,7 @@ class Medlem {
 
     // SQL-spørring med parametre for bruk i prepared statement.
     $sql = "
-      DELETE FROM medlem
-      WHERE medlemsnummer = ?;
+      CALL slett_medlem(?);
     ";
 
     // Kobler til databasen og utfører spørringen.

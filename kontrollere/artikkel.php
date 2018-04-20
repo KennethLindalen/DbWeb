@@ -7,4 +7,6 @@ $artikkel = Artikkel::finn($_GET["id"] ?? -1);
 if ($artikkel->artikkelkode == null)
   header("Location: error.php?id=4");
 
+$forfatter = $artikkel->medlemsnummer ? $artikkel->getMedlem()->fulltNavn() : "Administrator";
+
 ?>
