@@ -35,6 +35,8 @@
   <div id="medlem-body" class="collapse">
     <div class="card-body p-0" style="font-size: 0.8rem;">
 
+      <form method="post" id="slettMedlem"></form>
+
       <table class="table table-light table-striped table-hover mb-0">
         <thead class="thead-light">
           <tr>
@@ -55,11 +57,10 @@
               <td><?= $medlem->telefonnummer ?></td>
               <td><?= $medlem->epost ?></td>
               <td class="pt-2 pb-1">
-                <form method="post">
-                  <input type="hidden" name="operasjon" value="slettMedlem">
-                  <input type="hidden" name="medlemsnummer" value="<?= $medlem->medlemsnummer ?>">
-                  <button class="btn btn-danger btn-sm w-100">&minus;</button>
-                </form>
+                <input type="hidden" name="operasjon" value="slettMedlem" form="slettMedlem">
+                <button class="btn btn-danger btn-sm w-100" name="medlemsnummer" value="<?= $medlem->medlemsnummer ?>" form="slettMedlem">
+                  &minus;
+                </button>
               </td>
             </tr>
           <?php endforeach; ?>
@@ -81,6 +82,9 @@
   <div id="idrett-body" class="collapse">
     <div class="card-body p-0">
 
+      <form method="post" id="slettIdrett"></form>
+      <form method="post" id="nyIdrett"></form>
+
       <table class="table table-light table-striped table-hover mb-0">
         <thead class="thead-light">
           <tr>
@@ -95,21 +99,22 @@
               <th><?= $idrett->idrettskode ?></th>
               <td><?= $idrett->navn ?></td>
               <td class="ml-auto pt-2 pb-1">
-                <form method="post">
-                  <input type="hidden" name="operasjon" value="slettIdrett">
-                  <input type="hidden" name="idrettskode" value="<?= $idrett->idrettskode ?>">
-                  <button class="btn btn-danger btn-sm w-100">&minus;</button>
-                </form>
+                <input type="hidden" name="operasjon" value="slettIdrett" form="slettIdrett">
+                <button class="btn btn-danger btn-sm w-100" name="idrettskode" value="<?= $idrett->idrettskode ?>" form="slettIdrett">
+                  &minus;
+                </button>
               </td>
             </tr>
           <?php endforeach; ?>
           <tr>
-            <form method="post">
-              <input type="hidden" name="operasjon" value="nyIdrett">
-              <th>Ny</th>
-              <td><input type="text" class="input-min" name="navn" placeholder="Navn"></td>
-              <td class="pt-2 pb-1"><button class="btn btn-success btn-sm w-100">&plus;</button></td>
-            </form>
+            <th>Ny</th>
+            <td>
+              <input type="text" class="input-min" name="navn" placeholder="Navn" form="nyIdrett">
+            </td>
+            <td class="pt-2 pb-1">
+              <input type="hidden" name="operasjon" value="nyIdrett" form="nyIdrett">
+              <button class="btn btn-success btn-sm w-100" form="nyIdrett">&plus;</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -128,6 +133,9 @@
   </div>
   <div id="anlegg-body" class="collapse">
     <div class="card-body p-0">
+
+      <form method="post" id="slettAnlegg"></form>
+      <form method="post" id="nyttAnlegg"></form>
 
       <table class="table table-light table-striped table-hover mb-0">
         <thead class="thead-light">
@@ -151,33 +159,32 @@
               <td><?= $anlegg->stengetid ?>:00</td>
               <td>kr <?= $anlegg->timepris ?>,-</td>
               <td class="pt-2 pb-1">
-                <form method="post">
-                  <input type="hidden" name="operasjon" value="slettAnlegg">
-                  <input type="hidden" name="anleggskode" value="<?= $anlegg->anleggskode ?>">
-                  <button class="btn btn-danger btn-sm w-100">&minus;</button>
-                </form>
+                <input type="hidden" name="operasjon" value="slettAnlegg" form="slettAnlegg">
+                <button class="btn btn-danger btn-sm w-100" name="anleggskode" value="<?= $anlegg->anleggskode ?>" form="slettAnlegg">
+                  &minus;
+                </button>
               </td>
             </tr>
           <?php endforeach; ?>
           <tr>
-            <form method="post">
-              <input type="hidden" name="operasjon" value="nyttAnlegg">
-              <th>Ny</th>
-              <td>
-                <select class="input-min py-0 my-0" name="idrettskode">
-                  <?php foreach ($alleIdretter as $idrett): ?>
-                    <option value="<?= $idrett->idrettskode ?>">
-                      <?= $idrett->navn ?>
-                    </option>
-                  <?php endforeach; ?>
-                </select>
-              </td>
-              <td><input type="text" class="input-min" name="navn" placeholder="Navn"></td>
-              <td><input type="text" class="input-min" name="åpningstid" placeholder="Time"></td>
-              <td><input type="text" class="input-min" name="stengetid" placeholder="Time"></td>
-              <td><input type="text" class="input-min" name="timepris" placeholder="Beløp"></td>
-              <td class="pt-2 pb-1"><button class="btn btn-success btn-sm w-100">&plus;</button></td>
-            </form>
+            <th>Ny</th>
+            <td>
+              <select class="input-min py-0 my-0" name="idrettskode" form="nyttAnlegg">
+                <?php foreach ($alleIdretter as $idrett): ?>
+                  <option value="<?= $idrett->idrettskode ?>">
+                    <?= $idrett->navn ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </td>
+            <td><input type="text" class="input-min" name="navn" placeholder="Navn" form="nyttAnlegg"></td>
+            <td><input type="text" class="input-min" name="åpningstid" placeholder="Time" form="nyttAnlegg"></td>
+            <td><input type="text" class="input-min" name="stengetid" placeholder="Time" form="nyttAnlegg"></td>
+            <td><input type="text" class="input-min" name="timepris" placeholder="Beløp" form="nyttAnlegg"></td>
+            <td class="pt-2 pb-1">
+              <input type="hidden" name="operasjon" value="nyttAnlegg" form="nyttAnlegg">
+              <button class="btn btn-success btn-sm w-100" form="nyttAnlegg">&plus;</button>
+            </td>
           </tr>
         </tbody>
       </table>

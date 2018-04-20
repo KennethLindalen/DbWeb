@@ -91,7 +91,7 @@ class Reservasjon {
   // Statisk metode for sletting av reservasjoner.
   public static function slett($anleggskode, $dato, $time) {
 
-    // SQL-spørring med parametre for bruk i prepared statement.
+    // Kaller på en lagret prosedyre. Bruker prepared statement.
     $sql = "
       CALL slett_reservasjon(?, ?, ?);
     ";

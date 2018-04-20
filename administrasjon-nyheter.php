@@ -2,7 +2,7 @@
   $tittel = "Administrasjon - Nederlaget Idrettsklubb";
   include "utils/krevAdmin.php";
   include "utils/funksjoner.php";
-  include "kontrollere/administrasjonNyheter.php";
+  include "kontrollere/administrasjon-nyheter.php";
   include "layout/førInnhold.php";
 ?>
 <!-- Innhold starter her -->
@@ -38,7 +38,7 @@
       <form method="post">
         <div class="form-row">
           <div class="form-group col-12">
-            <label for="fornavn">Tittel</label>
+            <label for="tittel">Tittel</label>
             <input
               type="text" class="form-control valideres"
               name="tittel" id="tittel" placeholder="Tittel"
@@ -49,7 +49,7 @@
 
         <div class="form-row">
           <div class="form-group col-12">
-            <label for="fornavn">Undertittel</label>
+            <label for="undertittel">Undertittel</label>
             <input
               type="text" class="form-control valideres "
               name="undertittel" id="undertittel" placeholder="Undertittel"
@@ -60,7 +60,7 @@
 
         <div class="form-row">
           <div class="form-group col-12">
-            <label for="fornavn">Innhold</label>
+            <label for="innhold">Innhold</label>
             <textarea class="form-control valideres" name="innhold" id="innhold" placeholder="Innhold"><?= sizeof($feil) > 0 ? rens($_POST["innhold"]) : "" ?></textarea>
             <div class="invalid-feedback"></div>
           </div>
@@ -68,7 +68,7 @@
 
         <div class="form-row">
           <div class="form-group col-12">
-            <label for="fornavn">URL for bilde</label>
+            <label for="bildeUrl">URL for bilde</label>
             <input
               type="text" class="form-control valideres"
               name="bildeUrl" id="bildeUrl" placeholder="URL"

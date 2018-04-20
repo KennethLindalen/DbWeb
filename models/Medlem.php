@@ -198,7 +198,7 @@ class Medlem {
     // Slett fra cache hvis objektet finnes.
     Cache::set("medlem", $medlemsnummer, null);
 
-    // SQL-spørring med parametre for bruk i prepared statement.
+    // Kaller på en lagret prosedyre. Bruker prepared statement.
     $sql = "
       CALL slett_medlem(?);
     ";
